@@ -31,13 +31,20 @@
             position: fixed;
             z-index: 999;
             pointer-events: none;
-            mix-blend-mode: difference;
-            transition: transform 0.2s ease;
+            mix-blend-mode: normal;
+            transition: all 0.2s ease;
         }
 
         .cursor.active {
             transform: scale(1.3);
-            background-color: #128C7E;
+        }
+
+        .cursor.on-green {
+            background-color: #fff;
+        }
+
+        .cursor.on-dark {
+            background-color: #fff;
         }
 
         section {
@@ -177,6 +184,10 @@
             transform: translateX(-50px);
         }
 
+        .hero-text h1 .highlight-green {
+            color: #25D366;
+        }
+
         .hero-text p {
             font-size: 15px;
             color: #555;
@@ -184,6 +195,12 @@
             margin-bottom: 24px;
             opacity: 0;
             transform: translateY(20px);
+        }
+
+        .hero-text p .highlight-text {
+            background-color: #b9ff66;
+            padding: 0 4px;
+            border-radius: 4px;
         }
 
         .benefits {
@@ -232,10 +249,26 @@
             transform: scale(0.8);
         }
 
+        .hero-image video {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-16px); }
             100% { transform: translateY(0px); }
+        }
+
+        /* Updated Clients Section with reduced space */
+        .clients-section {
+            padding: 20px 10% 0;
+            margin-top: -40px;
         }
 
         .clients {
@@ -243,22 +276,29 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 100px;
-            padding: 24px 0;
+            gap: 2px;
+            padding: 5px 0;
             border-top: 1px solid #eee;
-            margin-top: 40px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .clients-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
         }
 
         .clients-scroll {
             display: flex;
-            gap: 40px;
-            animation: scroll-left 20s linear infinite;
+            gap: 30px;
+            animation: scroll-infinite 30s linear infinite;
+            width: fit-content;
         }
 
-        @keyframes scroll-left {
+        @keyframes scroll-infinite {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(-50%); }
         }
 
         .client-item {
@@ -267,11 +307,11 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            padding: 16px;
+            padding: 10px 16px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            min-width: 120px;
+            min-width: 110px;
             transition: transform 0.3s, box-shadow 0.3s;
             opacity: 0;
             transform: translateY(30px);
@@ -283,7 +323,7 @@
         }
 
         .client-item i {
-            font-size: 32px;
+            font-size: 28px;
             color: #25D366;
         }
 
@@ -325,7 +365,7 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 32px;
         }
 
         .feature-card {
@@ -334,7 +374,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
-            height: 224px;
+            min-height: 280px;
             opacity: 0;
             transform: translateY(50px);
         }
@@ -345,22 +385,25 @@
         }
 
         .feature-content {
-            padding: 32px;
-            width: 60%;
+            padding: 40px;
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .feature-card h2 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             line-height: 1.3;
         }
 
         .feature-card p {
             color: #555;
-            margin-bottom: 16px;
-            line-height: 1.5;
-            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
         .feature-link {
@@ -371,6 +414,7 @@
             color: #25D366;
             cursor: pointer;
             font-size: 14px;
+            margin-top: auto;
         }
 
         .feature-link i {
@@ -381,21 +425,40 @@
             transform: translate(4px, -4px);
         }
 
- .feature-image {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-}
+        .feature-image {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: #f8f9fa;
+        }
 
-.feature-image img {
-    max-height: 144px;
-    max-width: 100%;
-    object-fit: contain;
-    border-radius: 12px; /* This creates smooth rounded corners */
-}
+        .feature-image img, .feature-image video, .feature-image .gif-placeholder {
+            max-height: 200px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
 
+        .gif-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            border: 2px dashed #ddd;
+        }
 
         .dark-card {
             background-color: #222;
@@ -605,6 +668,7 @@
 
         .footer-logo img {
             height: 32px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
         }
 
         .footer-about p {
@@ -745,8 +809,8 @@
     <header>
         <nav>
             <h1>
-  <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" style="height: 40px;" />
-</h1>
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" style="height: 40px;" />
+            </h1>
             <div class="nav-links">
                 <h3>Features</h3>
                 <h3>Automate</h3>
@@ -754,7 +818,8 @@
                 <h3>Support</h3>
             </div>
             <div class="nav-buttons">
-                <button class="green-btn">Start for ₹1000</button>
+                <button class="outline-btn">Login</button>
+                <button class="green-btn">Sign Up</button>
             </div>
         </nav>
     </header>
@@ -763,72 +828,97 @@
     <section id="home-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Talk to your customers. Sell more. All on WhatsApp.</h1>
-                <p>Start conversations, send offers, answer questions — and grow your business. No tech headaches. Just results.</p>
+                <h1>Talk to your<br><span class="highlight-green">Customers.</span><br><span class="highlight-green">Sell more.</span><br>All on WhatsApp.</h1>
+                <p>Start <span class="highlight-text">conversations</span>, send <span class="highlight-text">offers</span>, answer <span class="highlight-text">questions</span> and grow your business. No Tech Headaches. Just Results.</p>
                 <div class="benefits">
                     <p><i class="ri-checkbox-circle-fill"></i> Instant WhatsApp setup</p>
-                    <p><i class="ri-checkbox-circle-fill"></i> Pre-approved templates</p>
-                    <p><i class="ri-checkbox-circle-fill"></i> ₹1,000/month — that's it.</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Pre approved templates</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> ₹1,000/month that's it.</p>
                 </div>
                 <div class="cta-buttons">
-                    <button class="green-btn">Start for ₹1,000/month</button>
+                    <button class="green-btn">Start Now!</button>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjgxaGNsYm5hdHhpa3A3YnJxcHl5aXZvM3BsOTI2bXM2eTloZmU5byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5iLmHt2r83cJ2R5lqm/giphy.gif" alt="SynxZap Dashboard">
+                <video autoplay loop muted playsinline>
+                    <source src="optimized-video.mp4" type="video/mp4">
+                    <img src="fallback-image.jpg" alt="SynxZap Dashboard">
+                </video>
             </div>
         </div>
-        <div class="clients">
-            <div class="clients-scroll">
-                <div class="client-item">
-                    <i class="ri-store-2-line"></i>
-                    <span>E-Commerce</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-hospital-line"></i>
-                    <span>Clinics</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-book-open-line"></i>
-                    <span>Education</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-home-4-line"></i>
-                    <span>Real Estate</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-shopping-bag-3-line"></i>
-                    <span>D2C Brands</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-briefcase-line"></i>
-                    <span>Agencies</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-restaurant-line"></i>
-                    <span>Restaurants</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-car-line"></i>
-                    <span>Automotive</span>
-                </div>
-                <!-- Duplicate for seamless loop -->
-                <div class="client-item">
-                    <i class="ri-store-2-line"></i>
-                    <span>E-Commerce</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-hospital-line"></i>
-                    <span>Clinics</span>
-                </div>
-                <div class="client-item">
-                    <i class="ri-book-open-line"></i>
-                    <span>Education</span>
-                </div>
+    </section>
 
-                <div class="client-item">
-                    <i class="ri-home-4-line"></i>
-                    <span>Real Estate</span>
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="clients">
+            <div class="clients-container">
+                <div class="clients-scroll">
+                    <!-- Original set -->
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
+                    <!-- Duplicate set for seamless infinite loop -->
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -843,54 +933,85 @@
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-content">
-                    <h2>Auto-Capture Leads</h2>
-                    <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system.</p>
+                    <h2>Auto Capture Leads</h2>
+                    <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system. No manual data entry required.</p>
                     <div class="feature-link">
                         <span>Learn more</span>
                         <i class="ri-arrow-right-up-line"></i>
                     </div>
                 </div>
                 <div class="feature-image">
-                    <img src="https://i.ibb.co/rGSpFZC7/lead-capture-software-img1-removebg-preview.png" alt="Lead Capture">
+                    <div class="gif-placeholder">Lead Capture GIF<br>Coming Soon</div>
                 </div>
             </div>
+            
             <div class="feature-card dark-card">
                 <div class="feature-content">
                     <h2>Smart Segmentation</h2>
-                    <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns.</p>
+                    <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns that convert better.</p>
                     <div class="feature-link">
                         <span>Learn more</span>
                         <i class="ri-arrow-right-up-line"></i>
                     </div>
                 </div>
                 <div class="feature-image">
-                    <img src="https://i.ibb.co/pjvcRmJg/SECCs.png" alt="Segmentation">
+                    <div class="gif-placeholder">Segmentation GIF<br>Coming Soon</div>
                 </div>
             </div>
+
             <div class="feature-card dark-card">
                 <div class="feature-content">
                     <h2>Campaign Builder</h2>
-                    <p>Pre-approved templates make launching campaigns effortless with just a few clicks.</p>
+                    <p>Pre approved templates make launching campaigns effortless with just a few clicks. No design skills needed.</p>
                     <div class="feature-link">
                         <span>Learn more</span>
                         <i class="ri-arrow-right-up-line"></i>
                     </div>
                 </div>
                 <div class="feature-image">
-                    <img src="https://i.ibb.co/JWzgKwsF/images.jpg" alt="Campaign Builder">
+                    <div class="gif-placeholder">Campaign Builder GIF<br>Coming Soon</div>
                 </div>
             </div>
+
             <div class="feature-card">
                 <div class="feature-content">
                     <h2>Quick Answer Bot</h2>
-                    <p>Answer common customer queries automatically with our 1-click setup bot.</p>
+                    <p>Answer common customer queries automatically with our 1 click setup bot. 24/7 customer support made easy.</p>
                     <div class="feature-link">
                         <span>Learn more</span>
                         <i class="ri-arrow-right-up-line"></i>
                     </div>
                 </div>
                 <div class="feature-image">
-                    <img src="https://i.ibb.co/5XyXW9Qt/images-1.jpg" alt="Chatbot">
+                    <div class="gif-placeholder">Chatbot GIF<br>Coming Soon</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-content">
+                    <h2>Broadcast Messages</h2>
+                    <p>Send bulk messages to your customer segments with personalized content. Reach thousands in minutes.</p>
+                    <div class="feature-link">
+                        <span>Learn more</span>
+                        <i class="ri-arrow-right-up-line"></i>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="gif-placeholder">Broadcast GIF<br>Coming Soon</div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card">
+                <div class="feature-content">
+                    <h2>Analytics Dashboard</h2>
+                    <p>Track message delivery, open rates, click through rates and conversions with detailed analytics and insights.</p>
+                    <div class="feature-link">
+                        <span>Learn more</span>
+                        <i class="ri-arrow-right-up-line"></i>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="gif-placeholder">Analytics GIF<br>Coming Soon</div>
                 </div>
             </div>
         </div>
@@ -904,10 +1025,10 @@
                 <div class="steps">
                     <p>1️⃣ Connect your WhatsApp number in minutes</p>
                     <p>2️⃣ Pick from templates or create custom campaigns</p>
-                    <p>3️⃣ Set auto-replies or lead capture triggers</p>
+                    <p>3️⃣ Set auto replies or lead capture triggers</p>
                     <p>4️⃣ Start sending, tracking, and growing 🚀</p>
                 </div>
-                <button class="black-btn">Start for ₹1000/month</button>
+                <button class="black-btn">Start Now!</button>
                 <p class="small-text">Setup in minutes, no coding required</p>
             </div>
             <div class="contact-image">
@@ -924,7 +1045,7 @@
         </div>
         <div class="pricing-container">
             <div class="pricing-card">
-                <h4>SynxZap Plan</h4>
+                <h4>The One Plan</h4>
                 <div class="pricing-info">
                     <p>Monthly: ₹1,000/mo + ₹499 setup</p>
                     <p>Yearly: ₹10,000/year (no setup fee)</p>
@@ -932,7 +1053,7 @@
                 <div class="features-list">
                     <p><i class="ri-check-line"></i> Unlimited campaigns</p>
                     <p><i class="ri-check-line"></i> Free 24h response window</p>
-                    <p><i class="ri-check-line"></i> Pre-approved templates</p>
+                    <p><i class="ri-check-line"></i> Pre approved templates</p>
                     <p><i class="ri-check-line"></i> Lead capture tools</p>
                     <p><i class="ri-check-line"></i> Segmentation filters</p>
                     <p><i class="ri-check-line"></i> Quick answer bot</p>
@@ -943,7 +1064,7 @@
             <div class="pricing-card">
                 <h4>Designed For</h4>
                 <div class="use-cases">
-                    <p><i class="ri-store-2-line"></i> E-commerce & D2C brands</p>
+                    <p><i class="ri-store-2-line"></i> E commerce & D2C brands</p>
                     <p><i class="ri-hospital-line"></i> Clinics & Consultations</p>
                     <p><i class="ri-book-open-line"></i> Education & Training</p>
                     <p><i class="ri-home-4-line"></i> Real Estate & Services</p>
@@ -956,10 +1077,10 @@
             <div class="pricing-card">
                 <h4>Ready to Grow?</h4>
                 <p style="margin-bottom: 24px; line-height: 1.6; font-size: 14px;">
-                    Everything your WhatsApp marketing should be — in one place.
+                    Everything your WhatsApp marketing should be in one place.
                 </p>
                 <div class="final-cta">
-                    <button class="green-btn">Start for ₹1,000/month</button>
+                    <button class="green-btn">Start Now!</button>
                 </div>
                 <p style="margin-top: 24px; font-size: 14px;">
                     Questions? <a href="mailto:hello@synxautomate.com" class="email-link">hello@synxautomate.com</a>
@@ -981,8 +1102,8 @@
             </div>
             <div class="footer-links">
                 <h3>Product</h3>
-                <a href="#">Features</a>
-                <a href="#">Pricing</a>
+                <a href="#services-section">Features</a>
+                <a href="#caseStudy-section">Pricing</a>
                 <a href="#">Use Cases</a>
                 <a href="#">Integrations</a>
             </div>
@@ -997,8 +1118,8 @@
                 <h3>Company</h3>
                 <a href="https://www.synxup.tech/aboutUs">About Us</a>
                 <a href="#">Careers</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="https://drive.google.com/file/d/1XxAHqWHHIhk9_F0x5Na67-D9vYjKi2tP/view" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="https://drive.google.com/file/d/1zle3iaPjbk4Og-WI3bBDH7jHAG0STNhV/view?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1010,9 +1131,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-        // Cursor Animation
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // Show the selected section
+    document.getElementById(sectionId).style.display = 'block';
+    
+    // Scroll to the section
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+    <script>
+        // Enhanced Cursor Animation with color detection
         const cursor = document.querySelector('.cursor');
         const links = document.querySelectorAll('a, button, .feature-link');
+        const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
+        const darkElements = document.querySelectorAll('footer, .dark-card');
         
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, {
@@ -1021,6 +1159,35 @@
                 duration: 0.5,
                 ease: "power2.out"
             });
+
+            // Check if cursor is over green or dark elements
+            let isOverGreen = false;
+            let isOverDark = false;
+
+            greenElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                    e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                    isOverGreen = true;
+                }
+            });
+
+            darkElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                    e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                    isOverDark = true;
+                }
+            });
+
+            // Reset classes
+            cursor.classList.remove('on-green', 'on-dark');
+
+            if (isOverGreen) {
+                cursor.classList.add('on-green');
+            } else if (isOverDark) {
+                cursor.classList.add('on-dark');
+            }
         });
 
         links.forEach(link => {
@@ -1063,7 +1230,7 @@
             delay: 1.3
         });
 
-        gsap.to(".hero-image img", {
+        gsap.to(".hero-image video, .hero-image img", {
             opacity: 1,
             scale: 1,
             duration: 1.0,
