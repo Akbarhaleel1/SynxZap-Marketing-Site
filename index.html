@@ -639,75 +639,322 @@
             text-decoration: none;
         }
 
-        /* Footer */
+        /* Enhanced Footer Styles */
         footer {
-            background-color: #222;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: white;
-            padding: 48px 10% 24px;
+            padding: 80px 0 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 32px;
-            margin-bottom: 32px;
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 211, 102, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 211, 102, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        /* Company Section */
+        .footer-company {
+            max-width: 350px;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .footer-logo h2 {
-            font-size: 19px;
-            font-weight: 700;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .footer-logo img {
-            height: 32px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+            height: 45px;
+            filter: brightness(1.1);
         }
 
-        .footer-about p {
-            color: #bbb;
-            line-height: 1.6;
-            max-width: 240px;
-            font-size: 14px;
+        .footer-logo h2 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #25D366, #34E77A);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-description {
+            color: #b8c5d6;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: #25D366;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .social-link i {
+            font-size: 20px;
+        }
+
+        /* Footer Columns */
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: white;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #25D366, #34E77A);
+            border-radius: 2px;
         }
 
         .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links a {
+            color: #b8c5d6;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+        }
+
+        .footer-links a:hover {
+            color: #25D366;
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .newsletter p {
+            color: #b8c5d6;
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .newsletter-form {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .footer-links h3 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .newsletter-form input {
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
-        .footer-links a {
-            color: #bbb;
+        .newsletter-form input::placeholder {
+            color: #b8c5d6;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: #25D366;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #25D366, #34E77A);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-top: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #b8c5d6;
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            width: 20px;
+            color: #25D366;
+            font-size: 16px;
+        }
+
+        /* Stats Section */
+        .footer-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #25D366, #34E77A);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #b8c5d6;
+            font-size: 14px;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-left {
+            color: #b8c5d6;
+            font-size: 14px;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-bottom-right a {
+            color: #b8c5d6;
             text-decoration: none;
-            transition: color 0.3s;
-            font-size: 13px;
+            font-size: 14px;
+            transition: color 0.3s ease;
         }
 
-        .footer-links a:hover {
+        .footer-bottom-right a:hover {
             color: #25D366;
         }
 
-        .footer-bottom {
-            border-top: 1px solid #444;
-            padding-top: 24px;
-            text-align: center;
-            color: #999;
+        .trust-badges {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 6px;
             font-size: 12px;
+            color: #b8c5d6;
+        }
+
+        .trust-badge i {
+            color: #25D366;
         }
 
         /* Responsive Design */
@@ -722,6 +969,19 @@
 
             .hero-text h1 {
                 font-size: 40px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .footer-main {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 40px;
+            }
+            
+            .footer-company {
+                grid-column: 1 / -1;
+                max-width: 100%;
+                margin-bottom: 20px;
             }
         }
 
@@ -780,6 +1040,35 @@
             .feature-image {
                 padding: 0 32px 32px;
             }
+
+            footer {
+                padding: 60px 0 0;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-right {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -797,6 +1086,32 @@
 
             .section-header h3 {
                 font-size: 29px;
+            }
+
+            .footer-container {
+                padding: 0 20px;
+            }
+
+            .newsletter {
+                padding: 20px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                padding: 0 20px;
+            }
+
+            .newsletter {
+                padding: 20px;
+            }
+
+            .social-links {
+                justify-content: center;
             }
         }
     </style>
@@ -1089,44 +1404,140 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" />
-                </div>
-                <p>
-                    The complete WhatsApp marketing platform for businesses looking to automate conversations and grow sales.
-                </p>
-            </div>
-            <div class="footer-links">
-                <h3>Product</h3>
-                <a href="#services-section">Features</a>
-                <a href="#caseStudy-section">Pricing</a>
-                <a href="#">Use Cases</a>
-                <a href="#">Integrations</a>
-            </div>
-            <div class="footer-links">
-                <h3>Resources</h3>
-                <a href="#">Blog</a>
-                <a href="#">Help Center</a>
-                <a href="#">Tutorials</a>
-                <a href="#">API Docs</a>
-            </div>
-            <div class="footer-links">
-                <h3>Company</h3>
-                <a href="https://www.synxup.tech/aboutUs">About Us</a>
-                <a href="#">Careers</a>
-                <a href="https://drive.google.com/file/d/1XxAHqWHHIhk9_F0x5Na67-D9vYjKi2tP/view" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                <a href="https://drive.google.com/file/d/1zle3iaPjbk4Og-WI3bBDH7jHAG0STNhV/view?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-            </div>
+<footer style="background: linear-gradient(135deg, #128C7E 0%, #25D366 100%); color: white; padding: 40px 0 0; position: relative; overflow: hidden;">
+  <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2;">
+    <!-- Main Footer Content -->
+    <div class="footer-main" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
+      <!-- Company Info -->
+      <div class="footer-company" style="max-width: 350px;">
+        <div class="footer-logo" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+          <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" style="height: 45px; filter: brightness(0) invert(1);" />
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
-            <p>Built in India · Serving UAE, UK, NL, AU</p>
+        <p class="footer-description" style="color: rgba(255, 255, 255, 0.8); line-height: 1.7; margin-bottom: 32px; font-size: 15px;">
+          The complete WhatsApp marketing platform that helps businesses automate conversations, capture leads, and grow sales with zero technical headaches.
+        </p>
+        <div class="social-links" style="display: flex; gap: 16px;">
+          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <i class="ri-twitter-x-line" style="font-size: 20px;"></i>
+          </a>
+          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <i class="ri-linkedin-line" style="font-size: 20px;"></i>
+          </a>
+          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <i class="ri-instagram-line" style="font-size: 20px;"></i>
+          </a>
+          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <i class="ri-youtube-line" style="font-size: 20px;"></i>
+          </a>
         </div>
-    </footer>
+      </div>
+
+      <!-- Product Links -->
+      <div class="footer-column">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 24px; color: white; position: relative;">Product</h3>
+        <ul class="footer-links" style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 14px;">
+            <a href="#caseStudy-section" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Pricing
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Use Cases
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Integrations
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="http://127.0.0.1:5500/privacy-policy.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;" target="_blank" rel="noopener noreferrer">
+              <i class="ri-file-info-line" style="font-size: 16px; opacity: 0.7;"></i>Privacy Policy
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="http://127.0.0.1:5500/terms-and-conditions.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;" target="_blank" rel="noopener noreferrer">
+              <i class="ri-file-text-line" style="font-size: 16px; opacity: 0.7;"></i>Terms & Conditions
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#section-link" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-arrow-right-line" style="font-size: 16px; opacity: 0.7;"></i>Section Link
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div class="footer-column">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 24px; color: white; position: relative;">Resources</h3>
+        <ul class="footer-links" style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-book-open-line" style="font-size: 16px; opacity: 0.7;"></i>Blog
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-question-line" style="font-size: 16px; opacity: 0.7;"></i>Help Center
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-community-line" style="font-size: 16px; opacity: 0.7;"></i>Community
+            </a>
+          </li>
+          <li style="margin-bottom: 14px;">
+            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+              <i class="ri-video-line" style="font-size: 16px; opacity: 0.7;"></i>Webinars
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="newsletter" style="background: rgba(255, 255, 255, 0.15); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: white;">Stay Updated</h3>
+        <div class="contact-info" style="margin-top: 24px;">
+          <div class="contact-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: rgba(255, 255, 255, 0.8); font-size: 14px;">
+            <i class="ri-mail-line" style="width: 20px; color: white; font-size: 16px;"></i>
+            <span>hello@synxautomate.com</span>
+          </div>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: rgba(255, 255, 255, 0.8); font-size: 14px;">
+            <i class="ri-phone-line" style="width: 20px; color: white; font-size: 16px;"></i>
+            <span>+91 98765 43210</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; gap: 20px;">
+      <div class="footer-bottom-left" style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+        <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
+      </div>
+      <div class="footer-bottom-right" style="display: flex; gap: 30px; align-items: center;">
+        <div class="trust-badges" style="display: flex; gap: 16px; align-items: center;">
+          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
+            <i class="ri-shield-check-line" style="color: white;"></i>
+            <span>SOC 2 Certified</span>
+          </div>
+          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
+            <i class="ri-lock-line" style="color: white;"></i>
+            <span>GDPR Compliant</span>
+          </div>
+          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
+            <i class="ri-whatsapp-line" style="color: white;"></i>
+            <span>Official Partner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
