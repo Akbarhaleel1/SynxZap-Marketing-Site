@@ -32,11 +32,12 @@
             z-index: 999;
             pointer-events: none;
             mix-blend-mode: normal;
-            transition: all 0.2s ease;
+            transition: all 0.1s ease-out;
+            transform: translate(-50%, -50%);
         }
 
         .cursor.active {
-            transform: scale(1.3);
+            transform: translate(-50%, -50%) scale(1.3);
         }
 
         .cursor.on-green {
@@ -241,12 +242,14 @@
 
         .hero-image img {
             width: 100%;
-            max-width: 480px;
+            max-width: 780px;
+            height: 300px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             animation: float 6s ease-in-out infinite;
             opacity: 0;
             transform: scale(0.8);
+            object-fit: cover;
         }
 
         .hero-image video {
@@ -265,7 +268,7 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Updated Clients Section with reduced space */
+        /* Clients Section */
         .clients-section {
             padding: 20px 10% 0;
             margin-top: -40px;
@@ -278,7 +281,6 @@
             flex-wrap: wrap;
             gap: 2px;
             padding: 5px 0;
-            border-top: 1px solid #eee;
             overflow: hidden;
             width: 100%;
         }
@@ -433,13 +435,15 @@
             padding: 24px;
             background: #f8f9fa;
         }
-
-        .feature-image img, .feature-image video, .feature-image .gif-placeholder {
-            max-height: 200px;
-            max-width: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-        }
+.feature-image img,
+.feature-image video,
+.feature-image .gif-placeholder {
+    width: 100%;
+    aspect-ratio: 1/1;    
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.2); 
+}
 
         .gif-placeholder {
             width: 100%;
@@ -641,25 +645,11 @@
 
         /* Enhanced Footer Styles */
         footer {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
             color: white;
-            padding: 80px 0 0;
+            padding: 40px 0 0;
             position: relative;
             overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(37, 211, 102, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(37, 211, 102, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-            z-index: 1;
         }
 
         .footer-container {
@@ -669,12 +659,12 @@
             position: relative;
             z-index: 2;
         }
-
+        
         .footer-main {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
-            gap: 50px;
-            margin-bottom: 60px;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         /* Company Section */
@@ -691,20 +681,11 @@
 
         .footer-logo img {
             height: 45px;
-            filter: brightness(1.1);
-        }
-
-        .footer-logo h2 {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #25D366, #34E77A);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            filter: brightness(0) invert(1);
         }
 
         .footer-description {
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.7;
             margin-bottom: 32px;
             font-size: 15px;
@@ -721,19 +702,18 @@
             justify-content: center;
             width: 45px;
             height: 45px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .social-link:hover {
-            background: #25D366;
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
         .social-link i {
@@ -756,12 +736,13 @@
             left: 0;
             width: 30px;
             height: 2px;
-            background: linear-gradient(90deg, #25D366, #34E77A);
+            background: white;
             border-radius: 2px;
         }
 
         .footer-links {
             list-style: none;
+            padding-left: 0;
         }
 
         .footer-links li {
@@ -769,7 +750,7 @@
         }
 
         .footer-links a {
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-size: 14px;
             transition: all 0.3s ease;
@@ -780,7 +761,7 @@
         }
 
         .footer-links a:hover {
-            color: #25D366;
+            color: white;
             transform: translateX(5px);
         }
 
@@ -791,20 +772,22 @@
 
         /* Newsletter Section */
         .newsletter {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.15);
             padding: 30px;
             border-radius: 16px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .newsletter h3 {
             margin-bottom: 16px;
             font-size: 18px;
+            font-weight: 600;
+            color: white;
         }
 
         .newsletter p {
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 24px;
             font-size: 14px;
             line-height: 1.5;
@@ -827,19 +810,19 @@
         }
 
         .newsletter-form input::placeholder {
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .newsletter-form input:focus {
             outline: none;
-            border-color: #25D366;
+            border-color: white;
             background: rgba(255, 255, 255, 0.15);
         }
 
         .newsletter-btn {
             padding: 14px 24px;
-            background: linear-gradient(135deg, #25D366, #34E77A);
-            color: white;
+            background: white;
+            color: #25D366;
             border: none;
             border-radius: 8px;
             font-weight: 600;
@@ -850,7 +833,7 @@
 
         .newsletter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
         }
 
         /* Contact Info */
@@ -863,44 +846,14 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 16px;
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
         }
 
         .contact-item i {
             width: 20px;
-            color: #25D366;
+            color: white;
             font-size: 16px;
-        }
-
-        /* Stats Section */
-        .footer-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 60px;
-            padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #25D366, #34E77A);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            color: #b8c5d6;
-            font-size: 14px;
         }
 
         /* Footer Bottom */
@@ -908,14 +861,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             flex-wrap: wrap;
             gap: 20px;
         }
 
         .footer-bottom-left {
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
         }
 
@@ -923,17 +876,6 @@
             display: flex;
             gap: 30px;
             align-items: center;
-        }
-
-        .footer-bottom-right a {
-            color: #b8c5d6;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-bottom-right a:hover {
-            color: #25D366;
         }
 
         .trust-badges {
@@ -946,15 +888,15 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             padding: 8px 12px;
             border-radius: 6px;
             font-size: 12px;
-            color: #b8c5d6;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .trust-badge i {
-            color: #25D366;
+            color: white;
         }
 
         /* Responsive Design */
@@ -1050,11 +992,6 @@
                 gap: 40px;
             }
 
-            .footer-stats {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
@@ -1132,8 +1069,8 @@
                 <h3 onclick="scrollToSection('contact-section')">Support</h3>
             </div>
             <div class="nav-buttons">
-                <button class="outline-btn">Login</button>
-                <button class="green-btn">Sign Up</button>
+                <button class="outline-btn" onclick="window.location.href='https://app.synxzap.com'">Login</button>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Sign Up</button>
             </div>
         </nav>
     </header>
@@ -1150,14 +1087,11 @@
                     <p><i class="ri-checkbox-circle-fill"></i> ₹1,000/month that's it.</p>
                 </div>
                 <div class="cta-buttons">
-                    <button class="green-btn">Start Now!</button>
+                    <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
                 </div>
             </div>
             <div class="hero-image">
-                <video autoplay loop muted playsinline>
-                    <source src="optimized-video.mp4" type="video/mp4">
-                    <img src="fallback-image.jpg" alt="SynxZap Dashboard">
-                </video>
+               <img src="/videos/dashboard.gif" alt="SynxZap Dashboard">
             </div>
         </div>
     </section>
@@ -1249,13 +1183,10 @@
                 <div class="feature-content">
                     <h2>Auto Capture Leads</h2>
                     <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system. No manual data entry required.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                    
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Lead Capture GIF<br>Coming Soon</div>
+               <img src="/videos/Auto_Capture_Leads.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
             
@@ -1263,13 +1194,10 @@
                 <div class="feature-content">
                     <h2>Smart Segmentation</h2>
                     <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns that convert better.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                   
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Segmentation GIF<br>Coming Soon</div>
+               <img src="/videos/smartsegmentaion.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
 
@@ -1277,13 +1205,10 @@
                 <div class="feature-content">
                     <h2>Campaign Builder</h2>
                     <p>Pre approved templates make launching campaigns effortless with just a few clicks. No design skills needed.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                 
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Campaign Builder GIF<br>Coming Soon</div>
+               <img src="/videos/Campaigns.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
 
@@ -1291,13 +1216,10 @@
                 <div class="feature-content">
                     <h2>Quick Answer Bot</h2>
                     <p>Answer common customer queries automatically with our 1 click setup bot. 24/7 customer support made easy.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                   
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Chatbot GIF<br>Coming Soon</div>
+               <img src="/videos/Answer_Bot.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
 
@@ -1305,13 +1227,10 @@
                 <div class="feature-content">
                     <h2>Broadcast Messages</h2>
                     <p>Send bulk messages to your customer segments with personalized content. Reach thousands in minutes.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                   
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Broadcast GIF<br>Coming Soon</div>
+               <img src="/videos/Broadcast_messages.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
 
@@ -1319,13 +1238,10 @@
                 <div class="feature-content">
                     <h2>Analytics Dashboard</h2>
                     <p>Track message delivery, open rates, click through rates and conversions with detailed analytics and insights.</p>
-                    <div class="feature-link">
-                        <span>Learn more</span>
-                        <i class="ri-arrow-right-up-line"></i>
-                    </div>
+                   
                 </div>
                 <div class="feature-image">
-                    <div class="gif-placeholder">Analytics GIF<br>Coming Soon</div>
+               <img src="/videos/Analytics.gif" alt="SynxZap Dashboard">
                 </div>
             </div>
         </div>
@@ -1340,9 +1256,9 @@
                     <p>1️⃣ Connect your WhatsApp number in minutes</p>
                     <p>2️⃣ Pick from templates or create custom campaigns</p>
                     <p>3️⃣ Set auto replies or lead capture triggers</p>
-                    <p>4️⃣ Start sending, tracking, and growing 🚀</p>
+                    <p>4️⃣ Start sending, tracking, and growing</p>
                 </div>
-                <button class="black-btn">Start Now!</button>
+                <button class="black-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
                 <p class="small-text">Setup in minutes, no coding required</p>
             </div>
             <div class="contact-image">
@@ -1373,7 +1289,7 @@
                     <p><i class="ri-check-line"></i> Quick answer bot</p>
                     <p><i class="ri-check-line"></i> CRM sync & exports</p>
                 </div>
-                <button class="green-btn">Get Started</button>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Get Started</button>
             </div>
             <div class="pricing-card">
                 <h4>Designed For</h4>
@@ -1394,7 +1310,7 @@
                     Everything your WhatsApp marketing should be in one place.
                 </p>
                 <div class="final-cta">
-                    <button class="green-btn">Start Now!</button>
+                    <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
                 </div>
                 <p style="margin-top: 24px; font-size: 14px;">
                     Questions? <a href="mailto:hello@synxautomate.com" class="email-link">hello@synxautomate.com</a>
@@ -1403,138 +1319,138 @@
         </div>
     </section>
 
-  <footer style="background: linear-gradient(135deg, #128C7E 0%, #25D366 100%); color: white; padding: 40px 0 0; position: relative; overflow: hidden;">
-  <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2;">
-    <!-- Main Footer Content -->
-    <div class="footer-main" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
-      <!-- Company Info -->
-      <div class="footer-company" style="max-width: 350px;">
-        <div class="footer-logo" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-          <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" style="height: 45px; filter: brightness(0) invert(1);" />
-        </div>
-        <p class="footer-description" style="color: rgba(255, 255, 255, 0.8); line-height: 1.7; margin-bottom: 32px; font-size: 15px;">
-          The complete WhatsApp marketing platform that helps businesses automate conversations, capture leads, and grow sales with zero technical headaches.
-        </p>
-        <div class="social-links" style="display: flex; gap: 16px;">
-          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-            <i class="ri-twitter-x-line" style="font-size: 20px;"></i>
-          </a>
-          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-            <i class="ri-linkedin-line" style="font-size: 20px;"></i>
-          </a>
-          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-            <i class="ri-instagram-line" style="font-size: 20px;"></i>
-          </a>
-          <a href="#" class="social-link" style="display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-            <i class="ri-youtube-line" style="font-size: 20px;"></i>
-          </a>
-        </div>
-      </div>
+    <footer>
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <!-- Company Info -->
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" />
+                    </div>
+                    <p class="footer-description">
+                        The complete WhatsApp marketing platform that helps businesses automate conversations, capture leads, and grow sales with zero technical headaches.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="ri-twitter-x-line"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-linkedin-line"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-youtube-line"></i>
+                        </a>
+                    </div>
+                </div>
 
-      <!-- Product Links -->
-      <div class="footer-column">
-        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 24px; color: white; position: relative;">Product</h3>
-        <ul class="footer-links" style="list-style: none; padding-left: 0;">
-          <li style="margin-bottom: 14px;">
-            <a href="#caseStudy-section" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Pricing
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Use Cases
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-check-line" style="font-size: 16px; opacity: 0.7;"></i>Integrations
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="https://www.synxzap.com/privacy-policy.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;" target="_blank" rel="noopener noreferrer">
-              <i class="ri-file-info-line" style="font-size: 16px; opacity: 0.7;"></i>Privacy Policy
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="https://www.synxzap.com/terms-and-conditions.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;" target="_blank" rel="noopener noreferrer">
-              <i class="ri-file-text-line" style="font-size: 16px; opacity: 0.7;"></i>Terms & Conditions
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#section-link" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-arrow-right-line" style="font-size: 16px; opacity: 0.7;"></i>Section Link
-            </a>
-          </li>
-        </ul>
-      </div>
+                <!-- Product Links -->
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#caseStudy-section">
+                                <i class="ri-check-line"></i>Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Use Cases
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Integrations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/privacy-policy.html" target="_blank" rel="noopener noreferrer">
+                                <i class="ri-file-info-line"></i>Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/terms-and-conditions.html" target="_blank" rel="noopener noreferrer">
+                                <i class="ri-file-text-line"></i>Terms & Conditions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-link">
+                                <i class="ri-arrow-right-line"></i>Section Link
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-      <!-- Resources -->
-      <div class="footer-column">
-        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 24px; color: white; position: relative;">Resources</h3>
-        <ul class="footer-links" style="list-style: none; padding-left: 0;">
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-book-open-line" style="font-size: 16px; opacity: 0.7;"></i>Blog
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-question-line" style="font-size: 16px; opacity: 0.7;"></i>Help Center
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-community-line" style="font-size: 16px; opacity: 0.7;"></i>Community
-            </a>
-          </li>
-          <li style="margin-bottom: 14px;">
-            <a href="#" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 6px 0;">
-              <i class="ri-video-line" style="font-size: 16px; opacity: 0.7;"></i>Webinars
-            </a>
-          </li>
-        </ul>
-      </div>
+                <!-- Resources -->
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#">
+                                <i class="ri-book-open-line"></i>Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-question-line"></i>Help Center
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-community-line"></i>Community
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-video-line"></i>Webinars
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-      <!-- Newsletter Section -->
-      <div class="newsletter" style="background: rgba(255, 255, 255, 0.15); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: white;">Stay Updated</h3>
-        <div class="contact-info" style="margin-top: 24px;">
-          <div class="contact-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: rgba(255, 255, 255, 0.8); font-size: 14px;">
-            <i class="ri-mail-line" style="width: 20px; color: white; font-size: 16px;"></i>
-            <span>hello@synxautomate.com</span>
-          </div>
-          <div class="contact-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: rgba(255, 255, 255, 0.8); font-size: 14px;">
-            <i class="ri-phone-line" style="width: 20px; color: white; font-size: 16px;"></i>
-            <span>+91 98765 43210</span>
-          </div>
+                <!-- Newsletter Section -->
+                <div class="newsletter">
+                    <h3>Stay Updated</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="ri-mail-line"></i>
+                            <span>hello@synxautomate.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="ri-shield-check-line"></i>
+                            <span>SOC 2 Certified</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-lock-line"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-whatsapp-line"></i>
+                            <span>Official Partner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.2); flex-wrap: wrap; gap: 20px;">
-      <div class="footer-bottom-left" style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">
-        <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
-      </div>
-      <div class="footer-bottom-right" style="display: flex; gap: 30px; align-items: center;">
-        <div class="trust-badges" style="display: flex; gap: 16px; align-items: center;">
-          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
-            <i class="ri-shield-check-line" style="color: white;"></i>
-            <span>SOC 2 Certified</span>
-          </div>
-          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
-            <i class="ri-lock-line" style="color: white;"></i>
-            <span>GDPR Compliant</span>
-          </div>
-          <div class="trust-badge" style="display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8);">
-            <i class="ri-whatsapp-line" style="color: white;"></i>
-            <span>Official Partner</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1556,12 +1472,8 @@
         const darkElements = document.querySelectorAll('footer, .dark-card');
         
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX - 12.5,
-                y: e.clientY - 12.5,
-                duration: 0.5,
-                ease: "power2.out"
-            });
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
 
             // Check if cursor is over green or dark elements
             let isOverGreen = false;
