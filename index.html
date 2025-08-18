@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SynxZap</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
     <style>
         * {
             margin: 0;
@@ -122,6 +125,7 @@
             transition: all 0.3s ease;
             font-size: 13px;
             border: none;
+            white-space: nowrap;
         }
 
         .outline-btn {
@@ -962,6 +966,15 @@
                 display: none;
             }
 
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-buttons button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
             .hero-text h1 {
                 font-size: 34px;
             }
@@ -1009,6 +1022,19 @@
         }
 
         @media (max-width: 576px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .nav-buttons {
+                gap: 6px;
+            }
+            
+            .nav-buttons button {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
             .cta-buttons {
                 flex-direction: column;
             }
@@ -1039,12 +1065,21 @@
         }
 
         @media (max-width: 480px) {
+            .nav-buttons {
+                gap: 4px;
+            }
+            
+            .nav-buttons button {
+                padding: 5px 8px;
+                font-size: 10px;
+            }
+
             .footer-container {
-                padding: 0 20px;
+                padding: 0 15px;
             }
 
             .newsletter {
-                padding: 20px;
+                padding: 15px;
             }
 
             .social-links {
@@ -1061,7 +1096,7 @@
     <header>
         <nav>
             <div class="logo" onclick="scrollToSection('home-section')">
-                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" style="height: 40px;" />
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" style="height: 40px;" loading="lazy" />
             </div>
             <div class="nav-links">
                 <h3 onclick="scrollToSection('features-section')">Features</h3>
@@ -1091,7 +1126,7 @@
                 </div>
             </div>
             <div class="hero-image">
-               <img src="/videos/dashboard.gif" alt="SynxZap Dashboard">
+               <img src="/videos/dashboard.gif" alt="SynxZap Dashboard" loading="lazy">
             </div>
         </div>
     </section>
@@ -1186,7 +1221,7 @@
                     
                 </div>
                 <div class="feature-image">
-               <img src="/videos/Auto_Capture_Leads.gif" alt="SynxZap Dashboard">
+               <img src="/videos/Auto_Capture_Leads.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
             
@@ -1197,7 +1232,7 @@
                    
                 </div>
                 <div class="feature-image">
-               <img src="/videos/smartsegmentaion.gif" alt="SynxZap Dashboard">
+               <img src="/videos/smartsegmentaion.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
 
@@ -1208,7 +1243,7 @@
                  
                 </div>
                 <div class="feature-image">
-               <img src="/videos/Campaigns.gif" alt="SynxZap Dashboard">
+               <img src="/videos/Campaigns.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
 
@@ -1219,7 +1254,7 @@
                    
                 </div>
                 <div class="feature-image">
-               <img src="/videos/Answer_Bot.gif" alt="SynxZap Dashboard">
+               <img src="/videos/Answer_Bot.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
 
@@ -1230,7 +1265,7 @@
                    
                 </div>
                 <div class="feature-image">
-               <img src="/videos/Broadcast_messages.gif" alt="SynxZap Dashboard">
+               <img src="/videos/Broadcast_messages.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
 
@@ -1241,7 +1276,7 @@
                    
                 </div>
                 <div class="feature-image">
-               <img src="/videos/Analytics.gif" alt="SynxZap Dashboard">
+               <img src="/videos/Analytics.gif" alt="SynxZap Dashboard" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1262,7 +1297,7 @@
                 <p class="small-text">Setup in minutes, no coding required</p>
             </div>
             <div class="contact-image">
-               <img src="/videos/LiveIn4steps.gif" alt="LiveIn4steps">
+               <img src="/videos/LiveIn4steps.gif" alt="LiveIn4steps" loading="lazy">
             </div>
         </div>
     </section>
@@ -1326,7 +1361,7 @@
                 <!-- Company Info -->
                 <div class="footer-company">
                     <div class="footer-logo">
-                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" />
+                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" loading="lazy" />
                     </div>
                     <p class="footer-description">
                         The complete WhatsApp marketing platform that helps businesses automate conversations, capture leads, and grow sales with zero technical headaches.
@@ -1448,8 +1483,9 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Load scripts after content -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script>
         // Smooth scroll to section function
         function scrollToSection(sectionId) {
@@ -1462,169 +1498,171 @@
         }
 
         // Enhanced Cursor Animation with color detection
-        const cursor = document.querySelector('.cursor');
-        const links = document.querySelectorAll('a, button, .feature-link');
-        const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
-        const darkElements = document.querySelectorAll('footer, .dark-card');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.cursor');
+            const links = document.querySelectorAll('a, button, .feature-link');
+            const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
+            const darkElements = document.querySelectorAll('footer, .dark-card');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
 
-            // Check if cursor is over green or dark elements
-            let isOverGreen = false;
-            let isOverDark = false;
+                // Check if cursor is over green or dark elements
+                let isOverGreen = false;
+                let isOverDark = false;
 
-            greenElements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                if (e.clientX >= rect.left && e.clientX <= rect.right &&
-                    e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                    isOverGreen = true;
+                greenElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                        e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        isOverGreen = true;
+                    }
+                });
+
+                darkElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                        e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        isOverDark = true;
+                    }
+                });
+
+                // Reset classes
+                cursor.classList.remove('on-green', 'on-dark');
+
+                if (isOverGreen) {
+                    cursor.classList.add('on-green');
+                } else if (isOverDark) {
+                    cursor.classList.add('on-dark');
                 }
             });
 
-            darkElements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                if (e.clientX >= rect.left && e.clientX <= rect.right &&
-                    e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                    isOverDark = true;
-                }
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.classList.add('active');
+                });
+                link.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('active');
+                });
             });
 
-            // Reset classes
-            cursor.classList.remove('on-green', 'on-dark');
-
-            if (isOverGreen) {
-                cursor.classList.add('on-green');
-            } else if (isOverDark) {
-                cursor.classList.add('on-dark');
-            }
-        });
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.classList.add('active');
+            // Hero Section Animation (persistent)
+            gsap.to(".hero-text h1", {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                delay: 0.5
             });
-            link.addEventListener('mouseleave', () => {
-                cursor.classList.remove('active');
+
+            gsap.to(".hero-text p", {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: 0.8
             });
-        });
 
-        // Hero Section Animation (persistent)
-        gsap.to(".hero-text h1", {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            delay: 0.5
-        });
+            gsap.to(".benefits p", {
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                stagger: 0.15,
+                delay: 1.0
+            });
 
-        gsap.to(".hero-text p", {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: 0.8
-        });
+            gsap.to(".cta-buttons button", {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.1,
+                delay: 1.3
+            });
 
-        gsap.to(".benefits p", {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.15,
-            delay: 1.0
-        });
+            gsap.to(".hero-image video, .hero-image img", {
+                opacity: 1,
+                scale: 1,
+                duration: 1.0,
+                ease: "back.out(1.7)",
+                delay: 0.7
+            });
 
-        gsap.to(".cta-buttons button", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            delay: 1.3
-        });
+            gsap.to(".client-item", {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                delay: 1.5
+            });
 
-        gsap.to(".hero-image video, .hero-image img", {
-            opacity: 1,
-            scale: 1,
-            duration: 1.0,
-            ease: "back.out(1.7)",
-            delay: 0.7
-        });
+            // Features Animation (persistent)
+            gsap.utils.toArray(".feature-card").forEach((card, i) => {
+                gsap.to(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.1
+                });
+            });
 
-        gsap.to(".client-item", {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            delay: 1.5
-        });
-
-        // Features Animation (persistent)
-        gsap.utils.toArray(".feature-card").forEach((card, i) => {
-            gsap.to(card, {
+            // How It Works Animation (persistent)
+            gsap.to(".contact-content h2", {
                 scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%",
+                    trigger: "#contact-section",
+                    start: "top 70%",
                     toggleActions: "play none none none",
                     once: true
                 },
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                delay: i * 0.1
+                duration: 0.6
             });
-        });
 
-        // How It Works Animation (persistent)
-        gsap.to(".contact-content h2", {
-            scrollTrigger: {
-                trigger: "#contact-section",
-                start: "top 70%",
-                toggleActions: "play none none none",
-                once: true
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.6
-        });
+            gsap.to(".steps p", {
+                scrollTrigger: {
+                    trigger: "#contact-section",
+                    start: "top 70%",
+                    toggleActions: "play none none none",
+                    once: true
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                stagger: 0.15,
+                delay: 0.3
+            });
 
-        gsap.to(".steps p", {
-            scrollTrigger: {
-                trigger: "#contact-section",
-                start: "top 70%",
-                toggleActions: "play none none none",
-                once: true
-            },
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.15,
-            delay: 0.3
-        });
+            gsap.to(".contact-image", {
+                scrollTrigger: {
+                    trigger: "#contact-section",
+                    start: "top 70%",
+                    toggleActions: "play none none none",
+                    once: true
+                },
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                delay: 0.5
+            });
 
-        gsap.to(".contact-image", {
-            scrollTrigger: {
-                trigger: "#contact-section",
-                start: "top 70%",
-                toggleActions: "play none none none",
-                once: true
-            },
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.5
-        });
-
-        // Pricing Animation (persistent)
-        gsap.to(".pricing-card", {
-            scrollTrigger: {
-                trigger: "#pricing-section",
-                start: "top 70%",
-                toggleActions: "play none none none",
-                once: true
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.15
+            // Pricing Animation (persistent)
+            gsap.to(".pricing-card", {
+                scrollTrigger: {
+                    trigger: "#pricing-section",
+                    start: "top 70%",
+                    toggleActions: "play none none none",
+                    once: true
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.15
+            });
         });
     </script>
 </body>
