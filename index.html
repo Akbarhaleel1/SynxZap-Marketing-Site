@@ -52,7 +52,7 @@
         }
 
         section {
-            padding: 65px 10%;
+            padding: 40px 8%; /* Reduced padding */
         }
 
         /* Header Styles */
@@ -61,7 +61,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 16px 10%;
+            padding: 16px 8%;
             background-color: white;
             z-index: 100;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
@@ -162,7 +162,7 @@
         /* Hero Section */
         #home-section {
             height: 100vh;
-            padding-top: 100px;
+            padding-top: 80px; /* Reduced padding */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -172,7 +172,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 40px;
+            gap: 30px; /* Reduced gap */
         }
 
         .hero-text {
@@ -184,7 +184,7 @@
             font-weight: 700;
             line-height: 1.2;
             color: #222;
-            margin-bottom: 20px;
+            margin-bottom: 16px; /* Reduced margin */
             opacity: 0;
             transform: translateX(-50px);
         }
@@ -197,7 +197,7 @@
             font-size: 15px;
             color: #555;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
             opacity: 0;
             transform: translateY(20px);
         }
@@ -209,14 +209,14 @@
         }
 
         .benefits {
-            margin-bottom: 32px;
+            margin-bottom: 24px; /* Reduced margin */
         }
 
         .benefits p {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 10px 0;
+            margin: 8px 0; /* Reduced margin */
             font-size: 14px;
             color: #444;
             opacity: 0;
@@ -231,7 +231,7 @@
         .cta-buttons {
             display: flex;
             gap: 16px;
-            margin-top: 24px;
+            margin-top: 20px; /* Reduced margin */
         }
 
         .cta-buttons button {
@@ -275,8 +275,8 @@
 
         /* Clients Section */
         .clients-section {
-            padding: 20px 10% 0;
-            margin-top: -40px;
+            padding: 10px 8% 0; /* Reduced padding */
+            margin-top: -30px; /* Reduced margin */
         }
 
         .clients {
@@ -348,7 +348,7 @@
         }
 
         .section-header {
-            margin-bottom: 48px;
+            margin-bottom: 40px; /* Reduced margin */
         }
 
         .section-header h3 {
@@ -356,7 +356,7 @@
             font-size: 38px;
             font-weight: 700;
             color: #222;
-            margin-bottom: 12px;
+            margin-bottom: 10px; /* Reduced margin */
             background-color: #b9ff66;
             padding: 0 8px;
             border-radius: 6px;
@@ -372,7 +372,7 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            gap: 24px; /* Reduced gap */
         }
 
         .feature-card {
@@ -392,8 +392,8 @@
         }
 
         .feature-content {
-            padding: 40px;
-            width: 55%;
+            padding: 30px; /* Reduced padding */
+            width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -402,13 +402,13 @@
         .feature-card h2 {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 14px; /* Reduced margin */
             line-height: 1.3;
         }
 
         .feature-card p {
             color: #555;
-            margin-bottom: 20px;
+            margin-bottom: 16px; /* Reduced margin */
             line-height: 1.6;
             font-size: 15px;
         }
@@ -433,40 +433,21 @@
         }
 
         .feature-image {
-            width: 45%;
+            width: 50%; /* Increased width */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px; /* Reduced padding */
             background: #f8f9fa;
         }
-.feature-image img,
-.feature-image video,
-.feature-image .gif-placeholder {
-    width: 100%;
-    aspect-ratio: 1/1;    
-    object-fit: cover;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.2); 
-}
 
-        .gif-placeholder {
+        .feature-image img,
+        .feature-image video {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 14px;
-            text-align: center;
-            border: 2px dashed #ddd;
+            height: auto;
+            max-height: 300px; /* Increased height */
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         .dark-card {
@@ -505,7 +486,7 @@
         .contact-container {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 30px; /* Reduced gap */
             position: relative;
             z-index: 1;
         }
@@ -517,14 +498,14 @@
         .contact-content h2 {
             font-size: 34px;
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
             line-height: 1.3;
             opacity: 0;
             transform: translateY(50px);
         }
 
         .steps {
-            margin-bottom: 32px;
+            margin-bottom: 24px; /* Reduced margin */
         }
 
         .steps p {
@@ -532,7 +513,7 @@
             align-items: center;
             gap: 12px;
             font-size: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 10px; /* Reduced margin */
             line-height: 1.5;
             opacity: 0;
             transform: translateX(-30px);
@@ -541,7 +522,7 @@
         .small-text {
             font-size: 12px;
             opacity: 0.9;
-            margin-top: 12px;
+            margin-top: 10px; /* Reduced margin */
         }
 
         .contact-image {
@@ -567,14 +548,14 @@
         .pricing-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 40px;
+            gap: 20px; /* Reduced gap */
+            margin-top: 30px; /* Reduced margin */
         }
 
         .pricing-card {
             background-color: white;
             border-radius: 12px;
-            padding: 32px;
+            padding: 28px; /* Reduced padding */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             opacity: 0;
@@ -589,12 +570,12 @@
         .pricing-card h4 {
             font-size: 19px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 16px; /* Reduced margin */
             color: #222;
         }
 
         .pricing-info {
-            margin-bottom: 20px;
+            margin-bottom: 16px; /* Reduced margin */
         }
 
         .pricing-info p {
@@ -605,14 +586,14 @@
         }
 
         .features-list {
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
         }
 
         .features-list p {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 10px 0;
+            margin: 8px 0; /* Reduced margin */
             color: #555;
             font-size: 14px;
         }
@@ -625,7 +606,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 12px 0;
+            margin: 10px 0; /* Reduced margin */
             color: #555;
             font-size: 14px;
         }
@@ -638,8 +619,8 @@
         .final-cta {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 24px 0;
+            gap: 10px; /* Reduced gap */
+            margin: 20px 0; /* Reduced margin */
         }
 
         .email-link {
@@ -652,7 +633,7 @@
         footer {
             background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
             color: white;
-            padding: 40px 0 0;
+            padding: 30px 0 0; /* Reduced padding */
             position: relative;
             overflow: hidden;
         }
@@ -668,8 +649,8 @@
         .footer-main {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px; /* Reduced gap */
+            margin-bottom: 30px; /* Reduced margin */
         }
 
         /* Company Section */
@@ -681,7 +662,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
         }
 
         .footer-logo img {
@@ -692,7 +673,7 @@
         .footer-description {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.7;
-            margin-bottom: 32px;
+            margin-bottom: 24px; /* Reduced margin */
             font-size: 15px;
         }
 
@@ -729,7 +710,7 @@
         .footer-column h3 {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
             color: white;
             position: relative;
         }
@@ -751,7 +732,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 14px;
+            margin-bottom: 12px; /* Reduced margin */
         }
 
         .footer-links a {
@@ -778,14 +759,14 @@
         /* Newsletter Section */
         .newsletter {
             background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
+            padding: 25px; /* Reduced padding */
             border-radius: 16px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .newsletter h3 {
-            margin-bottom: 16px;
+            margin-bottom: 14px; /* Reduced margin */
             font-size: 18px;
             font-weight: 600;
             color: white;
@@ -793,7 +774,7 @@
 
         .newsletter p {
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 24px;
+            margin-bottom: 20px; /* Reduced margin */
             font-size: 14px;
             line-height: 1.5;
         }
@@ -801,7 +782,7 @@
         .newsletter-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px; /* Reduced gap */
         }
 
         .newsletter-form input {
@@ -843,14 +824,14 @@
 
         /* Contact Info */
         .contact-info {
-            margin-top: 24px;
+            margin-top: 20px; /* Reduced margin */
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 14px; /* Reduced margin */
             color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
         }
@@ -866,10 +847,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 16px 0; /* Reduced padding */
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px; /* Reduced gap */
         }
 
         .footer-bottom-left {
@@ -879,13 +860,13 @@
 
         .footer-bottom-right {
             display: flex;
-            gap: 30px;
+            gap: 24px; /* Reduced gap */
             align-items: center;
         }
 
         .trust-badges {
             display: flex;
-            gap: 16px;
+            gap: 12px; /* Reduced gap */
             align-items: center;
         }
 
@@ -907,7 +888,7 @@
         /* Responsive Design */
         @media (max-width: 1200px) {
             section {
-                padding: 65px 5%;
+                padding: 40px 5%; /* Reduced padding */
             }
 
             header {
@@ -922,7 +903,7 @@
         @media (max-width: 1024px) {
             .footer-main {
                 grid-template-columns: 1fr 1fr 1fr;
-                gap: 40px;
+                gap: 30px; /* Reduced gap */
             }
             
             .footer-company {
@@ -942,7 +923,7 @@
             }
 
             .hero-image {
-                margin-top: 40px;
+                margin-top: 30px; /* Reduced margin */
             }
 
             .contact-container {
@@ -954,7 +935,7 @@
             }
 
             .contact-image {
-                margin-top: 40px;
+                margin-top: 30px; /* Reduced margin */
             }
 
             .pricing-container {
@@ -998,12 +979,12 @@
             }
 
             footer {
-                padding: 60px 0 0;
+                padding: 40px 0 0; /* Reduced padding */
             }
 
             .footer-main {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px; /* Reduced gap */
             }
 
             .footer-bottom {
@@ -1013,12 +994,36 @@
 
             .footer-bottom-right {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px; /* Reduced gap */
             }
 
             .trust-badges {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px; /* Reduced gap */
+            }
+
+            /* Clients section mobile fix */
+            .clients-section {
+                padding: 10px 5% 0;
+                margin-top: -20px; /* Reduced margin */
+            }
+
+            .clients-scroll {
+                gap: 15px;
+                animation: scroll-infinite 20s linear infinite;
+            }
+
+            .client-item {
+                min-width: 90px;
+                padding: 8px 12px;
+            }
+
+            .client-item i {
+                font-size: 22px;
+            }
+
+            .client-item span {
+                font-size: 11px;
             }
         }
 
@@ -1062,6 +1067,16 @@
 
             .social-links {
                 justify-content: center;
+            }
+
+            /* Clients section mobile fix */
+            .clients-scroll {
+                gap: 10px;
+            }
+
+            .client-item {
+                min-width: 80px;
+                padding: 6px 10px;
             }
         }
 
@@ -1446,7 +1461,11 @@
                         </div>
                         <div class="contact-item">
                             <i class="ri-phone-line"></i>
-                            <span>+91 98765 43210</span>
+                            <span>+91 99957 70096</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+44 7466 951870</span>
                         </div>
                     </div>
                 </div>
