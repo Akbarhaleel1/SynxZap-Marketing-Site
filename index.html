@@ -12,9 +12,7 @@
     <!-- Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
 
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
+    <!-- Critical CSS inline for faster rendering -->
     <style>
         * {
             margin: 0;
@@ -33,6 +31,14 @@
             overflow-x: hidden;
         }
 
+        /* Reduce animations on mobile for better performance */
+        @media (max-width: 768px) {
+            * {
+                animation-duration: 0.3s !important;
+                transition-duration: 0.2s !important;
+            }
+        }
+
         .cursor {
             height: 25px;
             width: 25px;
@@ -44,6 +50,14 @@
             mix-blend-mode: normal;
             transition: all 0.1s ease-out;
             transform: translate(-50%, -50%);
+            display: none; /* Hidden by default, shown only on desktop */
+        }
+
+        /* Only show cursor on desktop hover devices */
+        @media (hover: hover) and (pointer: fine) {
+            .cursor {
+                display: block;
+            }
         }
 
         .cursor.active {
@@ -60,6 +74,69 @@
 
         section {
             padding: 40px 8%;
+        }
+
+        /* Loading skeleton for better perceived performance */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Optimized image/gif container */
+        .media-container {
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .media-container.loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            z-index: 1;
+        }
+
+        .media-container.loading::after {
+            content: 'Loading...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .media-container img,
+        .media-container video {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .media-container img.loaded,
+        .media-container video.loaded {
+            opacity: 1;
         }
 
         /* Header Styles */
@@ -257,40 +334,32 @@
             justify-content: center;
         }
 
-        .hero-image img {
+        .hero-image .media-container {
             width: 100%;
             max-width: 1200px;
-            height: auto;
-            border-radius: 16px;
+            min-height: 400px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            animation: float 8s ease-in-out infinite;
             opacity: 0;
             transform: scale(0.8);
-            object-fit: contain;
-            background: transparent;
         }
 
-        .hero-image video {
-            width: 100%;
-            max-width: 80px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            animation: float 8s ease-in-out infinite;
-            opacity: 0;
-            transform: scale(0.8);
+        /* Reduced animation complexity for mobile */
+        @media (max-width: 768px) {
+            .hero-image .media-container {
+                animation: none;
+            }
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
 
-            50% {
-                transform: translateY(-12px);
-            }
-
-            100% {
-                transform: translateY(0px);
+        /* Desktop only float animation */
+        @media (min-width: 769px) {
+            .hero-image .media-container img.loaded {
+                animation: float 8s ease-in-out infinite;
             }
         }
 
@@ -325,13 +394,8 @@
         }
 
         @keyframes scroll-infinite {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .client-item {
@@ -418,6 +482,7 @@
             min-height: 280px;
             opacity: 0;
             transform: translateY(50px);
+            background: white;
         }
 
         .feature-card:hover {
@@ -475,15 +540,6 @@
             background: #f8f9fa;
         }
 
-        .feature-image img,
-        .feature-image video {
-            width: 100%;
-            height: auto;
-            max-height: 300px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
         .dark-card {
             background-color: #222;
             color: white;
@@ -495,6 +551,10 @@
 
         .dark-card .feature-content p {
             color: #ddd;
+        }
+
+        .dark-card .feature-image {
+            background: #333;
         }
 
         /* How It Works Section */
@@ -569,14 +629,11 @@
             transform: scale(0.9);
         }
 
-        .contact-image img {
+        .contact-image .media-container {
             width: 130%;
             max-width: 650px;
-            height: auto;
-            border-radius: 12px;
+            min-height: 400px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            object-fit: contain;
-            background: transparent;
         }
 
         /* Pricing Section */
@@ -924,22 +981,6 @@
             color: white;
         }
 
-        /* Loading placeholder */
-        .gif-placeholder {
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            min-height: 200px;
-        }
-
-        .gif-placeholder::after {
-            content: "Loading...";
-            color: #666;
-            font-size: 14px;
-        }
-
         /* Enhanced Mobile Responsive Design */
         @media (max-width: 1200px) {
             section {
@@ -1012,7 +1053,7 @@
                 text-align: center;
             }
 
-            .contact-image img {
+            .contact-image .media-container {
                 width: 100%;
                 max-width: 500px;
             }
@@ -1418,13 +1459,6 @@
                 line-height: 1;
             }
         }
-
-        /* Hide cursor on touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            .cursor {
-                display: none;
-            }
-        }
     </style>
 </head>
 
@@ -1471,8 +1505,9 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/videos/synxoverview.gif"
-                    alt="SynxZap Dashboard" loading="lazy">
+                <div class="media-container loading" data-src="/videos/synxoverview.gif">
+                    <img src="" alt="SynxZap Dashboard" loading="lazy" style="display: none;">
+                </div>
             </div>
         </div>
     </section>
@@ -1565,10 +1600,11 @@
                     <h2>Auto Capture Leads</h2>
                     <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system. No manual
                         data entry required.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/Auto_Capture_Leads.gif" alt="Auto Capture Leads" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/Auto_Capture_Leads.gif">
+                        <img src="" alt="Auto Capture Leads" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -1577,10 +1613,11 @@
                     <h2>Smart Segmentation</h2>
                     <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns that convert
                         better.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/smartsegmentaion.gif" alt="Smart Segmentation" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/smartsegmentaion.gif">
+                        <img src="" alt="Smart Segmentation" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -1589,10 +1626,11 @@
                     <h2>Campaign Builder</h2>
                     <p>Pre approved templates make launching campaigns effortless with just a few clicks. No design
                         skills needed.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/Campaigns.gif" alt="Campaign Builder" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/Campaigns.gif">
+                        <img src="" alt="Campaign Builder" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -1601,10 +1639,11 @@
                     <h2>Quick Answer Bot</h2>
                     <p>Answer common customer queries automatically with our 1 click setup bot. 24/7 customer support
                         made easy.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/Answer_Bot.gif" alt="Quick Answer Bot" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/Answer_Bot.gif">
+                        <img src="" alt="Quick Answer Bot" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -1613,10 +1652,11 @@
                     <h2>Broadcast Messages</h2>
                     <p>Send bulk messages to your customer segments with personalized content. Reach thousands in
                         minutes.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/Broadcast_messages.gif" alt="Broadcast Messages" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/Broadcast_messages.gif">
+                        <img src="" alt="Broadcast Messages" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -1625,10 +1665,11 @@
                     <h2>Analytics Dashboard</h2>
                     <p>Track message delivery, open rates, click through rates and conversions with detailed analytics
                         and insights.</p>
-
                 </div>
                 <div class="feature-image">
-                    <img src="/videos/Analytics.gif" alt="Analytics Dashboard" loading="lazy">
+                    <div class="media-container loading" data-src="/videos/Analytics.gif">
+                        <img src="" alt="Analytics Dashboard" loading="lazy" style="display: none;">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1650,7 +1691,9 @@
                 <p class="small-text">Setup in minutes, no coding required</p>
             </div>
             <div class="contact-image">
-                <img src="/videos/LiveIn4steps.gif" alt="Go Live in 4 Steps" loading="lazy">
+                <div class="media-container loading" data-src="/videos/LiveIn4steps.gif">
+                    <img src="" alt="Go Live in 4 Steps" loading="lazy" style="display: none;">
+                </div>
             </div>
         </div>
     </section>
@@ -1844,9 +1887,6 @@
         </div>
     </footer>
 
-    <!-- Load scripts after content -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script>
         // Smooth scroll to section function
         function scrollToSection(sectionId) {
@@ -1858,8 +1898,25 @@
             }
         }
 
-        // Enhanced Cursor Animation with color detection
+        // Optimized performance for mobile and desktop
         document.addEventListener('DOMContentLoaded', function () {
+            const isDesktop = window.innerWidth > 768 && window.matchMedia('(hover: hover)').matches;
+            const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Only initialize cursor and complex animations on desktop
+            if (isDesktop && !isReducedMotion) {
+                initializeCursor();
+                initializeComplexAnimations();
+            } else {
+                // Simple animations for mobile
+                initializeSimpleAnimations();
+            }
+
+            // Critical: Optimized lazy loading for GIFs
+            initializeOptimizedLazyLoading();
+        });
+
+        function initializeCursor() {
             const cursor = document.querySelector('.cursor');
             const links = document.querySelectorAll('a, button, .feature-link');
             const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
@@ -1907,8 +1964,26 @@
                     cursor.classList.remove('active');
                 });
             });
+        }
 
-            // Hero Section Animation (slower)
+        function initializeComplexAnimations() {
+            // Load GSAP only if needed
+            const script1 = document.createElement('script');
+            script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
+            script1.onload = function() {
+                const script2 = document.createElement('script');
+                script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
+                script2.onload = function() {
+                    gsap.registerPlugin(ScrollTrigger);
+                    setupGSAPAnimations();
+                };
+                document.head.appendChild(script2);
+            };
+            document.head.appendChild(script1);
+        }
+
+        function setupGSAPAnimations() {
+            // Hero Section Animation
             gsap.to(".hero-text h1", {
                 opacity: 1,
                 x: 0,
@@ -1943,7 +2018,7 @@
                 ease: "back.out(1.3)"
             });
 
-            gsap.to(".hero-image img", {
+            gsap.to(".hero-image .media-container", {
                 opacity: 1,
                 scale: 1,
                 duration: 1.5,
@@ -1960,7 +2035,7 @@
                 ease: "power2.out"
             });
 
-            // Features Animation (on scroll) - slower
+            // Features Animation (on scroll)
             gsap.utils.toArray(".feature-card").forEach((card, i) => {
                 ScrollTrigger.create({
                     trigger: card,
@@ -1978,7 +2053,7 @@
                 });
             });
 
-            // How It Works Animation (on scroll) - slower
+            // Contact Section Animation
             ScrollTrigger.create({
                 trigger: "#contact-section",
                 start: "top 70%",
@@ -2010,7 +2085,7 @@
                 once: true
             });
 
-            // Pricing Animation (on scroll) - slower
+            // Pricing Animation
             ScrollTrigger.create({
                 trigger: "#pricing-section",
                 start: "top 70%",
@@ -2025,45 +2100,183 @@
                 },
                 once: true
             });
+        }
 
-            // Optimized lazy loading for GIFs
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        function initializeSimpleAnimations() {
+            // Simple CSS-based animations for mobile
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
 
+            const observer = new IntersectionObserver(animateOnScroll, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observe elements for simple animations
+            document.querySelectorAll('.hero-text h1, .hero-text p, .benefits p, .cta-buttons button, .feature-card, .pricing-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Hero elements immediate animation
+            setTimeout(() => {
+                document.querySelectorAll('.hero-text h1, .hero-text p, .benefits p, .cta-buttons button').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0) translateX(0)';
+                    }, i * 200);
+                });
+            }, 300);
+
+            // Client items animation
+            setTimeout(() => {
+                document.querySelectorAll('.client-item').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, i * 100);
+                });
+            }, 1500);
+        }
+
+        function initializeOptimizedLazyLoading() {
+            const mediaContainers = document.querySelectorAll('.media-container[data-src]');
+            
             if ('IntersectionObserver' in window) {
                 const imageObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const img = entry.target;
-
-                            // Create placeholder while loading
-                            const placeholder = document.createElement('div');
-                            placeholder.className = 'gif-placeholder';
-                            placeholder.style.width = img.style.width || '100%';
-                            placeholder.style.height = img.style.height || '200px';
-
-                            // Insert placeholder
-                            img.parentNode.insertBefore(placeholder, img);
-                            img.style.display = 'none';
-
-                            // Load actual image
-                            const tempImg = new Image();
-                            tempImg.onload = function () {
-                                img.style.display = 'block';
-                                placeholder.remove();
-                            };
-                            tempImg.src = img.src;
-
-                            observer.unobserve(img);
+                            loadMediaOptimized(entry.target);
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, {
-                    rootMargin: '50px',
+                    rootMargin: '100px',
                     threshold: 0.1
                 });
 
-                lazyImages.forEach(img => imageObserver.observe(img));
+                mediaContainers.forEach(container => {
+                    imageObserver.observe(container);
+                });
+            } else {
+                // Fallback for older browsers
+                mediaContainers.forEach(loadMediaOptimized);
             }
+        }
+
+        function loadMediaOptimized(container) {
+            const src = container.getAttribute('data-src');
+            const img = container.querySelector('img');
+            
+            if (!src || !img) return;
+
+            // Create a new image for preloading
+            const tempImg = new Image();
+            
+            // Set up load handlers
+            tempImg.onload = function() {
+                // Image loaded successfully
+                img.src = this.src;
+                img.style.display = 'block';
+                img.classList.add('loaded');
+                container.classList.remove('loading');
+                
+                // Apply float animation only on desktop after load
+                if (window.innerWidth > 768 && window.matchMedia('(hover: hover)').matches) {
+                    img.style.animation = 'float 8s ease-in-out infinite';
+                }
+            };
+            
+            tempImg.onerror = function() {
+                // Handle error - show placeholder or retry
+                container.classList.remove('loading');
+                container.innerHTML = '<div style="padding: 40px; text-align: center; color: #999;">Media unavailable</div>';
+            };
+            
+            // Start loading with timeout
+            setTimeout(() => {
+                tempImg.src = src;
+            }, 100);
+            
+            // Timeout fallback
+            setTimeout(() => {
+                if (!img.classList.contains('loaded')) {
+                    tempImg.onerror();
+                }
+            }, 10000); // 10 second timeout
+        }
+
+        // Performance optimizations
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Optimized scroll handling
+        let ticking = false;
+        function updateOnScroll() {
+            // Minimal scroll operations only
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // Any scroll-based updates go here
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+
+        // Preload critical resources only after initial load
+        window.addEventListener('load', () => {
+            // Preload next section's media when page fully loads
+            setTimeout(() => {
+                const criticalImages = document.querySelectorAll('.media-container[data-src]');
+                if (criticalImages.length > 0) {
+                    loadMediaOptimized(criticalImages[0]); // Load first media immediately
+                }
+            }, 2000);
         });
+
+        // Handle resize efficiently
+        const handleResize = debounce(() => {
+            // Re-initialize animations if switching between mobile/desktop
+            const isNowDesktop = window.innerWidth > 768;
+            // Add any resize-specific logic here
+        }, 250);
+
+        window.addEventListener('resize', handleResize, { passive: true });
+
+        // Reduce animations on low-end devices
+        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+            document.documentElement.style.setProperty('--animation-duration', '0.1s');
+        }
+
+        // Battery API optimization (if supported)
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                if (battery.level < 0.2 || !battery.charging) {
+                    // Reduce animations on low battery
+                    document.querySelectorAll('*').forEach(el => {
+                        el.style.animationDuration = '0.1s';
+                        el.style.transitionDuration = '0.1s';
+                    });
+                }
+            });
+        }
     </script>
 </body>
 
