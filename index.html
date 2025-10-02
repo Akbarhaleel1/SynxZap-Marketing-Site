@@ -1,18 +1,794 @@
-<!DOCTYPE html>
+</style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <header>
+        <nav>
+            <div class="logo" onclick="scrollToSection('home-section')">
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo"
+                    style="height: 40px;" loading="lazy" />
+            </div>
+            <div class="nav-links">
+                <h3 onclick="scrollToSection('features-section')">Features</h3>
+                <h3 onclick="scrollToSection('pricing-section')">Pricing</h3>
+                <h3 onclick="scrollToSection('contact-section')">Support</h3>
+            </div>
+            <div class="nav-buttons">
+                <button class="outline-btn" onclick="window.location.href='https://app.synxzap.com'">Login</button>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Sign
+                    Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Talk to your<br><span class="highlight-green">Customers.</span><br><span
+                        class="highlight-green">Sell more.</span><br>All on WhatsApp.</h1>
+                <p>Start <span class="highlight-text">conversations</span>, send <span
+                        class="highlight-text">offers</span>, answer <span class="highlight-text">questions</span> and
+                    grow your business. No Tech Headaches. Just Results.</p>
+                <div class="benefits">
+                    <p><i class="ri-checkbox-circle-fill"></i> Instant WhatsApp setup</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Pre approved templates</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> No hidden fees </p>
+                </div>
+                <div class="cta-buttons">
+                    <button class="green-btn"
+                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <img src="/videos/synxoverview.gif" class="lazy-image" alt="SynxZap Dashboard" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients-section">
+        <div class="clients">
+            <div class="clients-container">
+                <div class="clients-scroll">
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features-section">
+        <div class="section-header lazy-content">
+            <h3>What You Can Do</h3>
+            <p>Powerful WhatsApp marketing tools designed to help you sell more with less effort</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card lazy-content" data-feature="1">
+                <div class="feature-content">
+                    <h2>AI Assisted Replies</h2>
+                    <p>Give 24x7 support to your customers with AI at no additional costs. Intelligent responses that
+                        understand context and provide instant solutions.</p>
+                    <div class="feature-badge">
+                        <i class="ri-robot-line"></i>
+                        <span>Powered by AI</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Answer_Bot.gif" class="lazy-image" alt="AI Assisted Replies" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content" data-feature="2">
+                <div class="feature-content">
+                    <h2>Create and Send Marketing Messages Easily</h2>
+                    <p>Pick pre-approved templates, segment your customers and easily send marketing campaigns. Launch
+                        professional campaigns in minutes.</p>
+                    <div class="feature-badge">
+                        <i class="ri-megaphone-line"></i>
+                        <span>Pre-Approved Templates</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Campaigns.gif" class="lazy-image" alt="Marketing Messages" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content" data-feature="3">
+                <div class="feature-content">
+                    <h2>Smart Insights</h2>
+                    <p>Learn from data and improve your campaigns easily. Track performance metrics and optimize your
+                        messaging strategy with actionable insights.</p>
+                    <div class="feature-badge">
+                        <i class="ri-line-chart-line"></i>
+                        <span>Real-time Analytics</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Analytics.gif" class="lazy-image" alt="Smart Insights" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card lazy-content" data-feature="4">
+                <div class="feature-content">
+                    <h2>Auto Capture Leads</h2>
+                    <p>New contacts are automatically added when they send messages, saving you hours of manual entry.
+                        Never miss a potential customer again.</p>
+                    <div class="feature-badge">
+                        <i class="ri-user-add-line"></i>
+                        <span>Zero Manual Work</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Auto_Capture_Leads.gif" class="lazy-image" alt="Auto Capture Leads"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card lazy-content" data-feature="5">
+                <div class="feature-content">
+                    <h2>Multi Channel Use</h2>
+                    <p>Speak with your customers on WhatsApp, on your website, through a link or QR code. Meet your
+                        customers wherever they are.</p>
+                    <div class="feature-badge">
+                        <i class="ri-links-line"></i>
+                        <span>Omnichannel Ready</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Broadcast_messages.gif" class="lazy-image" alt="Multi Channel"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content" data-feature="6">
+                <div class="feature-content">
+                    <h2>Integrate with your Store</h2>
+                    <p>Connect your Shopify or online store to send notifications, reminders or even proactive
+                        messaging. Automate your entire sales funnel.</p>
+                    <div class="feature-badge">
+                        <i class="ri-store-line"></i>
+                        <span>E-commerce Ready</span>
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/smartsegmentaion.gif" class="lazy-image" alt="Store Integration"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-section">
+        <div class="contact-container">
+            <div class="contact-content lazy-content">
+                <h2>Go Live in 5 Simple Steps</h2>
+                <div class="steps">
+                    <p>
+                        <span class="step-number">01.</span>
+                        Sign up to SynxZap
+                    </p>
+                    <p>
+                        <span class="step-number">02.</span>
+                        Login to facebook and connect your whatsapp number
+                    </p>
+                    <p>
+                        <span class="step-number">03.</span>
+                        Pick or create a marketing template, set campaigns
+                    </p>
+                    <p>
+                        <span class="step-number">04.</span>
+                        Create automations, add AI, upload your brochure
+                    </p>
+                    <p>
+                        <span class="step-number">05.</span>
+                        Continue growing...
+                    </p>
+                </div>
+                <button class="black-btn"
+                    onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                <p class="small-text">Setup in minutes, no coding required</p>
+            </div>
+            <div class="contact-image">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <img src="/videos/LiveIn4steps.gif" class="lazy-image" alt="Go Live in 5 Steps" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing-section">
+        <div class="section-header lazy-content">
+            <h3>Simple Pricing</h3>
+            <p>Everything you need to grow your business on WhatsApp</p>
+        </div>
+        <div class="pricing-container">
+            <div class="pricing-card lazy-content">
+                <h4>The One Plan</h4>
+                <div class="pricing-info">
+                    <p>Monthly: ₹1,000/mo + ₹499 setup</p>
+                    <p>Yearly: ₹10,000/year (no setup fee)</p>
+                </div>
+                <div class="features-list">
+                    <p><i class="ri-robot-line"></i> AI Assistant</p>
+                    <p><i class="ri-chat-4-line"></i> Unlimited Messages</p>
+                    <p><i class="ri-tools-line"></i> Easy Automation Builder</p>
+                    <p><i class="ri-user-add-line"></i> Auto Lead Capture</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Pre-Approved Template</p>
+                    <p><i class="ri-refresh-line"></i> CRM Sync & Reporting</p>
+                    <p><i class="ri-time-line"></i> Free 24hr chat window</p>
+                </div>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Get
+                    Started</button>
+            </div>
+            <div class="pricing-card lazy-content">
+                <h4>Designed For</h4>
+                <div class="use-cases">
+                    <p><i class="ri-store-2-line"></i> E commerce & D2C brands</p>
+                    <p><i class="ri-hospital-line"></i> Clinics & Consultations</p>
+                    <p><i class="ri-book-open-line"></i> Education & Training</p>
+                    <p><i class="ri-home-4-line"></i> Real Estate & Services</p>
+                    <p><i class="ri-briefcase-line"></i> Agencies with multiple clients</p>
+                </div>
+                <p style="margin-top: 16px; color: #25D366; font-weight: 600; font-size: 14px;">
+                    Coming Soon: AI chatflows, shared inbox, and CRM integrations
+                </p>
+            </div>
+            <div class="pricing-card lazy-content">
+                <h4>Ready to Grow?</h4>
+                <p style="margin-bottom: 24px; line-height: 1.6; font-size: 14px;">
+                    Everything your WhatsApp marketing should be in one place.
+                </p>
+                <div class="final-cta">
+                    <button class="green-btn"
+                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                </div>
+                <p style="margin-top: 24px; font-size: 14px;">
+                    Questions? <a href="mailto:support@synxzap.com" class="email-link">support@synxzap.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo"
+                            loading="lazy" />
+                    </div>
+                    <p class="footer-description">
+                        The complete WhatsApp marketing platform that helps businesses automate conversations, capture
+                        leads, and grow sales with zero technical headaches.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/synxzap" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hello_synx" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61578979535641" class="social-link"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#pricing-section">
+                                <i class="ri-check-line"></i>Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Use Cases
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Integrations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/privacy-policy" target="_blank" rel="noopener noreferrer">
+                                <i class="ri-file-info-line"></i>Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/terms-and-conditions" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="ri-file-text-line"></i>Terms & Conditions
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#">
+                                <i class="ri-book-open-line"></i>Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-question-line"></i>Help Center
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-community-line"></i>Community
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-video-line"></i>Webinars
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="newsletter">
+                    <h3>Stay Updated</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="ri-mail-line"></i>
+                            <span>support@synxzap.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+91 99957 70096</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+44 7466 951870</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="ri-shield-check-line"></i>
+                            <span>SOC2 Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-lock-line"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-whatsapp-line"></i>
+                            <span>Official Partner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursor = document.querySelector('.cursor');
+            const links = document.querySelectorAll('a, button, .feature-link');
+            const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
+            const darkElements = document.querySelectorAll('footer, .dark-card');
+            const isMobile = window.innerWidth <= 768;
+
+            if (!isMobile) {
+                let mouseX = 0, mouseY = 0;
+                let cursorX = 0, cursorY = 0;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                function animateCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+                    
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', () => cursor.classList.add('active'));
+                    link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    let isOverGreen = false;
+                    let isOverDark = false;
+
+                    greenElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverGreen = true;
+                        }
+                    });
+
+                    darkElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverDark = true;
+                        }
+                    });
+
+                    cursor.classList.remove('on-green', 'on-dark');
+                    if (isOverGreen) cursor.classList.add('on-green');
+                    else if (isOverDark) cursor.classList.add('on-dark');
+                });
+            }
+
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            function setupLazyLoading() {
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const placeholder = img.parentNode.querySelector('.image-placeholder');
+                            const tempImg = new Image();
+                            
+                            tempImg.onload = function () {
+                                img.classList.add('loaded');
+                                if (placeholder) placeholder.classList.add('loaded');
+                            };
+                            
+                            tempImg.onerror = function () {
+                                if (placeholder) {
+                                    placeholder.innerHTML = '<span style="color: #999;">Image unavailable</span>';
+                                }
+                            };
+                            
+                            tempImg.src = img.src;
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '100px', threshold: 0.1 });
+
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+            setupLazyLoading();
+
+            const animDuration = isMobile ? 0.8 : 1.2;
+            const animDelay = isMobile ? 0.2 : 0.4;
+
+            gsap.to(".hero-text h1", {
+                opacity: 1,
+                x: 0,
+                duration: animDuration,
+                delay: animDelay,
+                ease: "power3.out"
+            });
+
+            gsap.to(".hero-text p", {
+                opacity: 1,
+                y: 0,
+                duration: animDuration * 0.8,
+                delay: animDelay + 0.15,
+                ease: "power2.out"
+            });
+
+            gsap.to(".benefits p", {
+                opacity: 1,
+                x: 0,
+                duration: animDuration * 0.7,
+                stagger: 0.12,
+                delay: animDelay + 0.3,
+                ease: "power2.out"
+            });
+
+            gsap.to(".cta-buttons button", {
+                opacity: 1,
+                y: 0,
+                duration: animDuration * 0.7,
+                stagger: 0.15,
+                delay: animDelay + 0.5,
+                ease: "back.out(1.5)"
+            });
+
+            gsap.to(".hero-image img", {
+                opacity: 1,
+                scale: 1,
+                rotateY: 5,
+                duration: animDuration * 1.2,
+                ease: "power3.out",
+                delay: animDelay + 0.2
+            });
+
+            gsap.to(".client-item", {
+                opacity: 1,
+                y: 0,
+                duration: animDuration * 0.6,
+                stagger: 0.06,
+                delay: animDelay + 0.7,
+                ease: "power2.out"
+            });
+
+            if (!isMobile) {
+                ScrollTrigger.batch(".feature-card", {
+                    onEnter: batch => gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: "power2.out"
+                    }),
+                    start: "top 85%"
+                });
+
+                ScrollTrigger.batch(".pricing-card", {
+                    onEnter: batch => gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        stagger: 0.12,
+                        ease: "back.out(1.2)"
+                    }),
+                    start: "top 85%"
+                });
+
+                gsap.to(".hero-image img", {
+                    y: -50,
+                    scrollTrigger: {
+                        trigger: "#home-section",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+
+                gsap.utils.toArray(".section-header").forEach(header => {
+                    gsap.from(header, {
+                        opacity: 0,
+                        y: 30,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: header,
+                            start: "top 90%",
+                            once: true
+                        }
+                    });
+                });
+
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.addEventListener('mousemove', (e) => {
+                        const rect = button.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        gsap.to(button, {
+                            x: x * 0.2,
+                            y: y * 0.2,
+                            duration: 0.3,
+                            ease: "power2.out"
+                        });
+                    });
+                    
+                    button.addEventListener('mouseleave', () => {
+                        gsap.to(button, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.5,
+                            ease: "elastic.out(1, 0.5)"
+                        });
+                    });
+                });
+
+                const featureCards = document.querySelectorAll('.feature-card');
+                featureCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = (y - centerY) / 20;
+                        const rotateY = (centerX - x) / 20;
+                        
+                        gsap.to(card, {
+                            rotateX: rotateX,
+                            rotateY: rotateY,
+                            duration: 0.3,
+                            ease: "power2.out",
+                            transformPerspective: 1000
+                        });
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, {
+                            rotateX: 0,
+                            rotateY: 0,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                    });
+                });
+            } else {
+                const mobileObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            gsap.to(entry.target, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out"
+                            });
+                            mobileObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '50px' });
+
+                document.querySelectorAll('.feature-card, .pricing-card, .section-header').forEach(el => {
+                    mobileObserver.observe(el);
+                });
+            }
+
+            setTimeout(() => {
+                const criticalImages = [
+                    '/videos/synxoverview.gif',
+                    '/videos/LiveIn4steps.gif',
+                    '/videos/Answer_Bot.gif',
+                    '/videos/Campaigns.gif'
+                ];
+                criticalImages.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html><!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SynxZap</title>
-
-    <!-- Favicon -->
     <link rel="icon" href="https://i.ibb.co/CpVr0Nm7/Synx-Zap-logo-with-Tagline-3.png" type="image/png">
-
-    <!-- Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
-
-    <!-- Preload critical resources -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
     <style>
@@ -42,27 +818,30 @@
             z-index: 999;
             pointer-events: none;
             mix-blend-mode: normal;
-            transition: all 0.1s ease-out;
+            transition: all 0.15s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
         }
 
         .cursor.active {
-            transform: translate(-50%, -50%) scale(1.3);
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(37, 211, 102, 0.8);
         }
 
         .cursor.on-green {
             background-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
         }
 
         .cursor.on-dark {
             background-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
         }
 
         section {
             padding: 40px 8%;
         }
 
-        /* Enhanced Loading States */
         .content-skeleton {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
@@ -70,52 +849,14 @@
             border-radius: 8px;
         }
 
-        .skeleton-text {
-            height: 20px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .skeleton-text.short {
-            width: 70%;
-        }
-
-        .skeleton-text.medium {
-            width: 85%;
-        }
-
-        .skeleton-image {
-            width: 100%;
-            height: 200px;
-            border-radius: 12px;
-        }
-
-        .skeleton-card {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
         @keyframes loading {
             0% {
                 background-position: -200% 0;
             }
+
             100% {
                 background-position: 200% 0;
             }
-        }
-
-        /* Lazy loaded content states */
-        .lazy-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .lazy-content.loaded {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .image-container {
@@ -148,7 +889,7 @@
         .lazy-image {
             width: 100%;
             height: auto;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.6s ease;
             opacity: 0;
         }
 
@@ -166,20 +907,31 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
-        /* Header Styles */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 16px 8%;
-            background-color: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 100;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 12px 8%;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
         }
 
         nav {
@@ -194,6 +946,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo h1 {
@@ -201,11 +958,6 @@
             font-weight: 700;
             color: #333;
             cursor: pointer;
-        }
-
-        .logo i {
-            font-size: 26px;
-            color: #25D366;
         }
 
         .nav-links {
@@ -218,12 +970,28 @@
             font-weight: 500;
             color: #555;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
             font-size: 14px;
+            position: relative;
+        }
+
+        .nav-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #25D366;
+            transition: width 0.3s ease;
         }
 
         .nav-links h3:hover {
             color: #25D366;
+        }
+
+        .nav-links h3:hover::after {
+            width: 100%;
         }
 
         .nav-buttons {
@@ -237,10 +1005,30 @@
             border-radius: 7px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             font-size: 13px;
             border: none;
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .outline-btn {
@@ -250,39 +1038,45 @@
         }
 
         .outline-btn:hover {
-            background-color: #f5f5f5;
+            background-color: #25D366;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
         .green-btn {
             background-color: #25D366;
             color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
         }
 
         .green-btn:hover {
             background-color: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
         }
 
         .black-btn {
             background-color: #333;
             color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .black-btn:hover {
             background-color: #222;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hero Section */
         #home-section {
             min-height: 100vh;
-            padding-top: 10px;
+            padding-top: 100px;
             padding-bottom: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             margin-bottom: 0;
+            position: relative;
         }
 
         .hero-content {
@@ -308,6 +1102,19 @@
 
         .hero-text h1 .highlight-green {
             color: #25D366;
+            display: inline-block;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(37, 211, 102, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+            }
         }
 
         .hero-text p {
@@ -323,6 +1130,13 @@
             background-color: #b9ff66;
             padding: 0 4px;
             border-radius: 4px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .hero-text p .highlight-text:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(185, 255, 102, 0.4);
         }
 
         .benefits {
@@ -338,12 +1152,30 @@
             color: #444;
             opacity: 0;
             transform: translateX(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .benefits p:hover {
+            transform: translateX(5px);
+            color: #25D366;
         }
 
         .benefits i {
             color: #25D366;
             font-size: 16px;
             flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .cta-buttons {
@@ -363,6 +1195,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            perspective: 1000px;
         }
 
         .hero-image img {
@@ -370,59 +1203,63 @@
             max-width: 1200px;
             height: auto;
             border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            animation: float 8s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: float 6s ease-in-out infinite;
             opacity: 0;
-            transform: scale(0.8);
+            transform: scale(0.8) rotateY(5deg);
             object-fit: contain;
             background: transparent;
+            transition: transform 0.3s ease;
         }
 
-        .hero-image video {
-            width: 100%;
-            max-width: 80px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            animation: float 8s ease-in-out infinite;
-            opacity: 0;
-            transform: scale(0.8);
+        .hero-image img:hover {
+            transform: scale(1.02) rotateY(0deg);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0px);
+            0%,
+            100% {
+                transform: translateY(0px) rotateY(5deg);
             }
 
             50% {
-                transform: translateY(-12px);
-            }
-
-            100% {
-                transform: translateY(0px);
+                transform: translateY(-15px) rotateY(-2deg);
             }
         }
 
-        /* Clients Section - No spacing */
         .clients-section {
             padding: 0 8%;
             margin-top: -50px;
-        }
-
-        .clients {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2px;
-            padding: 0;
-            overflow: hidden;
-            width: 100%;
+            position: relative;
         }
 
         .clients-container {
             width: 100%;
             overflow: hidden;
             position: relative;
+            padding: 20px 0;
+        }
+
+        .clients-container::before,
+        .clients-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .clients-container::before {
+            left: 0;
+            background: linear-gradient(to right, #fff, transparent);
+        }
+
+        .clients-container::after {
+            right: 0;
+            background: linear-gradient(to left, #fff, transparent);
         }
 
         .clients-scroll {
@@ -430,6 +1267,10 @@
             gap: 30px;
             animation: scroll-infinite 40s linear infinite;
             width: fit-content;
+        }
+
+        .clients-scroll:hover {
+            animation-play-state: paused;
         }
 
         @keyframes scroll-infinite {
@@ -451,26 +1292,27 @@
             padding: 10px 16px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             min-width: 110px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             opacity: 0;
             transform: translateY(30px);
         }
 
         .client-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+            background: linear-gradient(135deg, #fff 0%, #f0fff4 100%);
         }
 
         .client-item i {
             font-size: 28px;
             color: #25D366;
-            height: 28px;
-            width: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: transform 0.4s ease;
+        }
+
+        .client-item:hover i {
+            transform: rotateY(360deg);
         }
 
         .client-item span {
@@ -479,10 +1321,8 @@
             color: #333;
             text-align: center;
             white-space: nowrap;
-            line-height: 1.2;
         }
 
-        /* Features Section */
         #features-section {
             background-color: #f9f9f9;
             position: relative;
@@ -502,6 +1342,12 @@
             background-color: #b9ff66;
             padding: 0 8px;
             border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .section-header h3:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(185, 255, 102, 0.4);
         }
 
         .section-header p {
@@ -521,17 +1367,32 @@
             display: flex;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             min-height: 280px;
-            opacity: 1;
-            transform: translateY(0);
             background: white;
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .feature-content {
@@ -540,6 +1401,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-card h2 {
@@ -547,6 +1410,11 @@
             font-weight: 700;
             margin-bottom: 14px;
             line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover h2 {
+            color: #25D366;
         }
 
         .feature-card p {
@@ -556,23 +1424,24 @@
             font-size: 15px;
         }
 
-        .feature-link {
-            display: flex;
+        .feature-badge {
+            display: inline-flex;
             align-items: center;
             gap: 6px;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
             color: #25D366;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: auto;
+            margin-top: 10px;
+            transition: all 0.3s ease;
         }
 
-        .feature-link i {
-            transition: transform 0.3s;
-        }
-
-        .feature-link:hover i {
-            transform: translate(4px, -4px);
+        .feature-card:hover .feature-badge {
+            background: #25D366;
+            color: white;
+            transform: scale(1.05);
         }
 
         .feature-image {
@@ -583,6 +1452,28 @@
             padding: 20px;
             background: #f8f9fa;
             position: relative;
+            overflow: hidden;
+        }
+
+        .feature-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 211, 102, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .feature-image img,
@@ -592,10 +1483,18 @@
             max-height: 300px;
             object-fit: contain;
             border-radius: 8px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-image img,
+        .feature-card:hover .feature-image video {
+            transform: scale(1.05);
         }
 
         .dark-card {
-            background-color: #222;
+            background: linear-gradient(135deg, #222 0%, #333 100%);
             color: white;
         }
 
@@ -607,9 +1506,8 @@
             color: #ddd;
         }
 
-        /* How It Works Section */
         #contact-section {
-            background-color: #25D366;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
             position: relative;
             overflow: hidden;
@@ -626,6 +1524,18 @@
             background: url('https://synxautomate.com/wp-content/uploads/2023/12/whatsapp-pattern.png') center/cover;
             opacity: 0.05;
             z-index: 0;
+            animation: pulse-background 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse-background {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .contact-container {
@@ -658,6 +1568,20 @@
             font-size: 15px;
             margin-bottom: 10px;
             line-height: 1.5;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .steps p:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            font-weight: 700;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .small-text {
@@ -678,12 +1602,16 @@
             max-width: 650px;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
             object-fit: contain;
             background: transparent;
+            transition: transform 0.5s ease;
         }
 
-        /* Pricing Section */
+        .contact-image img:hover {
+            transform: scale(1.05) rotateZ(2deg);
+        }
+
         #pricing-section {
             background-color: #f9f9f9;
         }
@@ -697,15 +1625,32 @@
 
         .pricing-card {
             background-color: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 28px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 211, 102, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .pricing-card:hover::before {
+            left: 100%;
         }
 
         .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(37, 211, 102, 0.2);
         }
 
         .pricing-card h4 {
@@ -737,6 +1682,12 @@
             margin: 8px 0;
             color: #555;
             font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .features-list p:hover {
+            transform: translateX(5px);
+            color: #25D366;
         }
 
         .features-list i {
@@ -750,6 +1701,12 @@
             margin: 10px 0;
             color: #555;
             font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .use-cases p:hover {
+            transform: translateX(5px);
+            color: #25D366;
         }
 
         .use-cases i {
@@ -768,9 +1725,13 @@
             font-weight: 600;
             color: #25D366;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        /* Enhanced Footer Styles */
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
         footer {
             background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
             color: white;
@@ -794,7 +1755,6 @@
             margin-bottom: 30px;
         }
 
-        /* Company Section */
         .footer-company {
             max-width: 350px;
         }
@@ -809,6 +1769,11 @@
         .footer-logo img {
             height: 45px;
             filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo:hover img {
+            transform: scale(1.05);
         }
 
         .footer-description {
@@ -833,21 +1798,26 @@
             border-radius: 12px;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .social-link:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
 
         .social-link i {
             font-size: 20px;
+            transition: transform 0.3s ease;
         }
 
-        /* Footer Columns */
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+
         .footer-column h3 {
             font-size: 18px;
             font-weight: 600;
@@ -865,6 +1835,11 @@
             height: 2px;
             background: white;
             border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .footer-column:hover h3::after {
+            width: 60px;
         }
 
         .footer-links {
@@ -889,21 +1864,32 @@
 
         .footer-links a:hover {
             color: white;
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
 
         .footer-links a i {
             font-size: 16px;
             opacity: 0.7;
+            transition: all 0.3s ease;
         }
 
-        /* Newsletter Section */
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
         .newsletter {
             background: rgba(255, 255, 255, 0.15);
             padding: 25px;
             border-radius: 16px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
         }
 
         .newsletter h3 {
@@ -920,50 +1906,6 @@
             line-height: 1.5;
         }
 
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .newsletter-form input {
-            padding: 14px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: white;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .newsletter-btn {
-            padding: 14px 24px;
-            background: white;
-            color: #25D366;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-
-        .newsletter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Contact Info */
         .contact-info {
             margin-top: 20px;
         }
@@ -975,6 +1917,12 @@
             margin-bottom: 14px;
             color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: white;
+            transform: translateX(5px);
         }
 
         .contact-item i {
@@ -983,7 +1931,6 @@
             font-size: 16px;
         }
 
-        /* Footer Bottom */
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -1020,13 +1967,18 @@
             border-radius: 6px;
             font-size: 12px;
             color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
         }
 
         .trust-badge i {
             color: white;
         }
 
-        /* Enhanced Mobile Responsive Design */
         @media (max-width: 1200px) {
             section {
                 padding: 40px 5%;
@@ -1062,7 +2014,6 @@
             #home-section {
                 padding-top: 100px;
                 min-height: auto;
-                height: auto;
             }
 
             .hero-content {
@@ -1077,11 +2028,6 @@
 
             .hero-text {
                 text-align: center;
-                order: 1;
-            }
-
-            .hero-image {
-                order: 2;
             }
 
             .contact-container {
@@ -1098,28 +2044,18 @@
                 text-align: center;
             }
 
-            .contact-image img {
-                width: 100%;
-                max-width: 500px;
-            }
-
             .pricing-container {
                 grid-template-columns: 1fr;
             }
 
             .clients-section {
                 margin-top: -30px;
-                padding: 0 5%;
             }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-            }
-
-            .nav-buttons {
-                gap: 8px;
             }
 
             .nav-buttons button {
@@ -1133,12 +2069,6 @@
 
             .hero-text h1 {
                 font-size: 32px;
-                line-height: 1.3;
-                text-align: left;
-            }
-
-            .hero-text p {
-                font-size: 16px;
                 text-align: left;
             }
 
@@ -1150,20 +2080,8 @@
                 margin: 20px 0;
             }
 
-            .benefits p {
-                font-size: 15px;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
             .cta-buttons {
                 justify-content: flex-start;
-                margin-top: 24px;
-            }
-
-            .section-header {
-                text-align: center;
-                margin-bottom: 30px;
             }
 
             .section-header h3 {
@@ -1176,8 +2094,6 @@
 
             .feature-card {
                 flex-direction: column;
-                height: auto;
-                min-height: auto;
             }
 
             .feature-content,
@@ -1197,27 +2113,16 @@
                 padding: 60px 5%;
             }
 
-            .contact-content h2 {
-                font-size: 28px;
-                text-align: left;
-            }
-
             .contact-content {
                 text-align: left;
             }
 
             .steps p {
                 justify-content: flex-start;
-                text-align: left;
-            }
-
-            footer {
-                padding: 40px 0 0;
             }
 
             .footer-main {
                 grid-template-columns: 1fr;
-                gap: 30px;
             }
 
             .footer-bottom {
@@ -1227,1063 +2132,43 @@
 
             .footer-bottom-right {
                 flex-direction: column;
-                gap: 12px;
             }
 
-            .trust-badges {
-                flex-wrap: wrap;
-                justify-content: center;
+            .cursor {
+                display: none;
             }
 
-            .clients-section {
-                padding: 0 5%;
-                margin-top: -20px;
-            }
-
-            .clients-scroll {
-                gap: 20px;
-                animation: scroll-infinite 35s linear infinite;
-            }
-
-            .client-item {
-                min-width: 100px;
-                padding: 12px 16px;
-            }
-
-            .client-item i {
-                font-size: 24px;
-            }
-
-            .client-item span {
-                font-size: 11px;
-            }
-
-            /* Mobile optimization for skeleton loading */
-            .skeleton-image {
-                height: 150px;
-            }
-
-            .skeleton-card {
-                padding: 20px;
+            .feature-card::before,
+            .feature-image::before {
+                display: none;
             }
         }
 
         @media (max-width: 576px) {
-            header {
-                padding: 12px 5%;
-            }
-
-            .nav-buttons {
-                gap: 6px;
-            }
-
-            .nav-buttons button {
-                padding: 8px 12px;
-                font-size: 11px;
-            }
-
-            #home-section {
-                padding: 70px 5% 30px;
-            }
-
             .hero-text h1 {
                 font-size: 28px;
-                line-height: 1.2;
-                margin-bottom: 16px;
-            }
-
-            .hero-text p {
-                font-size: 15px;
-                margin-bottom: 18px;
-            }
-
-            .benefits p {
-                font-size: 14px;
-                gap: 8px;
-                margin: 6px 0;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 gap: 12px;
-                margin-top: 20px;
             }
 
             .cta-buttons button {
                 width: 100%;
-                padding: 12px 20px;
-                font-size: 14px;
             }
 
             .section-header h3 {
                 font-size: 28px;
-                padding: 0 6px;
-            }
-
-            .section-header p {
-                font-size: 14px;
             }
 
             .contact-content h2 {
                 font-size: 24px;
-                margin-bottom: 16px;
-            }
-
-            .steps p {
-                font-size: 14px;
-                margin-bottom: 8px;
-            }
-
-            .footer-container {
-                padding: 0 5%;
-            }
-
-            .newsletter {
-                padding: 20px;
-            }
-
-            .social-links {
-                justify-content: flex-start;
-                gap: 12px;
-            }
-
-            .clients-section {
-                margin-top: -15px;
-            }
-
-            .clients-scroll {
-                gap: 15px;
-                animation: scroll-infinite 30s linear infinite;
-            }
-
-            .client-item {
-                min-width: 85px;
-                padding: 10px 12px;
-                gap: 6px;
-            }
-
-            .client-item i {
-                font-size: 22px;
-            }
-
-            .client-item span {
-                font-size: 10px;
-                line-height: 1.1;
-            }
-
-            /* Mobile skeleton optimization */
-            .skeleton-image {
-                height: 120px;
-            }
-
-            .skeleton-card {
-                padding: 16px;
-            }
-
-            .skeleton-text {
-                height: 16px;
-                margin-bottom: 8px;
             }
         }
 
-        @media (max-width: 480px) {
-            header {
-                padding: 10px 4%;
-            }
-
-            .logo img {
-                height: 32px;
-            }
-
-            .nav-buttons {
-                gap: 4px;
-            }
-
-            .nav-buttons button {
-                padding: 6px 10px;
-                font-size: 10px;
-            }
-
-            #home-section {
-                padding: 65px 4% 25px;
-            }
-
-            .hero-text h1 {
-                font-size: 26px;
-                margin-bottom: 14px;
-            }
-
-            .hero-text p {
-                font-size: 14px;
-                margin-bottom: 16px;
-            }
-
-            .benefits {
-                margin: 16px 0;
-            }
-
-            .benefits p {
-                font-size: 13px;
-                gap: 6px;
-                margin: 5px 0;
-            }
-
-            .benefits i {
-                font-size: 14px;
-            }
-
-            .cta-buttons {
-                margin-top: 18px;
-                gap: 10px;
-            }
-
-            .cta-buttons button {
-                padding: 10px 18px;
-                font-size: 13px;
-            }
-
-            section {
-                padding: 30px 4%;
-            }
-
-            .section-header h3 {
-                font-size: 24px;
-                padding: 0 4px;
-            }
-
-            .section-header p {
-                font-size: 13px;
-            }
-
-            .feature-content {
-                padding: 20px;
-            }
-
-            .feature-card h2 {
-                font-size: 20px;
-                margin-bottom: 12px;
-            }
-
-            .feature-card p {
-                font-size: 14px;
-            }
-
-            #contact-section {
-                padding: 50px 4%;
-            }
-
-            .contact-content h2 {
-                font-size: 22px;
-                margin-bottom: 14px;
-            }
-
-            .steps p {
-                font-size: 13px;
-                margin-bottom: 6px;
-            }
-
-            .footer-container {
-                padding: 0 4%;
-            }
-
-            .newsletter {
-                padding: 16px;
-            }
-
-            .newsletter h3 {
-                font-size: 16px;
-            }
-
-            .newsletter p {
-                font-size: 13px;
-            }
-
-            .footer-description {
-                font-size: 14px;
-            }
-
-            .clients-section {
-                padding: 0 4%;
-                margin-top: -10px;
-            }
-
-            .clients-scroll {
-                gap: 12px;
-                animation: scroll-infinite 25s linear infinite;
-            }
-
-            .client-item {
-                min-width: 75px;
-                padding: 8px 10px;
-                gap: 4px;
-            }
-
-            .client-item i {
-                font-size: 20px;
-            }
-
-            .client-item span {
-                font-size: 9px;
-                line-height: 1;
-            }
-
-            /* Ultra small mobile skeleton optimization */
-            .skeleton-image {
-                height: 100px;
-            }
-
-            .skeleton-card {
-                padding: 12px;
-            }
-
-            .skeleton-text {
-                height: 14px;
-                margin-bottom: 6px;
-            }
-        }
-
-        /* Hide cursor on touch devices */
         @media (hover: none) and (pointer: coarse) {
             .cursor {
                 display: none;
             }
         }
-    </style>
-</head>
-
-<body>
-    <div class="cursor"></div>
-
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo" onclick="scrollToSection('home-section')">
-                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo"
-                    style="height: 40px;" loading="lazy" />
-            </div>
-            <div class="nav-links">
-                <h3 onclick="scrollToSection('features-section')">Features</h3>
-                <h3 onclick="scrollToSection('pricing-section')">Pricing</h3>
-                <h3 onclick="scrollToSection('contact-section')">Support</h3>
-            </div>
-            <div class="nav-buttons">
-                <button class="outline-btn" onclick="window.location.href='https://app.synxzap.com'">Login</button>
-                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Sign
-                    Up</button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Talk to your<br><span class="highlight-green">Customers.</span><br><span
-                        class="highlight-green">Sell more.</span><br>All on WhatsApp.</h1>
-                <p>Start <span class="highlight-text">conversations</span>, send <span
-                        class="highlight-text">offers</span>, answer <span class="highlight-text">questions</span> and
-                    grow your business. No Tech Headaches. Just Results.</p>
-                <div class="benefits">
-                    <p><i class="ri-checkbox-circle-fill"></i> Instant WhatsApp setup</p>
-                    <p><i class="ri-checkbox-circle-fill"></i> Pre approved templates</p>
-                    <p><i class="ri-checkbox-circle-fill"></i> ₹1,000/month that's it.</p>
-                </div>
-                <div class="cta-buttons">
-                    <button class="green-btn"
-                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-container">
-                    <div class="image-placeholder">
-                        <div class="loading-spinner"></div>
-                    </div>
-                    <img src="/videos/synxoverview.gif" class="lazy-image"
-                        alt="SynxZap Dashboard" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients Section -->
-    <section class="clients-section">
-        <div class="clients">
-            <div class="clients-container">
-                <div class="clients-scroll">
-                    <!-- Original set -->
-                    <div class="client-item">
-                        <i class="ri-store-2-line"></i>
-                        <span>E Commerce</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-hospital-line"></i>
-                        <span>Clinics</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-book-open-line"></i>
-                        <span>Education</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-home-4-line"></i>
-                        <span>Real Estate</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-shopping-bag-3-line"></i>
-                        <span>D2C Brands</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-briefcase-line"></i>
-                        <span>Agencies</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-restaurant-line"></i>
-                        <span>Restaurants</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-car-line"></i>
-                        <span>Automotive</span>
-                    </div>
-                    <!-- Duplicate set for seamless infinite loop -->
-                    <div class="client-item">
-                        <i class="ri-store-2-line"></i>
-                        <span>E Commerce</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-hospital-line"></i>
-                        <span>Clinics</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-book-open-line"></i>
-                        <span>Education</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-home-4-line"></i>
-                        <span>Real Estate</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-shopping-bag-3-line"></i>
-                        <span>D2C Brands</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-briefcase-line"></i>
-                        <span>Agencies</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-restaurant-line"></i>
-                        <span>Restaurants</span>
-                    </div>
-                    <div class="client-item">
-                        <i class="ri-car-line"></i>
-                        <span>Automotive</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features-section">
-        <div class="section-header lazy-content">
-            <h3>What You Can Do</h3>
-            <p>Powerful WhatsApp marketing tools designed to help you sell more with less effort</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card lazy-content">
-                <div class="feature-content">
-                    <h2>Auto Capture Leads</h2>
-                    <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system. No manual
-                        data entry required.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/Auto_Capture_Leads.gif" class="lazy-image" alt="Auto Capture Leads" loading="lazy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-card dark-card lazy-content">
-                <div class="feature-content">
-                    <h2>Smart Segmentation</h2>
-                    <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns that convert
-                        better.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/smartsegmentaion.gif" class="lazy-image" alt="Smart Segmentation" loading="lazy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-card dark-card lazy-content">
-                <div class="feature-content">
-                    <h2>Campaign Builder</h2>
-                    <p>Pre approved templates make launching campaigns effortless with just a few clicks. No design
-                        skills needed.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/Campaigns.gif" class="lazy-image" alt="Campaign Builder" loading="lazy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-card lazy-content">
-                <div class="feature-content">
-                    <h2>Quick Answer Bot</h2>
-                    <p>Answer common customer queries automatically with our 1 click setup bot. 24/7 customer support
-                        made easy.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/Answer_Bot.gif" class="lazy-image" alt="Quick Answer Bot" loading="lazy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-card lazy-content">
-                <div class="feature-content">
-                    <h2>Broadcast Messages</h2>
-                    <p>Send bulk messages to your customer segments with personalized content. Reach thousands in
-                        minutes.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/Broadcast_messages.gif" class="lazy-image" alt="Broadcast Messages" loading="lazy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="feature-card dark-card lazy-content">
-                <div class="feature-content">
-                    <h2>Analytics Dashboard</h2>
-                    <p>Track message delivery, open rates, click through rates and conversions with detailed analytics
-                        and insights.</p>
-                </div>
-                <div class="feature-image">
-                    <div class="image-container">
-                        <div class="image-placeholder">
-                            <div class="loading-spinner"></div>
-                        </div>
-                        <img src="/videos/Analytics.gif" class="lazy-image" alt="Analytics Dashboard" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section id="contact-section">
-        <div class="contact-container">
-            <div class="contact-content lazy-content">
-                <h2>Go Live in 4 Simple Steps</h2>
-                <div class="steps">
-                    <p> Connect your whatsapp number</p>
-                    <p> Pick a template or create one</p>
-                    <p> Set up auto reply</p>
-                    <p> Start sending, track and grow!</p>
-                </div>
-                <button class="black-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start
-                    Now!</button>
-                <p class="small-text">Setup in minutes, no coding required</p>
-            </div>
-            <div class="contact-image">
-                <div class="image-container">
-                    <div class="image-placeholder">
-                        <div class="loading-spinner"></div>
-                    </div>
-                    <img src="/videos/LiveIn4steps.gif" class="lazy-image" alt="Go Live in 4 Steps" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing-section">
-        <div class="section-header lazy-content">
-            <h3>Simple Pricing</h3>
-            <p>Everything you need to grow your business on WhatsApp</p>
-        </div>
-        <div class="pricing-container">
-            <div class="pricing-card lazy-content">
-                <h4>The One Plan</h4>
-                <div class="pricing-info">
-                    <p>Monthly: ₹1,000/mo + ₹499 setup</p>
-                    <p>Yearly: ₹10,000/year (no setup fee)</p>
-                </div>
-                <div class="features-list">
-                    <p><i class="ri-check-line"></i> Unlimited campaigns</p>
-                    <p><i class="ri-check-line"></i> Free 24h response window</p>
-                    <p><i class="ri-check-line"></i> Pre approved templates</p>
-                    <p><i class="ri-check-line"></i> Lead capture tools</p>
-                    <p><i class="ri-check-line"></i> Segmentation filters</p>
-                    <p><i class="ri-check-line"></i> Quick answer bot</p>
-                    <p><i class="ri-check-line"></i> CRM sync & exports</p>
-                </div>
-                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Get
-                    Started</button>
-            </div>
-            <div class="pricing-card lazy-content">
-                <h4>Designed For</h4>
-                <div class="use-cases">
-                    <p><i class="ri-store-2-line"></i> E commerce & D2C brands</p>
-                    <p><i class="ri-hospital-line"></i> Clinics & Consultations</p>
-                    <p><i class="ri-book-open-line"></i> Education & Training</p>
-                    <p><i class="ri-home-4-line"></i> Real Estate & Services</p>
-                    <p><i class="ri-briefcase-line"></i> Agencies with multiple clients</p>
-                </div>
-                <p style="margin-top: 16px; color: #25D366; font-weight: 600; font-size: 14px;">
-                    Coming Soon: AI chatflows, shared inbox, and CRM integrations
-                </p>
-            </div>
-            <div class="pricing-card lazy-content">
-                <h4>Ready to Grow?</h4>
-                <p style="margin-bottom: 24px; line-height: 1.6; font-size: 14px;">
-                    Everything your WhatsApp marketing should be in one place.
-                </p>
-                <div class="final-cta">
-                    <button class="green-btn"
-                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
-                </div>
-                <p style="margin-top: 24px; font-size: 14px;">
-                    Questions? <a href="mailto:support@synxzap.com" class="email-link">support@synxzap.com</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <!-- Main Footer Content -->
-            <div class="footer-main">
-                <!-- Company Info -->
-                <div class="footer-company">
-                    <div class="footer-logo">
-                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo"
-                            loading="lazy" />
-                    </div>
-                    <p class="footer-description">
-                        The complete WhatsApp marketing platform that helps businesses automate conversations, capture
-                        leads, and grow sales with zero technical headaches.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/company/synxzap" class="social-link" target="_blank"
-                            rel="noopener noreferrer">
-                            <i class="ri-linkedin-fill"></i>
-                        </a>
-                        <a href="https://www.instagram.com/hello_synx" class="social-link" target="_blank"
-                            rel="noopener noreferrer">
-                            <i class="ri-instagram-line"></i>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=61578979535641" class="social-link"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="ri-facebook-line"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product Links -->
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li>
-                            <a href="#pricing-section">
-                                <i class="ri-check-line"></i>Pricing
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ri-check-line"></i>Use Cases
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ri-check-line"></i>Integrations
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.synxzap.com/privacy-policy" target="_blank" rel="noopener noreferrer">
-                                <i class="ri-file-info-line"></i>Privacy Policy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.synxzap.com/terms-and-conditions" target="_blank"
-                                rel="noopener noreferrer">
-                                <i class="ri-file-text-line"></i>Terms & Conditions
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li>
-                            <a href="#">
-                                <i class="ri-book-open-line"></i>Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ri-question-line"></i>Help Center
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ri-community-line"></i>Community
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ri-video-line"></i>Webinars
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter Section -->
-                <div class="newsletter">
-                    <h3>Stay Updated</h3>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="ri-mail-line"></i>
-                            <span>support@synxzap.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="ri-phone-line"></i>
-                            <span>+91 99957 70096</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="ri-phone-line"></i>
-                            <span>+44 7466 951870</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="footer-bottom-left">
-                    <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
-                </div>
-                <div class="footer-bottom-right">
-                    <div class="trust-badges">
-                        <div class="trust-badge">
-                            <i class="ri-shield-check-line"></i>
-                            <span>SOC2 Compliant</span>
-                        </div>
-                        <div class="trust-badge">
-                            <i class="ri-lock-line"></i>
-                            <span>GDPR Compliant</span>
-                        </div>
-                        <div class="trust-badge">
-                            <i class="ri-whatsapp-line"></i>
-                            <span>Official Partner</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Load scripts after content -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-    <script>
-        // Smooth scroll to section function
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // Enhanced Mobile-First Loading System
-        document.addEventListener('DOMContentLoaded', function () {
-            const cursor = document.querySelector('.cursor');
-            const links = document.querySelectorAll('a, button, .feature-link');
-            const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
-            const darkElements = document.querySelectorAll('footer, .dark-card');
-
-            // Cursor functionality (desktop only)
-            if (window.innerWidth > 768) {
-                document.addEventListener('mousemove', (e) => {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-
-                    // Check if cursor is over green or dark elements
-                    let isOverGreen = false;
-                    let isOverDark = false;
-
-                    greenElements.forEach(element => {
-                        const rect = element.getBoundingClientRect();
-                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
-                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                            isOverGreen = true;
-                        }
-                    });
-
-                    darkElements.forEach(element => {
-                        const rect = element.getBoundingClientRect();
-                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
-                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                            isOverDark = true;
-                        }
-                    });
-
-                    // Reset classes
-                    cursor.classList.remove('on-green', 'on-dark');
-
-                    if (isOverGreen) {
-                        cursor.classList.add('on-green');
-                    } else if (isOverDark) {
-                        cursor.classList.add('on-dark');
-                    }
-                });
-
-                links.forEach(link => {
-                    link.addEventListener('mouseenter', () => {
-                        cursor.classList.add('active');
-                    });
-                    link.addEventListener('mouseleave', () => {
-                        cursor.classList.remove('active');
-                    });
-                });
-            }
-
-            // Immediate UI Rendering - Show content first, load images later
-            function showContentImmediately() {
-                // Remove opacity from feature cards and pricing cards immediately
-                const featureCards = document.querySelectorAll('.feature-card');
-                const pricingCards = document.querySelectorAll('.pricing-card');
-                
-                featureCards.forEach(card => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                });
-                
-                pricingCards.forEach(card => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                });
-
-                // Show section headers immediately
-                const sectionHeaders = document.querySelectorAll('.section-header');
-                sectionHeaders.forEach(header => {
-                    header.style.opacity = '1';
-                    header.style.transform = 'translateY(0)';
-                });
-
-                // Show contact content immediately
-                const contactContent = document.querySelector('.contact-content');
-                if (contactContent) {
-                    contactContent.style.opacity = '1';
-                    contactContent.style.transform = 'translateY(0)';
-                }
-            }
-
-            // Call immediately to show content
-            showContentImmediately();
-
-            // Enhanced Lazy Loading System for Mobile
-            function setupLazyLoading() {
-                const lazyImages = document.querySelectorAll('.lazy-image');
-                const placeholders = document.querySelectorAll('.image-placeholder');
-
-                if ('IntersectionObserver' in window) {
-                    const imageObserver = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const img = entry.target;
-                                const placeholder = img.parentNode.querySelector('.image-placeholder');
-                                
-                                // Preload image
-                                const tempImg = new Image();
-                                tempImg.onload = function () {
-                                    img.classList.add('loaded');
-                                    if (placeholder) {
-                                        placeholder.classList.add('loaded');
-                                    }
-                                };
-                                tempImg.onerror = function () {
-                                    // Fallback if image fails to load
-                                    if (placeholder) {
-                                        placeholder.innerHTML = '<span style="color: #999;">Image unavailable</span>';
-                                    }
-                                };
-                                tempImg.src = img.src;
-                                
-                                imageObserver.unobserve(img);
-                            }
-                        });
-                    }, {
-                        rootMargin: '100px', // Start loading 100px before entering viewport
-                        threshold: 0.1
-                    });
-
-                    lazyImages.forEach(img => {
-                        imageObserver.observe(img);
-                    });
-                } else {
-                    // Fallback for older browsers
-                    lazyImages.forEach(img => {
-                        img.classList.add('loaded');
-                    });
-                    placeholders.forEach(placeholder => {
-                        placeholder.classList.add('loaded');
-                    });
-                }
-            }
-
-            // Initialize lazy loading
-            setupLazyLoading();
-
-            // Hero Section Animation (faster on mobile)
-            const isMobile = window.innerWidth <= 768;
-            const animationDuration = isMobile ? 0.8 : 1.2;
-            const animationDelay = isMobile ? 0.3 : 0.5;
-
-            gsap.to(".hero-text h1", {
-                opacity: 1,
-                x: 0,
-                duration: animationDuration,
-                delay: animationDelay,
-                ease: "power2.out"
-            });
-
-            gsap.to(".hero-text p", {
-                opacity: 1,
-                y: 0,
-                duration: animationDuration * 0.8,
-                delay: animationDelay + 0.2,
-                ease: "power2.out"
-            });
-
-            gsap.to(".benefits p", {
-                opacity: 1,
-                x: 0,
-                duration: animationDuration * 0.6,
-                stagger: 0.1,
-                delay: animationDelay + 0.4,
-                ease: "power2.out"
-            });
-
-            gsap.to(".cta-buttons button", {
-                opacity: 1,
-                y: 0,
-                duration: animationDuration * 0.6,
-                stagger: 0.1,
-                delay: animationDelay + 0.6,
-                ease: "back.out(1.3)"
-            });
-
-            gsap.to(".hero-image img", {
-                opacity: 1,
-                scale: 1,
-                duration: animationDuration,
-                ease: "back.out(1.2)",
-                delay: animationDelay + 0.3
-            });
-
-            gsap.to(".client-item", {
-                opacity: 1,
-                y: 0,
-                duration: animationDuration * 0.6,
-                stagger: 0.08,
-                delay: animationDelay + 0.8,
-                ease: "power2.out"
-            });
-
-            // Scroll-triggered animations (faster on mobile)
-            if (!isMobile) {
-                // Only use scroll triggers on desktop for better performance
-                gsap.utils.toArray(".lazy-content").forEach((element, i) => {
-                    ScrollTrigger.create({
-                        trigger: element,
-                        start: "top 85%",
-                        onEnter: () => {
-                            gsap.to(element, {
-                                opacity: 1,
-                                y: 0,
-                                duration: 0.8,
-                                delay: i * 0.1,
-                                ease: "power2.out"
-                            });
-                        },
-                        once: true
-                    });
-                });
-            } else {
-                // On mobile, show content immediately when scrolled into view
-                const mobileObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            mobileObserver.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: '50px'
-                });
-
-                document.querySelectorAll('.lazy-content').forEach(element => {
-                    mobileObserver.observe(element);
-                });
-            }
-
-            // Performance optimization for mobile
-            if (isMobile) {
-                // Disable hover effects on mobile
-                const style = document.createElement('style');
-                style.textContent = `
-                    @media (max-width: 768px) {
-                        .feature-card:hover,
-                        .pricing-card:hover,
-                        .client-item:hover {
-                            transform: none !important;
-                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-                        }
-                    }
-                `;
-                document.head.appendChild(style);
-
-                // Reduce animation complexity on mobile
-                gsap.set("*", { force3D: false });
-            }
-
-            // Preload critical images after initial load
-            setTimeout(() => {
-                const criticalImages = [
-                    '/videos/synxoverview.gif',
-                    '/videos/LiveIn4steps.gif'
-                ];
-                
-                criticalImages.forEach(src => {
-                    const img = new Image();
-                    img.src = src;
-                });
-            }, 2000);
-        });
-    </script>
-</body>
-
-</html>

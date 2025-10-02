@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynxZap - WhatsApp Marketing Platform</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.ibb.co/CpVr0Nm7/Synx-Zap-logo-with-Tagline-3.png" type="image/png">
+
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Variables */
+        :root {
+            --primary-green: #25D366;
+            --dark-green: #128C7E;
+            --light-green: #DCF8C6;
+            --accent-yellow: #FFF3CD;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #666666;
+            --light-gray: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 0 6%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 42px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            border-color: var(--dark-green);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 6% 60px;
+            background: linear-gradient(135deg, #f8fffe 0%, #ffffff 50%, #f0fdf4 100%);
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--dark-gray);
+            margin-bottom: 24px;
+        }
+
+        .hero-content .highlight {
+            color: var(--primary-green);
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--medium-gray);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-benefits {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .hero-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--dark-gray);
+        }
+
+        .hero-benefits i {
+            color: var(--primary-green);
+            font-size: 20px;
+            width: 20px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .hero-video {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .hero-video video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 211, 102, 0.1) 0%, rgba(18, 140, 126, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        /* Industry Section */
+        .industry-section {
+            padding: 80px 6%;
+            background: white;
+        }
+
+        .industry-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-yellow);
+            color: #856404;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--medium-gray);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .industry-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--dark-green));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .industry-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--primary-green);
+        }
+
+        .industry-card:hover::before {
+            opacity: 1;
+        }
+
+        .industry-card i {
+            font-size: 48px;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .industry-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 12px;
+        }
+
+        .industry-card p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.5;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 6%;
+            background: var(--light-gray);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card-content {
+            padding: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-green);
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .feature-link:hover {
+            gap: 12px;
+        }
+
+        .feature-image {
+            height: 160px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-image.placeholder {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 100px 6%;
+            background: white;
+        }
+
+        .how-it-works-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.5;
+        }
+
+        .step-card::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -16px;
+            width: 32px;
+            height: 2px;
+            background: var(--border-color);
+        }
+
+        .step-card:last-child::after {
+            display: none;
+        }
+
+        /* Knowledge Section */
+        .knowledge-section {
+            padding: 100px 6%;
+            background: var(--light-gray);
+        }
+
+        .knowledge-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .knowledge-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .knowledge-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .knowledge-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .knowledge-image {
+            height: 140px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .knowledge-image.placeholder {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .knowledge-content {
+            padding: 20px;
+        }
+
+        .knowledge-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+        }
+
+        .knowledge-card p {
+            font-size: 13px;
+            color: var(--medium-gray);
+            line-height: 1.4;
+        }
+
+        /* Why SynxZap Section */
+        .why-synxzap-section {
+            padding: 100px 6%;
+            background: white;
+        }
+
+        .why-synxzap-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-green);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .benefit-icon i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 16px;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.5;
+        }
+
+        /* Go Live Section */
+        .go-live-section {
+            padding: 100px 6%;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+        }
+
+        .go-live-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .go-live-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .go-live-step {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 32px 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .go-live-step-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .go-live-step h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .go-live-step p {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 6%;
+            background: var(--light-gray);
+        }
+
+        .pricing-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px 32px;
+            box-shadow: var(--shadow-medium);
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-green);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-green);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        .pricing-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 4px;
+        }
+
+        .pricing-period {
+            font-size: 14px;
+            color: var(--medium-gray);
+            margin-bottom: 24px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        .pricing-features i {
+            color: var(--primary-green);
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 6%;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #2a2a2a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--dark-gray);
+            border: 2px solid white;
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 6% 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-container {
+                gap: 40px;
+            }
+            
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            .feature-row,
+            .knowledge-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .steps-grid,
+            .benefits-grid,
+            .go-live-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-8px);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0 4%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-section,
+            .industry-section,
+            .features-section,
+            .how-it-works-section,
+            .knowledge-section,
+            .why-synxzap-section,
+            .go-live-section,
+            .pricing-section,
+            .cta-section,
+            footer {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .cta-section h2 {
+                font-size: 36px;
+            }
+
+            .industry-grid,
+            .feature-row,
+            .knowledge-row,
+            .steps-grid,
+            .benefits-grid,
+            .go-live-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Loading States */
+        .loading-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap">
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#knowledge">Knowledge</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-outline">Login</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Talk to your <span class="highlight">Customers.</span><br><span class="highlight">Sell more.</span><br>All on WhatsApp.</h1>
+                <p>Start conversations, send offers, answer questions and grow your business. No Tech Headaches. Just Results.</p>
+                <ul class="hero-benefits">
+                    <li><i class="ri-checkbox-circle-fill"></i>Instant WhatsApp setup</li>
+                    <li><i class="ri-checkbox-circle-fill"></i>Pre-approved templates</li>
+                    <li><i class="ri-checkbox-circle-fill"></i>₹1,000/month that's it</li>
+                </ul>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary">Start Now <i class="ri-arrow-right-line"></i></a>
+                    <a href="#" class="btn btn-outline">Watch Demo</a>
+                </div>
+            </div>
+            <div class="hero-video">
+                <video autoplay muted loop playsinline>
+                    <source src="/videos/synxoverview.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Real Section -->
+    <section class="industry-section">
+        <div class="industry-container">
+            <div class="section-header">
+                <div class="section-badge">Industry Real / Customer Real</div>
+                <h2 class="section-title">Trusted by businesses across industries</h2>
+                <p class="section-subtitle">From e-commerce to healthcare, restaurants to real estate - see how different industries use SynxZap to grow their business</p>
+            </div>
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <i class="ri-store-2-line"></i>
+                    <h3>E-Commerce</h3>
+                    <p>Send order updates, abandoned cart reminders, and personalized offers to boost sales</p>
+                </div>
+                <div class="industry-card">
+                    <i class="ri-hospital-line"></i>
+                    <h3>Healthcare</h3>
+                    <p>Appointment reminders, health tips, and patient support through automated messaging</p>
+                </div>
+                <div class="industry-card">
+                    <i class="ri-book-open-line"></i>
+                    <h3>Education</h3>
+                    <p>Course updates, assignment reminders, and student engagement through WhatsApp</p>
+                </div>
+                <div class="industry-card">
+                    <i class="ri-home-4-line"></i>
+                    <h3>Real Estate</h3>
+                    <p>Property updates, viewing schedules, and lead nurturing for better conversions</p>
+                </div>
+                <div class="industry-card">
+                    <i class="ri-restaurant-line"></i>
+                    <h3>Restaurants</h3>
+                    <p>Table bookings, menu updates, and special offers to increase customer loyalty</p>
+                </div>
+                <div class="industry-card">
+                    <i class="ri-briefcase-line"></i>
+                    <h3>Agencies</h3>
+                    <p>Manage multiple client campaigns and communications from one dashboard</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="features-container">
+            <div class="section-header">
+                <div class="section-badge">Features</div>
+                <h2 class="section-title">Everything you need to succeed</h2>
+                <p class="section-subtitle">Powerful WhatsApp marketing tools designed to help you sell more with less effort</p>
+            </div>
+            <div class="features-grid">
+                <!-- First Row -->
+                <div class="feature-row">
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Auto Capture Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Auto Capture Leads</h3>
+                            <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Segmentation Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Smart Segmentation</h3>
+                            <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Campaign Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Campaign Builder</h3>
+                            <p>Pre-approved templates make launching campaigns effortless with just a few clicks</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Bot Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Quick Answer Bot</h3>
+                            <p>Answer common customer queries automatically with our 1-click setup bot</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second Row -->
+                <div class="feature-row">
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Broadcast Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Broadcast Messages</h3>
+                            <p>Send bulk messages to your customer segments with personalized content</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Analytics Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Analytics Dashboard</h3>
+                            <p>Track message delivery, open rates, click through rates and conversions</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Integration Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>CRM Integration</h3>
+                            <p>Sync with your existing CRM and export data seamlessly</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Support Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>24/7 Support</h3>
+                            <p>Get help whenever you need it with our dedicated support team</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Third Row -->
+                <div class="feature-row">
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Templates Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Message Templates</h3>
+                            <p>Pre-approved WhatsApp templates for instant campaign launches</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Automation Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Smart Automation</h3>
+                            <p>Set up automated workflows based on customer behavior and triggers</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            Contact Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>Contact Management</h3>
+                            <p>Organize and manage all your WhatsApp contacts in one place</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image placeholder">
+                            API Demo
+                        </div>
+                        <div class="feature-card-content">
+                            <h3>API Access</h3>
+                            <p>Integrate SynxZap with your existing tools and workflows</p>
+                            <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <div class="how-it-works-container">
+            <div class="section-header">
+                <div class="section-badge">How It Works</div>
+                <h2 class="section-title">Get started in 4 simple steps</h2>
+                <p class="section-subtitle">From setup to success - here's how easy it is to start growing your business with SynxZap</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Connect WhatsApp</h3>
+                    <p>Link your WhatsApp Business account in just one click. No technical setup required.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Choose Templates</h3>
+                    <p>Pick from our library of pre-approved templates or create your own custom messages.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Set Auto-Reply</h3>
+                    <p>Configure smart responses and chatbots to handle customer queries automatically.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>Launch & Track</h3>
+                    <p>Start sending campaigns and track performance with detailed analytics and insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Section -->
+    <section id="knowledge" class="knowledge-section">
+        <div class="knowledge-container">
+            <div class="section-header">
+                <div class="section-badge">Knowledge</div>
+                <h2 class="section-title">Learn & Grow</h2>
+                <p class="section-subtitle">Resources, guides, and insights to help you master WhatsApp marketing</p>
+            </div>
+            <div class="knowledge-grid">
+                <!-- Meta Hub -->
+                <div>
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--dark-gray); margin-bottom: 24px;">Meta Hub</h3>
+                    <div class="knowledge-row">
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">WhatsApp Guide</div>
+                            <div class="knowledge-content">
+                                <h3>WhatsApp Business Guide</h3>
+                                <p>Complete guide to setting up and optimizing your WhatsApp Business profile</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">API Documentation</div>
+                            <div class="knowledge-content">
+                                <h3>WhatsApp API Docs</h3>
+                                <p>Technical documentation for integrating WhatsApp Business API</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Best Practices</div>
+                            <div class="knowledge-content">
+                                <h3>Messaging Best Practices</h3>
+                                <p>Tips and strategies for effective WhatsApp business communication</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Policy Updates</div>
+                            <div class="knowledge-content">
+                                <h3>Policy Updates</h3>
+                                <p>Stay updated with the latest WhatsApp Business policy changes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry News -->
+                <div>
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--dark-gray); margin-bottom: 24px;">Industry News</h3>
+                    <div class="knowledge-row">
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">E-commerce Trends</div>
+                            <div class="knowledge-content">
+                                <h3>E-commerce Marketing Trends</h3>
+                                <p>Latest trends in e-commerce and how WhatsApp fits into the strategy</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Customer Support</div>
+                            <div class="knowledge-content">
+                                <h3>Customer Support Evolution</h3>
+                                <p>How businesses are transforming customer support with messaging</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Marketing Automation</div>
+                            <div class="knowledge-content">
+                                <h3>Marketing Automation</h3>
+                                <p>The future of automated marketing and customer engagement</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Success Stories</div>
+                            <div class="knowledge-content">
+                                <h3>Success Stories</h3>
+                                <p>Real businesses sharing their WhatsApp marketing success stories</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Latest News -->
+                <div>
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--dark-gray); margin-bottom: 24px;">Latest News</h3>
+                    <div class="knowledge-row">
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Product Updates</div>
+                            <div class="knowledge-content">
+                                <h3>SynxZap Product Updates</h3>
+                                <p>Latest features and improvements to the SynxZap platform</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Webinar</div>
+                            <div class="knowledge-content">
+                                <h3>Upcoming Webinars</h3>
+                                <p>Join our live sessions to learn advanced WhatsApp marketing strategies</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Case Study</div>
+                            <div class="knowledge-content">
+                                <h3>New Case Studies</h3>
+                                <p>In-depth analysis of successful WhatsApp marketing campaigns</p>
+                            </div>
+                        </div>
+                        <div class="knowledge-card">
+                            <div class="knowledge-image placeholder">Partnership</div>
+                            <div class="knowledge-content">
+                                <h3>Partnership Announcements</h3>
+                                <p>New integrations and partnerships to enhance your experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why SynxZap Section -->
+    <section class="why-synxzap-section">
+        <div class="why-synxzap-container">
+            <div class="section-header">
+                <div class="section-badge">Why SynxZap?</div>
+                <h2 class="section-title">Built for your success</h2>
+                <p class="section-subtitle">Everything you need to succeed with WhatsApp marketing, all in one platform</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-rocket-line"></i>
+                    </div>
+                    <h3>Easy to Start and Use</h3>
+                    <p>No technical skills required. Get started in minutes with our intuitive interface and guided setup process.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-money-dollar-circle-line"></i>
+                    </div>
+                    <h3>Low Cost and High ROI</h3>
+                    <p>Start at just ₹1,000/month and see immediate returns on your investment with higher conversion rates.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h3>Only Provide you Pre-Approved Templates</h3>
+                    <p>All our templates are pre-approved by WhatsApp, ensuring your messages reach customers without issues.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-customer-service-line"></i>
+                    </div>
+                    <h3>Best in Class Support</h3>
+                    <p>Get 24/7 support from our expert team. We're here to help you succeed every step of the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go Live in 4 Steps Section -->
+    <section class="go-live-section">
+        <div class="go-live-container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">Go Live in 4 Steps!</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">From zero to WhatsApp marketing hero in just minutes</p>
+            </div>
+            <div class="go-live-steps">
+                <div class="go-live-step">
+                    <div class="go-live-step-number">01</div>
+                    <h3>Signup to SynxZap</h3>
+                    <p>Create your account and verify your business details in under 2 minutes</p>
+                </div>
+                <div class="go-live-step">
+                    <div class="go-live-step-number">02</div>
+                    <h3>Upload your file and track all meta</h3>
+                    <p>Import your contacts and set up tracking for comprehensive analytics</p>
+                </div>
+                <div class="go-live-step">
+                    <div class="go-live-step-number">03</div>
+                    <h3>Send Message and track and choose</h3>
+                    <p>Launch your first campaign and monitor performance in real-time</p>
+                </div>
+                <div class="go-live-step">
+                    <div class="go-live-step-number">04</div>
+                    <h3>Execute your campaigns and generate your ROI</h3>
+                    <p>Scale your campaigns and watch your business grow with measurable ROI</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-white">Start Your Journey <i class="ri-arrow-right-line"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="pricing-container">
+            <div class="section-header">
+                <div class="section-badge">The Cost</div>
+                <h2 class="section-title">Simple, transparent pricing</h2>
+                <p class="section-subtitle">Put pricing first with transparent costs and choose what works best for your business</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>The One - Monthly</h3>
+                        <div class="pricing-price">₹1,499</div>
+                        <div class="pricing-period">per month + ₹499 setup fee</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="ri-check-line"></i>Unlimited campaigns</li>
+                        <li><i class="ri-check-line"></i>Free 24h response window</li>
+                        <li><i class="ri-check-line"></i>Pre-approved templates</li>
+                        <li><i class="ri-check-line"></i>Lead capture & segmentation</li>
+                        <li><i class="ri-check-line"></i>Quick answer bot</li>
+                        <li><i class="ri-check-line"></i>Analytics dashboard</li>
+                        <li><i class="ri-check-line"></i>CRM sync & exports</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3>The One - Annually</h3>
+                        <div class="pricing-price">₹10,000</div>
+                        <div class="pricing-period">per year (No setup fee)</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="ri-check-line"></i>Everything in Monthly</li>
+                        <li><i class="ri-check-line"></i>2 months free</li>
+                        <li><i class="ri-check-line"></i>Priority support</li>
+                        <li><i class="ri-check-line"></i>Advanced analytics</li>
+                        <li><i class="ri-check-line"></i>Custom integrations</li>
+                        <li><i class="ri-check-line"></i>Dedicated account manager</li>
+                        <li><i class="ri-check-line"></i>Free onboarding call</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Start Annual Plan</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 32px; background: white; border-radius: var(--border-radius); border: 2px solid var(--border-color);">
+                <h3 style="margin-bottom: 16px; color: var(--dark-gray);">Be Our Partner</h3>
+                <p style="margin-bottom: 24px; color: var(--medium-gray);">Looking for a reseller program? Join our partner network and earn steady monthly income by offering WhatsApp marketing solutions to your clients.</p>
+                <a href="#" class="btn btn-primary">Join Partner Program</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to transform your business?</h2>
+            <p>Join thousands of businesses already growing with SynxZap</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-white">Start Free Trial</a>
+                <a href="#" class="btn btn-primary">Schedule Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SynxZap</h3>
+                    <p>The complete WhatsApp marketing platform that helps businesses automate conversations, capture leads, and grow sales with zero technical headaches.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="ri-linkedin-fill"></i></a>
+                        <a href="#" class="social-link"><i class="ri-instagram-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-facebook-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-twitter-line"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Templates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SynxZap. All rights reserved. Powered by Synx Automation Pvt. Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active class to navigation links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.industry-card, .feature-card, .knowledge-card, .benefit-card, .step-card, .go-live-step, .pricing-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (for future mobile menu implementation)
+        const createMobileMenu = () => {
+            const nav = document.querySelector('.nav-links');
+            const burger = document.createElement('div');
+            burger.className = 'mobile-menu-toggle';
+            burger.innerHTML = '<i class="ri-menu-line"></i>';
+            burger.style.display = 'none';
+            
+            if (window.innerWidth <= 768) {
+                burger.style.display = 'block';
+                nav.style.display = 'none';
+            }
+            
+            document.querySelector('nav').appendChild(burger);
+            
+            burger.addEventListener('click', () => {
+                const isVisible = nav.style.display === 'flex';
+                nav.style.display = isVisible ? 'none' : 'flex';
+                burger.querySelector('i').className = isVisible ? 'ri-menu-line' : 'ri-close-line';
+            });
+        };
+
+        // Initialize mobile menu on load and resize
+        window.addEventListener('load', createMobileMenu);
+        window.addEventListener('resize', createMobileMenu);
+
+        // Add loading states for images (placeholder functionality)
+        document.querySelectorAll('.feature-image.placeholder, .knowledge-image.placeholder').forEach(placeholder => {
+            placeholder.classList.add('loading-placeholder');
+            
+            // Simulate loading completion after 2 seconds
+            setTimeout(() => {
+                placeholder.classList.remove('loading-placeholder');
+            }, 2000 + Math.random() * 1000);
+        });
+    </script>
+</body>
+</html>

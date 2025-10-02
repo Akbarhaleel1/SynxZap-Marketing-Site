@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynxZap</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.ibb.co/CpVr0Nm7/Synx-Zap-logo-with-Tagline-3.png" type="image/png">
+
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            position: relative;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .cursor {
+            height: 25px;
+            width: 25px;
+            background-color: #25D366;
+            border-radius: 50%;
+            position: fixed;
+            z-index: 999;
+            pointer-events: none;
+            mix-blend-mode: normal;
+            transition: all 0.1s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .cursor.on-green {
+            background-color: #fff;
+        }
+
+        .cursor.on-dark {
+            background-color: #fff;
+        }
+
+        section {
+            padding: 40px 8%;
+        }
+
+        /* Enhanced Loading States */
+        .content-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        .skeleton-text {
+            height: 20px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .skeleton-text.short {
+            width: 70%;
+        }
+
+        .skeleton-text.medium {
+            width: 85%;
+        }
+
+        .skeleton-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+        }
+
+        .skeleton-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Lazy loaded content states */
+        .lazy-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .lazy-content.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-placeholder.loaded {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .lazy-image {
+            width: 100%;
+            height: auto;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #25D366;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px 8%;
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #25D366;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links h3 {
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links h3:hover {
+            color: #25D366;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            border: none;
+            white-space: nowrap;
+        }
+
+        .outline-btn {
+            background-color: transparent;
+            color: #25D366;
+            border: 2px solid #25D366;
+        }
+
+        .outline-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .green-btn {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .green-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .black-btn {
+            background-color: #333;
+            color: white;
+        }
+
+        .black-btn:hover {
+            background-color: #222;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        #home-section {
+            min-height: 100vh;
+            padding-top: 10px;
+            padding-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .hero-text {
+            width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #222;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .hero-text h1 .highlight-green {
+            color: #25D366;
+        }
+
+        .hero-text p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-text p .highlight-text {
+            background-color: #b9ff66;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .benefits {
+            margin-bottom: 24px;
+        }
+
+        .benefits p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            font-size: 14px;
+            color: #444;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .benefits i {
+            color: #25D366;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .cta-buttons button {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-image {
+            width: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+            object-fit: contain;
+            background: transparent;
+        }
+
+        .hero-image video {
+            width: 100%;
+            max-width: 80px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Clients Section - No spacing */
+        .clients-section {
+            padding: 0 8%;
+            margin-top: -50px;
+        }
+
+        .clients {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .clients-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .clients-scroll {
+            display: flex;
+            gap: 30px;
+            animation: scroll-infinite 40s linear infinite;
+            width: fit-content;
+        }
+
+        @keyframes scroll-infinite {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .client-item {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 110px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .client-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .client-item i {
+            font-size: 28px;
+            color: #25D366;
+            height: 28px;
+            width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-item span {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        /* Features Section */
+        #features-section {
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .section-header h3 {
+            display: inline-block;
+            font-size: 38px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 10px;
+            background-color: #b9ff66;
+            padding: 0 8px;
+            border-radius: 6px;
+        }
+
+        .section-header p {
+            font-size: 15px;
+            color: #555;
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            display: flex;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 280px;
+            opacity: 1;
+            transform: translateY(0);
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-content {
+            padding: 30px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .feature-card p {
+            color: #555;
+            margin-bottom: 16px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .feature-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: #25D366;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        .feature-link i {
+            transition: transform 0.3s;
+        }
+
+        .feature-link:hover i {
+            transform: translate(4px, -4px);
+        }
+
+        .feature-image {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .feature-image img,
+        .feature-image video {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .dark-card {
+            background-color: #222;
+            color: white;
+        }
+
+        .dark-card .feature-content h2 {
+            color: white;
+        }
+
+        .dark-card .feature-content p {
+            color: #ddd;
+        }
+
+        /* How It Works Section */
+        #contact-section {
+            background-color: #25D366;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 8%;
+        }
+
+        #contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://synxautomate.com/wp-content/uploads/2023/12/whatsapp-pattern.png') center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .contact-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-content {
+            width: 50%;
+        }
+
+        .contact-content h2 {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .steps {
+            margin-bottom: 24px;
+        }
+
+        .steps p {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .small-text {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .contact-image {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-image img {
+            width: 130%;
+            max-width: 650px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+            background: transparent;
+        }
+
+        /* Pricing Section */
+        #pricing-section {
+            background-color: #f9f9f9;
+        }
+
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card h4 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #222;
+        }
+
+        .pricing-info {
+            margin-bottom: 16px;
+        }
+
+        .pricing-info p {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #25D366;
+        }
+
+        .features-list {
+            margin-bottom: 20px;
+        }
+
+        .features-list p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .features-list i {
+            color: #25D366;
+        }
+
+        .use-cases p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .use-cases i {
+            color: #25D366;
+            font-size: 16px;
+        }
+
+        .final-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .email-link {
+            font-weight: 600;
+            color: #25D366;
+            text-decoration: none;
+        }
+
+        /* Enhanced Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+            color: white;
+            padding: 30px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Company Section */
+        .footer-company {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 45px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .social-link i {
+            font-size: 20px;
+        }
+
+        /* Footer Columns */
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .newsletter h3 {
+            margin-bottom: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .newsletter p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            padding: 14px 24px;
+            background: white;
+            color: #25D366;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            width: 20px;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom-left {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .trust-badge i {
+            color: white;
+        }
+
+        /* Enhanced Mobile Responsive Design */
+        @media (max-width: 1200px) {
+            section {
+                padding: 40px 5%;
+            }
+
+            header {
+                padding: 16px 5%;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .clients-section {
+                padding: 0 5%;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .footer-main {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-company {
+                grid-column: 1 / -1;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            #home-section {
+                padding-top: 100px;
+                min-height: auto;
+                height: auto;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .hero-text,
+            .hero-image {
+                width: 100%;
+            }
+
+            .hero-text {
+                text-align: center;
+                order: 1;
+            }
+
+            .hero-image {
+                order: 2;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .contact-content,
+            .contact-image {
+                width: 100%;
+            }
+
+            .contact-content {
+                text-align: center;
+            }
+
+            .contact-image img {
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .pricing-container {
+                grid-template-columns: 1fr;
+            }
+
+            .clients-section {
+                margin-top: -30px;
+                padding: 0 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-buttons button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            #home-section {
+                padding: 80px 5% 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+                line-height: 1.3;
+                text-align: left;
+            }
+
+            .hero-text p {
+                font-size: 16px;
+                text-align: left;
+            }
+
+            .hero-text {
+                text-align: left;
+            }
+
+            .benefits {
+                margin: 20px 0;
+            }
+
+            .benefits p {
+                font-size: 15px;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .cta-buttons {
+                justify-content: flex-start;
+                margin-top: 24px;
+            }
+
+            .section-header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .section-header h3 {
+                font-size: 32px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+            }
+
+            .feature-content,
+            .feature-image {
+                width: 100%;
+            }
+
+            .feature-content {
+                padding: 24px;
+            }
+
+            .feature-image {
+                padding: 0 24px 24px;
+            }
+
+            #contact-section {
+                padding: 60px 5%;
+            }
+
+            .contact-content h2 {
+                font-size: 28px;
+                text-align: left;
+            }
+
+            .contact-content {
+                text-align: left;
+            }
+
+            .steps p {
+                justify-content: flex-start;
+                text-align: left;
+            }
+
+            footer {
+                padding: 40px 0 0;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-right {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .trust-badges {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .clients-section {
+                padding: 0 5%;
+                margin-top: -20px;
+            }
+
+            .clients-scroll {
+                gap: 20px;
+                animation: scroll-infinite 35s linear infinite;
+            }
+
+            .client-item {
+                min-width: 100px;
+                padding: 12px 16px;
+            }
+
+            .client-item i {
+                font-size: 24px;
+            }
+
+            .client-item span {
+                font-size: 11px;
+            }
+
+            /* Mobile optimization for skeleton loading */
+            .skeleton-image {
+                height: 150px;
+            }
+
+            .skeleton-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 12px 5%;
+            }
+
+            .nav-buttons {
+                gap: 6px;
+            }
+
+            .nav-buttons button {
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+
+            #home-section {
+                padding: 70px 5% 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 28px;
+                line-height: 1.2;
+                margin-bottom: 16px;
+            }
+
+            .hero-text p {
+                font-size: 15px;
+                margin-bottom: 18px;
+            }
+
+            .benefits p {
+                font-size: 14px;
+                gap: 8px;
+                margin: 6px 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            .cta-buttons button {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .section-header h3 {
+                font-size: 28px;
+                padding: 0 6px;
+            }
+
+            .section-header p {
+                font-size: 14px;
+            }
+
+            .contact-content h2 {
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+
+            .steps p {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .footer-container {
+                padding: 0 5%;
+            }
+
+            .newsletter {
+                padding: 20px;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+                gap: 12px;
+            }
+
+            .clients-section {
+                margin-top: -15px;
+            }
+
+            .clients-scroll {
+                gap: 15px;
+                animation: scroll-infinite 30s linear infinite;
+            }
+
+            .client-item {
+                min-width: 85px;
+                padding: 10px 12px;
+                gap: 6px;
+            }
+
+            .client-item i {
+                font-size: 22px;
+            }
+
+            .client-item span {
+                font-size: 10px;
+                line-height: 1.1;
+            }
+
+            /* Mobile skeleton optimization */
+            .skeleton-image {
+                height: 120px;
+            }
+
+            .skeleton-card {
+                padding: 16px;
+            }
+
+            .skeleton-text {
+                height: 16px;
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 4%;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .nav-buttons {
+                gap: 4px;
+            }
+
+            .nav-buttons button {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
+            #home-section {
+                padding: 65px 4% 25px;
+            }
+
+            .hero-text h1 {
+                font-size: 26px;
+                margin-bottom: 14px;
+            }
+
+            .hero-text p {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
+            .benefits {
+                margin: 16px 0;
+            }
+
+            .benefits p {
+                font-size: 13px;
+                gap: 6px;
+                margin: 5px 0;
+            }
+
+            .benefits i {
+                font-size: 14px;
+            }
+
+            .cta-buttons {
+                margin-top: 18px;
+                gap: 10px;
+            }
+
+            .cta-buttons button {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+
+            section {
+                padding: 30px 4%;
+            }
+
+            .section-header h3 {
+                font-size: 24px;
+                padding: 0 4px;
+            }
+
+            .section-header p {
+                font-size: 13px;
+            }
+
+            .feature-content {
+                padding: 20px;
+            }
+
+            .feature-card h2 {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .feature-card p {
+                font-size: 14px;
+            }
+
+            #contact-section {
+                padding: 50px 4%;
+            }
+
+            .contact-content h2 {
+                font-size: 22px;
+                margin-bottom: 14px;
+            }
+
+            .steps p {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .footer-container {
+                padding: 0 4%;
+            }
+
+            .newsletter {
+                padding: 16px;
+            }
+
+            .newsletter h3 {
+                font-size: 16px;
+            }
+
+            .newsletter p {
+                font-size: 13px;
+            }
+
+            .footer-description {
+                font-size: 14px;
+            }
+
+            .clients-section {
+                padding: 0 4%;
+                margin-top: -10px;
+            }
+
+            .clients-scroll {
+                gap: 12px;
+                animation: scroll-infinite 25s linear infinite;
+            }
+
+            .client-item {
+                min-width: 75px;
+                padding: 8px 10px;
+                gap: 4px;
+            }
+
+            .client-item i {
+                font-size: 20px;
+            }
+
+            .client-item span {
+                font-size: 9px;
+                line-height: 1;
+            }
+
+            /* Ultra small mobile skeleton optimization */
+            .skeleton-image {
+                height: 100px;
+            }
+
+            .skeleton-card {
+                padding: 12px;
+            }
+
+            .skeleton-text {
+                height: 14px;
+                margin-bottom: 6px;
+            }
+        }
+
+        /* Hide cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="scrollToSection('home-section')">
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo"
+                    style="height: 40px;" loading="lazy" />
+            </div>
+            <div class="nav-links">
+                <h3 onclick="scrollToSection('features-section')">Features</h3>
+                <h3 onclick="scrollToSection('pricing-section')">Pricing</h3>
+                <h3 onclick="scrollToSection('contact-section')">Support</h3>
+            </div>
+            <div class="nav-buttons">
+                <button class="outline-btn" onclick="window.location.href='https://app.synxzap.com'">Login</button>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Sign
+                    Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Talk to your<br><span class="highlight-green">Customers.</span><br><span
+                        class="highlight-green">Sell more.</span><br>All on WhatsApp.</h1>
+                <p>Start <span class="highlight-text">conversations</span>, send <span
+                        class="highlight-text">offers</span>, answer <span class="highlight-text">questions</span> and
+                    grow your business. No Tech Headaches. Just Results.</p>
+                <div class="benefits">
+                    <p><i class="ri-checkbox-circle-fill"></i> Instant WhatsApp setup</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Pre approved templates</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> ₹1,000/month that's it.</p>
+                </div>
+                <div class="cta-buttons">
+                    <button class="green-btn"
+                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <img src="/videos/synxoverview.gif" class="lazy-image" alt="SynxZap Dashboard" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="clients">
+            <div class="clients-container">
+                <div class="clients-scroll">
+                    <!-- Original set -->
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
+                    <!-- Duplicate set for seamless infinite loop -->
+                    <div class="client-item">
+                        <i class="ri-store-2-line"></i>
+                        <span>E Commerce</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-hospital-line"></i>
+                        <span>Clinics</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-book-open-line"></i>
+                        <span>Education</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-home-4-line"></i>
+                        <span>Real Estate</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-shopping-bag-3-line"></i>
+                        <span>D2C Brands</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-briefcase-line"></i>
+                        <span>Agencies</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-restaurant-line"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="client-item">
+                        <i class="ri-car-line"></i>
+                        <span>Automotive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features-section">
+        <div class="section-header lazy-content">
+            <h3>What You Can Do</h3>
+            <p>Powerful WhatsApp marketing tools designed to help you sell more with less effort</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card lazy-content">
+                <div class="feature-content">
+                    <h2>Auto Capture Leads</h2>
+                    <p>Turn every WhatsApp chat into a live lead automatically with our smart capture system. No manual
+                        data entry required.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Auto_Capture_Leads.gif" class="lazy-image" alt="Auto Capture Leads"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content">
+                <div class="feature-content">
+                    <h2>Smart Segmentation</h2>
+                    <p>Filter customers by age, gender, location, tags & behavior for targeted campaigns that convert
+                        better.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/smartsegmentaion.gif" class="lazy-image" alt="Smart Segmentation"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content">
+                <div class="feature-content">
+                    <h2>Campaign Builder</h2>
+                    <p>Pre approved templates make launching campaigns effortless with just a few clicks. No design
+                        skills needed.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Campaigns.gif" class="lazy-image" alt="Campaign Builder" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card lazy-content">
+                <div class="feature-content">
+                    <h2>Quick Answer Bot</h2>
+                    <p>Answer common customer queries automatically with our 1 click setup bot. 24/7 customer support
+                        made easy.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Answer_Bot.gif" class="lazy-image" alt="Quick Answer Bot" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card lazy-content">
+                <div class="feature-content">
+                    <h2>Broadcast Messages</h2>
+                    <p>Send bulk messages to your customer segments with personalized content. Reach thousands in
+                        minutes.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Broadcast_messages.gif" class="lazy-image" alt="Broadcast Messages"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card dark-card lazy-content">
+                <div class="feature-content">
+                    <h2>Analytics Dashboard</h2>
+                    <p>Track message delivery, open rates, click through rates and conversions with detailed analytics
+                        and insights.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="image-container">
+                        <div class="image-placeholder">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <img src="/videos/Analytics.gif" class="lazy-image" alt="Analytics Dashboard" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- How It Works Section -->
+  <section id="contact-section">
+    <div class="contact-container">
+        <div class="contact-content lazy-content">
+            <h2>Go Live in 4 Simple Steps</h2>
+            <div class="steps">
+                <p>
+                    <span class="step-number">01.</span>
+                    Connect your whatsapp number
+                </p>
+                <p>
+                    <span class="step-number">02.</span>
+                    Pick a template or create one
+                </p>
+                <p>
+                    <span class="step-number">03.</span>
+                    Set up auto reply
+                </p>
+                <p>
+                    <span class="step-number">04.</span>
+                    Start sending, track and grow!
+                </p>
+            </div>
+            <button class="black-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+            <p class="small-text">Setup in minutes, no coding required</p>
+        </div>
+        <div class="contact-image">
+            <div class="image-container">
+                <div class="image-placeholder">
+                    <div class="loading-spinner"></div>
+                </div>
+                <img src="/videos/LiveIn4steps.gif" class="lazy-image" alt="Go Live in 4 Steps" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Pricing Section -->
+    <section id="pricing-section">
+        <div class="section-header lazy-content">
+            <h3>Simple Pricing</h3>
+            <p>Everything you need to grow your business on WhatsApp</p>
+        </div>
+        <div class="pricing-container">
+            <div class="pricing-card lazy-content">
+                <h4>The One Plan</h4>
+                <div class="pricing-info">
+                    <p>Monthly: ₹1,000/mo + ₹499 setup</p>
+                    <p>Yearly: ₹10,000/year (no setup fee)</p>
+                </div>
+                <div class="features-list">
+                    <p><i class="ri-check-line"></i> Unlimited campaigns</p>
+                    <p><i class="ri-check-line"></i> Free 24h response window</p>
+                    <p><i class="ri-check-line"></i> Pre approved templates</p>
+                    <p><i class="ri-check-line"></i> Lead capture tools</p>
+                    <p><i class="ri-check-line"></i> Segmentation filters</p>
+                    <p><i class="ri-check-line"></i> Quick answer bot</p>
+                    <p><i class="ri-check-line"></i> CRM sync & exports</p>
+                </div>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Get
+                    Started</button>
+            </div>
+            <div class="pricing-card lazy-content">
+                <h4>Designed For</h4>
+                <div class="use-cases">
+                    <p><i class="ri-store-2-line"></i> E commerce & D2C brands</p>
+                    <p><i class="ri-hospital-line"></i> Clinics & Consultations</p>
+                    <p><i class="ri-book-open-line"></i> Education & Training</p>
+                    <p><i class="ri-home-4-line"></i> Real Estate & Services</p>
+                    <p><i class="ri-briefcase-line"></i> Agencies with multiple clients</p>
+                </div>
+                <p style="margin-top: 16px; color: #25D366; font-weight: 600; font-size: 14px;">
+                    Coming Soon: AI chatflows, shared inbox, and CRM integrations
+                </p>
+            </div>
+            <div class="pricing-card lazy-content">
+                <h4>Ready to Grow?</h4>
+                <p style="margin-bottom: 24px; line-height: 1.6; font-size: 14px;">
+                    Everything your WhatsApp marketing should be in one place.
+                </p>
+                <div class="final-cta">
+                    <button class="green-btn"
+                        onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                </div>
+                <p style="margin-top: 24px; font-size: 14px;">
+                    Questions? <a href="mailto:support@synxzap.com" class="email-link">support@synxzap.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-main">
+                <!-- Company Info -->
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo"
+                            loading="lazy" />
+                    </div>
+                    <p class="footer-description">
+                        The complete WhatsApp marketing platform that helps businesses automate conversations, capture
+                        leads, and grow sales with zero technical headaches.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/synxzap" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hello_synx" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61578979535641" class="social-link"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Links -->
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#pricing-section">
+                                <i class="ri-check-line"></i>Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Use Cases
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Integrations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/privacy-policy" target="_blank" rel="noopener noreferrer">
+                                <i class="ri-file-info-line"></i>Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/terms-and-conditions" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="ri-file-text-line"></i>Terms & Conditions
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#">
+                                <i class="ri-book-open-line"></i>Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-question-line"></i>Help Center
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-community-line"></i>Community
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-video-line"></i>Webinars
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="newsletter">
+                    <h3>Stay Updated</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="ri-mail-line"></i>
+                            <span>support@synxzap.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+91 99957 70096</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+44 7466 951870</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="ri-shield-check-line"></i>
+                            <span>SOC2 Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-lock-line"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-whatsapp-line"></i>
+                            <span>Official Partner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load scripts after content -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script>
+        // Smooth scroll to section function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Enhanced Mobile-First Loading System
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursor = document.querySelector('.cursor');
+            const links = document.querySelectorAll('a, button, .feature-link');
+            const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
+            const darkElements = document.querySelectorAll('footer, .dark-card');
+
+            // Cursor functionality (desktop only)
+            if (window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+
+                    // Check if cursor is over green or dark elements
+                    let isOverGreen = false;
+                    let isOverDark = false;
+
+                    greenElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverGreen = true;
+                        }
+                    });
+
+                    darkElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverDark = true;
+                        }
+                    });
+
+                    // Reset classes
+                    cursor.classList.remove('on-green', 'on-dark');
+
+                    if (isOverGreen) {
+                        cursor.classList.add('on-green');
+                    } else if (isOverDark) {
+                        cursor.classList.add('on-dark');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', () => {
+                        cursor.classList.add('active');
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('active');
+                    });
+                });
+            }
+
+            // Immediate UI Rendering - Show content first, load images later
+            function showContentImmediately() {
+                // Remove opacity from feature cards and pricing cards immediately
+                const featureCards = document.querySelectorAll('.feature-card');
+                const pricingCards = document.querySelectorAll('.pricing-card');
+
+                featureCards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+
+                pricingCards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+
+                // Show section headers immediately
+                const sectionHeaders = document.querySelectorAll('.section-header');
+                sectionHeaders.forEach(header => {
+                    header.style.opacity = '1';
+                    header.style.transform = 'translateY(0)';
+                });
+
+                // Show contact content immediately
+                const contactContent = document.querySelector('.contact-content');
+                if (contactContent) {
+                    contactContent.style.opacity = '1';
+                    contactContent.style.transform = 'translateY(0)';
+                }
+            }
+
+            // Call immediately to show content
+            showContentImmediately();
+
+            // Enhanced Lazy Loading System for Mobile
+            function setupLazyLoading() {
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                const placeholders = document.querySelectorAll('.image-placeholder');
+
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                const placeholder = img.parentNode.querySelector('.image-placeholder');
+
+                                // Preload image
+                                const tempImg = new Image();
+                                tempImg.onload = function () {
+                                    img.classList.add('loaded');
+                                    if (placeholder) {
+                                        placeholder.classList.add('loaded');
+                                    }
+                                };
+                                tempImg.onerror = function () {
+                                    // Fallback if image fails to load
+                                    if (placeholder) {
+                                        placeholder.innerHTML = '<span style="color: #999;">Image unavailable</span>';
+                                    }
+                                };
+                                tempImg.src = img.src;
+
+                                imageObserver.unobserve(img);
+                            }
+                        });
+                    }, {
+                        rootMargin: '100px', // Start loading 100px before entering viewport
+                        threshold: 0.1
+                    });
+
+                    lazyImages.forEach(img => {
+                        imageObserver.observe(img);
+                    });
+                } else {
+                    // Fallback for older browsers
+                    lazyImages.forEach(img => {
+                        img.classList.add('loaded');
+                    });
+                    placeholders.forEach(placeholder => {
+                        placeholder.classList.add('loaded');
+                    });
+                }
+            }
+
+            // Initialize lazy loading
+            setupLazyLoading();
+
+            // Hero Section Animation (faster on mobile)
+            const isMobile = window.innerWidth <= 768;
+            const animationDuration = isMobile ? 0.8 : 1.2;
+            const animationDelay = isMobile ? 0.3 : 0.5;
+
+            gsap.to(".hero-text h1", {
+                opacity: 1,
+                x: 0,
+                duration: animationDuration,
+                delay: animationDelay,
+                ease: "power2.out"
+            });
+
+            gsap.to(".hero-text p", {
+                opacity: 1,
+                y: 0,
+                duration: animationDuration * 0.8,
+                delay: animationDelay + 0.2,
+                ease: "power2.out"
+            });
+
+            gsap.to(".benefits p", {
+                opacity: 1,
+                x: 0,
+                duration: animationDuration * 0.6,
+                stagger: 0.1,
+                delay: animationDelay + 0.4,
+                ease: "power2.out"
+            });
+
+            gsap.to(".cta-buttons button", {
+                opacity: 1,
+                y: 0,
+                duration: animationDuration * 0.6,
+                stagger: 0.1,
+                delay: animationDelay + 0.6,
+                ease: "back.out(1.3)"
+            });
+
+            gsap.to(".hero-image img", {
+                opacity: 1,
+                scale: 1,
+                duration: animationDuration,
+                ease: "back.out(1.2)",
+                delay: animationDelay + 0.3
+            });
+
+            gsap.to(".client-item", {
+                opacity: 1,
+                y: 0,
+                duration: animationDuration * 0.6,
+                stagger: 0.08,
+                delay: animationDelay + 0.8,
+                ease: "power2.out"
+            });
+
+            // Scroll-triggered animations (faster on mobile)
+            if (!isMobile) {
+                // Only use scroll triggers on desktop for better performance
+                gsap.utils.toArray(".lazy-content").forEach((element, i) => {
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: "top 85%",
+                        onEnter: () => {
+                            gsap.to(element, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.8,
+                                delay: i * 0.1,
+                                ease: "power2.out"
+                            });
+                        },
+                        once: true
+                    });
+                });
+            } else {
+                // On mobile, show content immediately when scrolled into view
+                const mobileObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            mobileObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '50px'
+                });
+
+                document.querySelectorAll('.lazy-content').forEach(element => {
+                    mobileObserver.observe(element);
+                });
+            }
+
+            // Performance optimization for mobile
+            if (isMobile) {
+                // Disable hover effects on mobile
+                const style = document.createElement('style');
+                style.textContent = `
+                    @media (max-width: 768px) {
+                        .feature-card:hover,
+                        .pricing-card:hover,
+                        .client-item:hover {
+                            transform: none !important;
+                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Reduce animation complexity on mobile
+                gsap.set("*", { force3D: false });
+            }
+
+            // Preload critical images after initial load
+            setTimeout(() => {
+                const criticalImages = [
+                    '/videos/synxoverview.gif',
+                    '/videos/LiveIn4steps.gif'
+                ];
+
+                criticalImages.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>
