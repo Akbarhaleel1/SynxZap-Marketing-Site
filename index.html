@@ -13,6 +13,13 @@
             <div class="nav-links">
                 <h3 onclick="scrollToSection('features-section')">Features</h3>
                 <h3 onclick="scrollToSection('pricing-section')">Pricing</h3>
+                <a href="https://www.synxzap.com/whatsappQr" target="_blank" style="text-decoration: none;">
+                    <h3 onclick="scrollToSection('pricing-section')">Whatsapp Qr</h3>
+                </a>
+                <a href="https://www.synxzap.com/whatsappWidgets" target="_blank" style="text-decoration: none;">
+                    <h3 onclick="scrollToSection('pricing-section')">Whatsapp Widgets</h3>
+                </a>
+
                 <h3 onclick="scrollToSection('contact-section')">Support</h3>
             </div>
             <div class="nav-buttons">
@@ -227,8 +234,7 @@
                         <div class="image-placeholder">
                             <div class="loading-spinner"></div>
                         </div>
-                        <img src="/videos/Broadcast_messages.gif" class="lazy-image" alt="Multi Channel"
-                            loading="lazy">
+                        <img src="/videos/Broadcast_messages.gif" class="lazy-image" alt="Multi Channel" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -282,8 +288,8 @@
                         Continue growing...
                     </p>
                 </div>
-                <button class="black-btn"
-                    onclick="window.location.href='https://app.synxzap.com/auth/register'">Start Now!</button>
+                <button class="black-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Start
+                    Now!</button>
                 <p class="small-text">Setup in minutes, no coding required</p>
             </div>
             <div class="contact-image">
@@ -515,10 +521,10 @@
                 function animateCursor() {
                     cursorX += (mouseX - cursorX) * 0.15;
                     cursorY += (mouseY - cursorY) * 0.15;
-                    
+
                     cursor.style.left = cursorX + 'px';
                     cursor.style.top = cursorY + 'px';
-                    
+
                     requestAnimationFrame(animateCursor);
                 }
                 animateCursor();
@@ -571,18 +577,18 @@
                             const img = entry.target;
                             const placeholder = img.parentNode.querySelector('.image-placeholder');
                             const tempImg = new Image();
-                            
+
                             tempImg.onload = function () {
                                 img.classList.add('loaded');
                                 if (placeholder) placeholder.classList.add('loaded');
                             };
-                            
+
                             tempImg.onerror = function () {
                                 if (placeholder) {
                                     placeholder.innerHTML = '<span style="color: #999;">Image unavailable</span>';
                                 }
                             };
-                            
+
                             tempImg.src = img.src;
                             imageObserver.unobserve(img);
                         }
@@ -703,7 +709,7 @@
                         const rect = button.getBoundingClientRect();
                         const x = e.clientX - rect.left - rect.width / 2;
                         const y = e.clientY - rect.top - rect.height / 2;
-                        
+
                         gsap.to(button, {
                             x: x * 0.2,
                             y: y * 0.2,
@@ -711,7 +717,7 @@
                             ease: "power2.out"
                         });
                     });
-                    
+
                     button.addEventListener('mouseleave', () => {
                         gsap.to(button, {
                             x: 0,
@@ -732,7 +738,7 @@
                         const centerY = rect.height / 2;
                         const rotateX = (y - centerY) / 20;
                         const rotateY = (centerX - x) / 20;
-                        
+
                         gsap.to(card, {
                             rotateX: rotateX,
                             rotateY: rotateY,
@@ -741,7 +747,7 @@
                             transformPerspective: 1000
                         });
                     });
-                    
+
                     card.addEventListener('mouseleave', () => {
                         gsap.to(card, {
                             rotateX: 0,
@@ -787,7 +793,8 @@
     </script>
 </body>
 
-</html><!DOCTYPE html>
+</html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1114,6 +1121,7 @@
         }
 
         @keyframes glow {
+
             0%,
             100% {
                 text-shadow: 0 0 5px rgba(37, 211, 102, 0.3);
@@ -1175,6 +1183,7 @@
         }
 
         @keyframes pulse {
+
             0%,
             100% {
                 transform: scale(1);
@@ -1225,6 +1234,7 @@
         }
 
         @keyframes float {
+
             0%,
             100% {
                 transform: translateY(0px) rotateY(5deg);
@@ -1535,6 +1545,7 @@
         }
 
         @keyframes pulse-background {
+
             0%,
             100% {
                 transform: scale(1);

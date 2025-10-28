@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp QR Code Generator - SynxZap</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-green-300: rgba(34, 197, 94, 1);
+            --color-green-400: rgba(22, 163, 74, 1);
+            --color-green-500: rgba(16, 185, 129, 1);
+            --color-green-600: rgba(5, 150, 105, 1);
+            --color-green-700: rgba(4, 120, 87, 1);
+            --color-green-800: rgba(6, 95, 70, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-green-500-rgb: 16, 185, 129;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-green-500);
+            --color-primary-hover: var(--color-green-600);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+
+            /* Spacing */
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+
+            /* Border Radius */
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+
+            /* Font */
+            --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .dark {
+            --color-background: var(--color-charcoal-700);
+            --color-surface: var(--color-charcoal-800);
+            --color-text: var(--color-gray-200);
+            --color-text-secondary: rgba(167, 169, 169, 0.7);
+            --color-primary: var(--color-green-300);
+            --color-primary-hover: var(--color-green-400);
+            --color-border: rgba(119, 124, 124, 0.3);
+            --color-btn-primary-text: var(--color-slate-900);
+            --color-card-border: rgba(119, 124, 124, 0.2);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light) {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(167, 169, 169, 0.7);
+                --color-primary: var(--color-green-300);
+                --color-primary-hover: var(--color-green-400);
+                --color-border: rgba(119, 124, 124, 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+                --color-card-border: rgba(119, 124, 124, 0.2);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .cursor {
+            height: 25px;
+            width: 25px;
+            background-color: #25D366;
+            border-radius: 50%;
+            position: fixed;
+            z-index: 999;
+            pointer-events: none;
+            mix-blend-mode: normal;
+            transition: all 0.15s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(37, 211, 102, 0.8);
+        }
+
+        .cursor.on-green {
+            background-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        .cursor.on-dark {
+            background-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px 8%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .dark header {
+            background: rgba(31, 33, 33, 0.95);
+        }
+
+        header.scrolled {
+            padding: 12px 8%;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links h3 {
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .dark .nav-links h3 {
+            color: #ddd;
+        }
+
+        .nav-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #25D366;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links h3:hover {
+            color: #25D366;
+        }
+
+        .nav-links h3:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-size: 13px;
+            border: none;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .outline-btn {
+            background-color: transparent;
+            color: #25D366;
+            border: 2px solid #25D366;
+        }
+
+        .outline-btn:hover {
+            background-color: #25D366;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .green-btn {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+        }
+
+        .green-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-8) var(--space-12);
+            cursor: pointer;
+            color: var(--color-text);
+            font-size: 14px;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, rgb(16, 185, 129), rgb(20, 184, 166));
+            color: white;
+            text-align: center;
+            padding: 150px 20px 96px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: rgb(16, 185, 129);
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            color: var(--color-text-secondary);
+        }
+
+        /* Generator Section */
+        #generator {
+            background: linear-gradient(to bottom right, rgb(236, 253, 245), rgb(224, 242, 254));
+            padding: 80px 20px;
+        }
+
+        .dark #generator {
+            background: linear-gradient(to bottom right, rgb(31, 33, 33), rgb(38, 40, 40));
+        }
+
+        .generator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .config-panel {
+            background-color: white;
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .config-panel {
+            background-color: rgb(55, 65, 81);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .dark .form-input, .dark .form-textarea, .dark .form-select {
+            background-color: rgb(31, 41, 55);
+            border-color: rgb(75, 85, 99);
+            color: white;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: rgb(16, 185, 129);
+        }
+
+        .form-textarea {
+            resize: none;
+        }
+
+        .customize-section {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: var(--radius-base);
+            margin-bottom: 24px;
+        }
+
+        .dark .customize-section {
+            background-color: rgb(75, 85, 99);
+        }
+
+        .customize-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .color-input {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: white;
+            padding: 12px;
+            border-radius: var(--radius-base);
+            margin-top: 16px;
+        }
+
+        .dark .checkbox-group {
+            background-color: rgb(55, 65, 81);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-generate {
+            background: linear-gradient(to right, rgb(5, 150, 105), rgb(16, 185, 129));
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .dark .btn-reset {
+            background-color: rgb(75, 85, 99);
+            color: white;
+        }
+
+        .btn-copy {
+            background-color: rgb(37, 99, 235);
+            color: white;
+        }
+
+        .btn-download {
+            background-color: rgb(99, 102, 241);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background-color: #fef2f2;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: var(--radius-base);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark .error-message {
+            background-color: rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 32px;
+        }
+
+        .phone-mockup {
+            width: 288px;
+            height: 576px;
+            background-color: rgb(15, 23, 42);
+            border-radius: 48px;
+            border: 14px solid rgb(30, 41, 59);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 128px;
+            height: 24px;
+            background-color: rgb(30, 41, 59);
+            border-radius: 0 0 16px 16px;
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            background-color: white;
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .dark .phone-screen {
+            background-color: rgb(75, 85, 99);
+        }
+
+        .qr-preview {
+            width: 192px;
+            height: 192px;
+            object-fit: contain;
+            border-radius: var(--radius-base);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .placeholder-icon {
+            width: 160px;
+            height: 160px;
+            background-color: #f9fafb;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: rgb(16, 185, 129);
+        }
+
+        .dark .placeholder-icon {
+            background-color: rgb(107, 114, 128);
+        }
+
+        .qr-info {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .qr-info p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .qr-info a {
+            font-size: 12px;
+            color: rgb(59, 130, 246);
+            word-break: break-all;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background-color: var(--color-surface);
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .dark .faq-question:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-answer {
+            padding: 20px 24px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid var(--color-card-border);
+            color: var(--color-text-secondary);
+            display: none;
+        }
+
+        .dark .faq-answer {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--color-card-border);
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: rgb(16, 185, 129);
+            border-bottom-color: rgb(16, 185, 129);
+        }
+
+        .tab-content {
+            display: none;
+            background-color: var(--color-surface);
+            padding: 24px;
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+            color: white;
+            padding: 30px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-company {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 45px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .footer-column:hover h3::after {
+            width: 60px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .footer-links a i {
+            font-size: 16px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .newsletter {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .newsletter h3 {
+            margin-bottom: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .newsletter p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            width: 20px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom-left {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .trust-badge i {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .generator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-company {
+                grid-column: 1 / -1;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .customize-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 20px 80px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-right {
+                flex-direction: column;
+            }
+
+            .cursor {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 28px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-buttons button {
+                width: 100%;
+            }
+
+            .section-header h3 {
+                font-size: 28px;
+            }
+
+            .contact-content h2 {
+                font-size: 24px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .cursor {
+                display: none;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="scrollToSection('home-section')">
+                <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="Synx Zap Logo" />
+            </div>
+            <div class="nav-links">
+                <h3 onclick="scrollToSection('features-section')">Features</h3>
+                <h3 onclick="scrollToSection('pricing-section')">Pricing</h3>
+                                  <a href="https://www.synxzap.com/whatsappQr" target="_blank" style="text-decoration: none;">
+  <h3 onclick="scrollToSection('pricing-section')">Whatsapp Qr</h3>
+</a>
+
+                <h3 onclick="scrollToSection('contact-section')">Support</h3>
+            </div>
+            <div class="nav-buttons">
+                <button class="outline-btn" onclick="window.location.href='https://app.synxzap.com'">Login</button>
+                <button class="green-btn" onclick="window.location.href='https://app.synxzap.com/auth/register'">Sign Up</button>
+               
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home-section">
+        <h1>Generate WhatsApp QR Codes Instantly</h1>
+        <p>Create shareable WhatsApp QR codes that open a pre-filled chat. Fast, free, and mobile-ready.</p>
+        <button class="btn-primary" onclick="scrollToGenerator()">Create QR Code</button>
+    </section>
+
+    <!-- Benefits Section -->
+    <section style="background-color: var(--color-surface); padding: 64px 20px;">
+        <div class="container">
+            <h2 class="section-title">Why Use WhatsApp QR Codes?</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Direct Chat Links</h3>
+                    <p class="card-desc">Scan to start a WhatsApp chat with a pre-filled message instantly.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3 class="card-title">Mobile Friendly</h3>
+                    <p class="card-desc">Scans work across devices and opens WhatsApp directly.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Boost Engagement</h3>
+                    <p class="card-desc">Make it faster for customers to contact you.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Trackable</h3>
+                    <p class="card-desc">Use UTM or tracking parameters in pre-filled messages.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧩</div>
+                    <h3 class="card-title">No Setup Required</h3>
+                    <p class="card-desc">Generate QR codes without changing your website.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Share Everywhere</h3>
+                    <p class="card-desc">Use on print, social, displays, receipts and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section id="generator">
+        <div class="container">
+            <h2 class="section-title" style="background: linear-gradient(to right, rgb(5, 150, 105), rgb(37, 99, 235)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">WhatsApp QR Generator</h2>
+            <p class="section-subtitle">Create a custom QR code that opens WhatsApp with your pre-filled message. Perfect for business cards, marketing materials, and more.</p>
+
+            <div class="generator-grid">
+                <!-- Configuration Panel -->
+                <div class="config-panel">
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp Number</label>
+                        <input type="tel" class="form-input" id="phoneInput" placeholder="+1234567890">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Pre-filled Message</label>
+                        <textarea class="form-textarea" id="messageInput" rows="3" placeholder="Hello! How can I help you?">Hello! How can I help you?</textarea>
+                    </div>
+
+                    <div class="customize-section">
+                        <h3 class="form-label">Customize QR</h3>
+                        <div class="customize-grid">
+                            <div>
+                                <label class="form-label" style="font-size: 12px;">Color</label>
+                                <input type="color" class="color-input" id="fgColorInput" value="#000000">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 12px;">Background</label>
+                                <input type="color" class="color-input" id="bgColorInput" value="#ffffff">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 12px;">Size</label>
+                                <select class="form-select" id="sizeSelect">
+                                    <option value="200">Small (200px)</option>
+                                    <option value="300" selected>Medium (300px)</option>
+                                    <option value="400">Large (400px)</option>
+                                    <option value="600">Extra Large (600px)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="withLogoCheck">
+                            <label for="withLogoCheck" class="form-label" style="margin: 0;">Add Logo</label>
+                            <input type="file" id="logoFileInput" accept="image/*" style="flex: 1; font-size: 12px;" disabled>
+                        </div>
+                    </div>
+
+                    <div id="errorMessage" class="error-message hidden">
+                        <span>⚠️</span>
+                        <span id="errorText"></span>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-generate" onclick="generateQR()">Generate QR</button>
+                        <button class="btn btn-reset" onclick="resetForm()">Reset</button>
+                        <button class="btn btn-copy" id="copyBtn" onclick="copyLink()" disabled>Copy Link</button>
+                        <button class="btn btn-download" id="downloadBtn" onclick="downloadQR()" disabled>Download QR</button>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="preview-panel">
+                    <h3 class="preview-title">Preview</h3>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div id="qrPreviewContainer">
+                                <div class="qr-placeholder">
+                                    <div class="placeholder-icon">+</div>
+                                    <p style="font-size: 14px; color: var(--color-text-secondary);">Your QR code will appear here</p>
+                                </div>
+                            </div>
+                            <div id="qrInfoContainer" class="qr-info hidden">
+                                <p>Scan to open in WhatsApp</p>
+                                <a id="waLink" href="#" target="_blank"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section style="background-color: var(--color-surface); padding: 64px 20px;">
+        <div class="container">
+            <h2 class="section-title">How the QR Generator Works</h2>
+            <p class="section-subtitle">Three simple steps to create a WhatsApp QR with a custom message</p>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">1</div>
+                    <h3 class="card-title">Enter Phone & Message</h3>
+                    <p class="card-desc">Add your WhatsApp number and pre-filled message for the QR code.</p>
+                </div>
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">2</div>
+                    <h3 class="card-title">Customize QR</h3>
+                    <p class="card-desc">Choose colors, size and optionally add a logo or label.</p>
+                </div>
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">3</div>
+                    <h3 class="card-title">Download & Share</h3>
+                    <p class="card-desc">Download PNG/SVG or embed the QR on your site and marketing materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 64px 20px;">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(0)">
+                        <span>Is the QR generator free to use?</span>
+                        <span id="faq-icon-0">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0">
+                        Yes — generate, download, and use WhatsApp QR codes for free with no account required.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(1)">
+                        <span>How do I include a pre-filled message?</span>
+                        <span id="faq-icon-1">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1">
+                        Enter the message when generating the QR. The message will appear in the chat input when opened.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(2)">
+                        <span>What formats can I download?</span>
+                        <span id="faq-icon-2">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2">
+                        You can download high-resolution PNG and scalable SVG files for print or web.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(3)">
+                        <span>Will the QR work internationally?</span>
+                        <span id="faq-icon-3">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3">
+                        Yes — include the full international phone number with country code to ensure it works worldwide.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(4)">
+                        <span>Can I brand the QR with a logo?</span>
+                        <span id="faq-icon-4">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4">
+                        Yes — add a small logo overlay option when generating for better recognition.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(5)">
+                        <span>How do I test the QR?</span>
+                        <span id="faq-icon-5">▼</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5">
+                        Scan with a phone camera or QR app; it should open WhatsApp and populate the message field.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="hero">
+        <h2 style="font-size: 36px; margin-bottom: 16px;">Ready to Create Your WhatsApp QR?</h2>
+        <p>Generate QR codes for contact, promotions, and customer support in seconds.</p>
+        <button class="btn-primary" onclick="scrollToGenerator()">Generate QR Now</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/007qGT0/Synx-Zap-logo-with-Tagline-1.png" alt="SynxZap Logo" />
+                    </div>
+                    <p class="footer-description">
+                        The complete WhatsApp marketing platform that helps businesses automate conversations, capture
+                        leads, and grow sales with zero technical headaches.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/synxzap" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hello_synx" class="social-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61578979535641" class="social-link"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#pricing-section">
+                                <i class="ri-check-line"></i>Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Use Cases
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-check-line"></i>Integrations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/privacy-policy" target="_blank" rel="noopener noreferrer">
+                                <i class="ri-file-info-line"></i>Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/terms-and-conditions" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="ri-file-text-line"></i>Terms & Conditions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.synxzap.com/refund&SubscriptionPolicy" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="ri-file-text-line"></i>Refund & Subscription Policy
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#">
+                                <i class="ri-book-open-line"></i>Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-question-line"></i>Help Center
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-community-line"></i>Community
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ri-video-line"></i>Webinars
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="newsletter">
+                    <h3>Stay Updated</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="ri-mail-line"></i>
+                            <span>support@synxzap.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+91 99957 70096</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="ri-phone-line"></i>
+                            <span>+44 7466 951870</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>© 2025 SynxZap · Powered by Synx Automation Pvt. Ltd.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="ri-shield-check-line"></i>
+                            <span>SOC2 Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-lock-line"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="ri-whatsapp-line"></i>
+                            <span>Official Partner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // State management
+        let state = {
+            phone: '',
+            message: 'Hello! How can I help you?',
+            fgColor: '#000000',
+            bgColor: '#ffffff',
+            size: 300,
+            withLogo: false,
+            logoFile: null,
+            qrUrl: null,
+            previewUrl: null
+        };
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to system
+        const currentTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+            themeIcon.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Form elements
+        const phoneInput = document.getElementById('phoneInput');
+        const messageInput = document.getElementById('messageInput');
+        const fgColorInput = document.getElementById('fgColorInput');
+        const bgColorInput = document.getElementById('bgColorInput');
+        const sizeSelect = document.getElementById('sizeSelect');
+        const withLogoCheck = document.getElementById('withLogoCheck');
+        const logoFileInput = document.getElementById('logoFileInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const copyBtn = document.getElementById('copyBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Event listeners
+        phoneInput.addEventListener('input', (e) => {
+            state.phone = e.target.value;
+            updateCopyButton();
+        });
+
+        messageInput.addEventListener('input', (e) => {
+            state.message = e.target.value;
+        });
+
+        fgColorInput.addEventListener('input', (e) => {
+            state.fgColor = e.target.value;
+        });
+
+        bgColorInput.addEventListener('input', (e) => {
+            state.bgColor = e.target.value;
+        });
+
+        sizeSelect.addEventListener('change', (e) => {
+            state.size = parseInt(e.target.value);
+        });
+
+        withLogoCheck.addEventListener('change', (e) => {
+            state.withLogo = e.target.checked;
+            logoFileInput.disabled = !e.target.checked;
+        });
+
+        logoFileInput.addEventListener('change', (e) => {
+            state.logoFile = e.target.files[0] || null;
+        });
+
+        // Helper functions
+        function validatePhone(input) {
+            const cleaned = input.replace(/\D/g, '');
+            return cleaned.length >= 8 && cleaned.length <= 15 ? cleaned : null;
+        }
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.remove('hidden');
+        }
+
+        function hideError() {
+            errorMessage.classList.add('hidden');
+        }
+
+        function updateCopyButton() {
+            copyBtn.disabled = !state.phone;
+        }
+
+        function makeApiUrl(waLink) {
+            const fg = state.fgColor.replace('#', '');
+            const bg = state.bgColor.replace('#', '');
+            const params = new URLSearchParams({
+                data: waLink,
+                size: `${state.size}x${state.size}`,
+                format: 'png'
+            });
+            if (fg) params.set('color', fg);
+            if (bg) params.set('bgcolor', bg);
+            return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function composePngWithLogo(qrBlob, logo, pxSize) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const qrUrl = URL.createObjectURL(qrBlob);
+                    const logoDataUrl = await readFileAsDataURL(logo);
+
+                    const qrImg = new Image();
+                    const logoImg = new Image();
+                    let loaded = 0;
+
+                    const tryResolve = () => {
+                        loaded++;
+                        if (loaded < 2) return;
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = pxSize;
+                        canvas.height = pxSize;
+                        const ctx = canvas.getContext('2d');
+                        
+                        if (!ctx) {
+                            reject(new Error('Canvas not supported'));
+                            return;
+                        }
+
+                        // Draw QR code
+                        ctx.drawImage(qrImg, 0, 0, canvas.width, canvas.height);
+
+                        // Calculate logo size and position (25% of QR size)
+                        const logoSize = Math.round(pxSize * 0.25);
+                        const x = Math.round((pxSize - logoSize) / 2);
+                        const y = Math.round((pxSize - logoSize) / 2);
+
+                        // Create circular clip path for logo
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(x + logoSize/2, y + logoSize/2, logoSize/2, 0, Math.PI * 2);
+                        ctx.closePath();
+                        ctx.clip();
+
+                        // Draw white background
+                        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+                        ctx.fillRect(x, y, logoSize, logoSize);
+
+                        // Draw logo
+                        ctx.drawImage(logoImg, x, y, logoSize, logoSize);
+                        ctx.restore();
+
+                        const dataUrl = canvas.toDataURL('image/png');
+                        URL.revokeObjectURL(qrUrl);
+                        resolve(dataUrl);
+                    };
+
+                    qrImg.onload = tryResolve;
+                    qrImg.onerror = reject;
+                    logoImg.onload = tryResolve;
+                    logoImg.onerror = reject;
+
+                    qrImg.src = qrUrl;
+                    logoImg.src = logoDataUrl;
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        async function generateQR() {
+            hideError();
+            
+            const cleaned = validatePhone(state.phone);
+            if (!cleaned) {
+                showError('Enter a valid phone number with country code (digits only).');
+                return;
+            }
+
+            const waLink = `https://wa.me/${cleaned}?text=${encodeURIComponent(state.message)}`;
+            const apiUrl = makeApiUrl(waLink);
+
+            try {
+                const res = await fetch(apiUrl);
+                if (!res.ok) throw new Error('Failed to fetch QR image from provider.');
+
+                const qrBlob = await res.blob();
+                
+                if (state.withLogo && state.logoFile) {
+                    const composedDataUrl = await composePngWithLogo(qrBlob, state.logoFile, state.size);
+                    state.previewUrl = composedDataUrl;
+                    state.qrUrl = null;
+                    displayQR(composedDataUrl, waLink);
+                } else {
+                    const url = URL.createObjectURL(qrBlob);
+                    state.previewUrl = url;
+                    state.qrUrl = apiUrl;
+                    displayQR(url, waLink);
+                }
+
+                downloadBtn.disabled = false;
+            } catch (e) {
+                showError(e.message || 'Failed to generate QR.');
+            }
+        }
+
+        function displayQR(imageUrl, waLink) {
+            const container = document.getElementById('qrPreviewContainer');
+            const infoContainer = document.getElementById('qrInfoContainer');
+            const waLinkElement = document.getElementById('waLink');
+
+            container.innerHTML = `<img src="${imageUrl}" alt="WhatsApp QR" class="qr-preview">`;
+            
+            const cleaned = state.phone.replace(/\D/g, '');
+            waLinkElement.href = waLink;
+            waLinkElement.textContent = `wa.me/${cleaned}`;
+            infoContainer.classList.remove('hidden');
+        }
+
+        async function copyLink() {
+            if (!state.phone) return;
+            
+            const cleaned = state.phone.replace(/\D/g, '');
+            const waLink = `https://wa.me/${cleaned}?text=${encodeURIComponent(state.message)}`;
+            
+            try {
+                await navigator.clipboard.writeText(waLink);
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied! ✓';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            } catch {
+                showError('Unable to copy to clipboard.');
+            }
+        }
+
+        function downloadQR() {
+            if (!state.previewUrl && !state.qrUrl) return;
+            
+            const url = state.previewUrl || state.qrUrl;
+            if (!url) return;
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `whatsapp-qr-${Date.now()}.png`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        }
+
+        function resetForm() {
+            phoneInput.value = '';
+            messageInput.value = 'Hello! How can I help you?';
+            fgColorInput.value = '#000000';
+            bgColorInput.value = '#ffffff';
+            sizeSelect.value = '300';
+            withLogoCheck.checked = false;
+            logoFileInput.disabled = true;
+            logoFileInput.value = '';
+            
+            state = {
+                phone: '',
+                message: 'Hello! How can I help you?',
+                fgColor: '#000000',
+                bgColor: '#ffffff',
+                size: 300,
+                withLogo: false,
+                logoFile: null,
+                qrUrl: null,
+                previewUrl: null
+            };
+
+            const container = document.getElementById('qrPreviewContainer');
+            container.innerHTML = `
+                <div class="qr-placeholder">
+                    <div class="placeholder-icon">+</div>
+                    <p style="font-size: 14px; color: var(--color-text-secondary);">Your QR code will appear here</p>
+                </div>
+            `;
+            
+            document.getElementById('qrInfoContainer').classList.add('hidden');
+            hideError();
+            copyBtn.disabled = true;
+            downloadBtn.disabled = true;
+        }
+
+        function scrollToGenerator() {
+            document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleFaq(index) {
+            const answer = document.getElementById(`faq-answer-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+                document.querySelectorAll('[id^="faq-icon-"]').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                answer.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Cursor animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursor = document.querySelector('.cursor');
+            const links = document.querySelectorAll('a, button, .feature-link');
+            const greenElements = document.querySelectorAll('.green-btn, #contact-section, .highlight-green');
+            const darkElements = document.querySelectorAll('footer, .dark-card');
+            const isMobile = window.innerWidth <= 768;
+
+            if (!isMobile) {
+                let mouseX = 0, mouseY = 0;
+                let cursorX = 0, cursorY = 0;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                function animateCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+                    
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', () => cursor.classList.add('active'));
+                    link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    let isOverGreen = false;
+                    let isOverDark = false;
+
+                    greenElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverGreen = true;
+                        }
+                    });
+
+                    darkElements.forEach(element => {
+                        const rect = element.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            isOverDark = true;
+                        }
+                    });
+
+                    cursor.classList.remove('on-green', 'on-dark');
+                    if (isOverGreen) cursor.classList.add('on-green');
+                    else if (isOverDark) cursor.classList.add('on-dark');
+                });
+            }
+
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Widget Generator - SynxZap</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-green-300: rgba(34, 197, 94, 1);
+            --color-green-400: rgba(22, 163, 74, 1);
+            --color-green-500: rgba(16, 185, 129, 1);
+            --color-green-600: rgba(5, 150, 105, 1);
+            --color-green-700: rgba(4, 120, 87, 1);
+            --color-green-800: rgba(6, 95, 70, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-green-500-rgb: 16, 185, 129;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-green-500);
+            --color-primary-hover: var(--color-green-600);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+
+            /* Spacing */
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+
+            /* Border Radius */
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+
+            /* Font */
+            --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .dark {
+            --color-background: var(--color-charcoal-700);
+            --color-surface: var(--color-charcoal-800);
+            --color-text: var(--color-gray-200);
+            --color-text-secondary: rgba(167, 169, 169, 0.7);
+            --color-primary: var(--color-green-300);
+            --color-primary-hover: var(--color-green-400);
+            --color-border: rgba(119, 124, 124, 0.3);
+            --color-btn-primary-text: var(--color-slate-900);
+            --color-card-border: rgba(119, 124, 124, 0.2);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light) {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(167, 169, 169, 0.7);
+                --color-primary: var(--color-green-300);
+                --color-primary-hover: var(--color-green-400);
+                --color-border: rgba(119, 124, 124, 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+                --color-card-border: rgba(119, 124, 124, 0.2);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-card-border);
+            backdrop-filter: blur(8px);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--space-16) var(--space-24);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-8) var(--space-12);
+            cursor: pointer;
+            color: var(--color-text);
+            font-size: 14px;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, rgb(16, 185, 129), rgb(20, 184, 166));
+            color: white;
+            text-align: center;
+            padding: 150px 20px 96px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: rgb(16, 185, 129);
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            color: var(--color-text-secondary);
+        }
+
+        /* Generator Section */
+        #generator {
+            background: linear-gradient(to bottom right, rgb(236, 253, 245), rgb(224, 242, 254));
+            padding: 80px 20px;
+        }
+
+        .dark #generator {
+            background: linear-gradient(to bottom right, rgb(31, 33, 33), rgb(38, 40, 40));
+        }
+
+        .generator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .config-panel {
+            background-color: white;
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .config-panel {
+            background-color: rgb(55, 65, 81);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .dark .form-input, .dark .form-textarea, .dark .form-select {
+            background-color: rgb(31, 41, 55);
+            border-color: rgb(75, 85, 99);
+            color: white;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: rgb(16, 185, 129);
+        }
+
+        .form-textarea {
+            resize: none;
+        }
+
+        .customize-section {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: var(--radius-base);
+            margin-bottom: 24px;
+        }
+
+        .dark .customize-section {
+            background-color: rgb(75, 85, 99);
+        }
+
+        .customize-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .color-input {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: white;
+            padding: 12px;
+            border-radius: var(--radius-base);
+            margin-top: 16px;
+        }
+
+        .dark .checkbox-group {
+            background-color: rgb(55, 65, 81);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-generate {
+            background: linear-gradient(to right, rgb(5, 150, 105), rgb(16, 185, 129));
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .dark .btn-reset {
+            background-color: rgb(75, 85, 99);
+            color: white;
+        }
+
+        .btn-copy {
+            background-color: rgb(37, 99, 235);
+            color: white;
+        }
+
+        .btn-download {
+            background-color: rgb(99, 102, 241);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background-color: #fef2f2;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: var(--radius-base);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark .error-message {
+            background-color: rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 32px;
+        }
+
+        .phone-mockup {
+            width: 288px;
+            height: 576px;
+            background-color: rgb(15, 23, 42);
+            border-radius: 48px;
+            border: 14px solid rgb(30, 41, 59);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 128px;
+            height: 24px;
+            background-color: rgb(30, 41, 59);
+            border-radius: 0 0 16px 16px;
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            background-color: white;
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .dark .phone-screen {
+            background-color: rgb(75, 85, 99);
+        }
+
+        .widget-preview {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            transition: transform 0.3s;
+        }
+
+        .widget-preview:hover {
+            transform: scale(1.1);
+        }
+
+        .widget-circular {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .widget-rounded {
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .widget-square {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-output {
+            background-color: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .alert-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark .alert-box {
+            background-color: #374151;
+            color: white;
+        }
+
+        .alert-icon {
+            color: #ef4444;
+            margin-bottom: 16px;
+        }
+
+        .alert-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .alert-button:hover {
+            background-color: #dc2626;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-card-border);
+            padding: 32px 20px;
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .generator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .customize-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="https://synxzap.com" class="logo-container" target="_blank">
+                <div class="logo-text">🟢 SynxZap</div>
+            </a>
+            <button class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">🌙</span> Toggle Theme
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Add WhatsApp Chat to Your Website</h1>
+        <p>Connect with visitors instantly. Boost conversions. Free Widget Generator.</p>
+        <button class="btn-primary" onclick="scrollToGenerator()">Create Free Widget</button>
+    </section>
+
+    <!-- Benefits Section -->
+    <section style="background-color: var(--color-surface); padding: 64px 20px;">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our WhatsApp Widget?</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3 class="card-title">Instant Customer Connection</h3>
+                    <p class="card-desc">Let visitors chat with you on WhatsApp in one click</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3 class="card-title">Increase Conversions</h3>
+                    <p class="card-desc">Turn visitors into leads with live consultations</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🕐</div>
+                    <h3 class="card-title">24/7 Availability</h3>
+                    <p class="card-desc">Stay connected with customers anytime, anywhere</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3 class="card-title">Mobile-First Design</h3>
+                    <p class="card-desc">Perfect experience on all devices</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3 class="card-title">Free Forever</h3>
+                    <p class="card-desc">No hidden costs, completely free widget</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Easy Setup</h3>
+                    <p class="card-desc">Install in under 2 minutes, no coding required</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Widget Generator Section -->
+    <section id="generator">
+        <div class="container">
+            <h2 class="section-title" style="background: linear-gradient(to right, rgb(5, 150, 105), rgb(37, 99, 235)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Create Your WhatsApp Widget</h2>
+            <p class="section-subtitle">Customize your WhatsApp widget to match your brand and connect with customers instantly</p>
+
+            <div class="generator-grid">
+                <!-- Configuration Panel -->
+                <div class="config-panel">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Customize Your Widget</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp Number (with country code)</label>
+                        <input
+                            type="tel"
+                            id="phoneNumber"
+                            placeholder="e.g., +1234567890"
+                            class="form-input"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Welcome Message</label>
+                        <textarea
+                            id="welcomeMessage"
+                            rows="3"
+                            placeholder="Hello! How can we help you today?"
+                            class="form-textarea"
+                        >Hello! How can we help you today?</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Button Text</label>
+                        <input
+                            type="text"
+                            id="buttonText"
+                            placeholder="Chat with us"
+                            class="form-input"
+                            value="Chat with us"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tooltip Text</label>
+                        <input
+                            type="text"
+                            id="tooltipText"
+                            placeholder="Need help? Chat with us!"
+                            class="form-input"
+                            value="Need help? Chat with us!"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Position</label>
+                        <select id="position" class="form-select">
+                            <option value="bottom-right">Bottom Right</option>
+                            <option value="bottom-left">Bottom Left</option>
+                            <option value="bottom-center">Bottom Center</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Colors</label>
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm text-gray-600 dark:text-gray-400">Button:</label>
+                                <input
+                                    type="color"
+                                    id="buttonColor"
+                                    class="color-input"
+                                    value="#25D366"
+                                />
+                                <div
+                                    class="color-preview"
+                                    id="buttonColorPreview"
+                                    style="background-color: #25D366; width: 40px; height: 40px; border-radius: 8px; border: 2px solid #e5e7eb;"
+                                ></div>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm text-gray-600 dark:text-gray-400">Text:</label>
+                                <input
+                                    type="color"
+                                    id="textColor"
+                                    class="color-input"
+                                    value="#FFFFFF"
+                                />
+                                <div
+                                    class="color-preview"
+                                    id="textColorPreview"
+                                    style="background-color: #FFFFFF; width: 40px; height: 40px; border-radius: 8px; border: 2px solid #e5e7eb;"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Button Style</label>
+                        <select id="buttonStyle" class="form-select">
+                            <option value="circular">Circular Icon</option>
+                            <option value="rounded">Rounded with Text</option>
+                            <option value="square">Square</option>
+                        </select>
+                    </div>
+
+                    <button
+                        onclick="generateCode()"
+                        class="w-full px-6 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-colors"
+                    >
+                        Generate Widget Code
+                    </button>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="preview-panel">
+                    <h3 class="preview-title">Live Preview</h3>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div id="widgetPreview" class="widget-preview">
+                                <!-- Widget will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Output -->
+            <div id="codeOutput" class="hidden">
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-8 border border-stone-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Your Widget Code</h3>
+                    <p class="text-slate-600 dark:text-gray-300 mb-4">
+                        Copy this code and paste it before the closing &lt;/body&gt; tag of your website:
+                    </p>
+                    <div class="code-output mb-4">
+                        <pre id="generatedCode"></pre>
+                    </div>
+                    <button
+                        onclick="copyCode()"
+                        id="copyButton"
+                        class="px-4 py-2 bg-green-500 text-white rounded-lg font-medium transition-colors hover:bg-green-600"
+                    >
+                        Copy Code
+                    </button>
+
+                    <div class="mt-6 p-5 bg-blue-50 dark:bg-gray-600 rounded-lg">
+                        <h4 class="font-semibold mb-3 text-gray-900 dark:text-white">Installation Instructions:</h4>
+                        <ol class="list-decimal list-inside text-slate-600 dark:text-gray-300 space-y-2">
+                            <li>Copy the code above</li>
+                            <li>Open your website's HTML file or admin panel</li>
+                            <li>Paste the code just before the closing &lt;/body&gt; tag</li>
+                            <li>Save and refresh your website</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section style="background-color: var(--color-surface); padding: 64px 20px;">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get your WhatsApp widget up and running in 3 simple steps</p>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">1</div>
+                    <h3 class="card-title">Customize Your Widget</h3>
+                    <p class="card-desc">Choose colors, position, and text to match your brand</p>
+                </div>
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">2</div>
+                    <h3 class="card-title">Copy the Code</h3>
+                    <p class="card-desc">Get your unique widget code instantly with one click</p>
+                </div>
+                <div class="card">
+                    <div style="width: 64px; height: 64px; background-color: rgb(16, 185, 129); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px;">3</div>
+                    <h3 class="card-title">Add to Website</h3>
+                    <p class="card-desc">Paste before closing body tag and go live immediately</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="hero">
+        <h2 style="font-size: 36px; margin-bottom: 16px;">Ready to Connect with Your Customers?</h2>
+        <p>Join thousands of businesses using WhatsApp widgets to grow</p>
+        <button class="btn-primary" onclick="scrollToGenerator()">Generate Widget Now</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Synx Automation Private Limited. All rights reserved. | SynxZap WhatsApp Marketing Platform</p>
+    </footer>
+
+    <!-- Alert Modal -->
+    <div id="alertModal" class="alert-overlay hidden">
+        <div class="alert-box">
+            <div class="alert-icon">
+                <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <p id="alertMessage" class="text-center mb-4"></p>
+            <button onclick="closeAlert()" class="alert-button">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let state = {
+            phoneNumber: '',
+            welcomeMessage: 'Hello! How can we help you today?',
+            buttonText: 'Chat with us',
+            tooltipText: 'Need help? Chat with us!',
+            buttonColor: '#25D366',
+            textColor: '#FFFFFF',
+            position: 'bottom-right',
+            buttonStyle: 'circular',
+            generatedCode: '',
+            copied: false
+        };
+
+        // DOM elements
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const welcomeMessageInput = document.getElementById('welcomeMessage');
+        const buttonTextInput = document.getElementById('buttonText');
+        const tooltipTextInput = document.getElementById('tooltipText');
+        const positionSelect = document.getElementById('position');
+        const buttonColorInput = document.getElementById('buttonColor');
+        const textColorInput = document.getElementById('textColor');
+        const buttonStyleSelect = document.getElementById('buttonStyle');
+        const buttonColorPreview = document.getElementById('buttonColorPreview');
+        const textColorPreview = document.getElementById('textColorPreview');
+        const widgetPreview = document.getElementById('widgetPreview');
+        const codeOutput = document.getElementById('codeOutput');
+        const generatedCode = document.getElementById('generatedCode');
+        const copyButton = document.getElementById('copyButton');
+        const alertModal = document.getElementById('alertModal');
+        const alertMessage = document.getElementById('alertMessage');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        // Initialize event listeners
+        function init() {
+            phoneNumberInput.addEventListener('input', updateState);
+            welcomeMessageInput.addEventListener('input', updateState);
+            buttonTextInput.addEventListener('input', updateState);
+            tooltipTextInput.addEventListener('input', updateState);
+            positionSelect.addEventListener('change', updateState);
+            buttonColorInput.addEventListener('input', updateState);
+            textColorInput.addEventListener('input', updateState);
+            buttonStyleSelect.addEventListener('change', updateState);
+            
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Initial preview update
+            updatePreview();
+        }
+
+        // Update state from inputs
+        function updateState() {
+            state.phoneNumber = phoneNumberInput.value;
+            state.welcomeMessage = welcomeMessageInput.value;
+            state.buttonText = buttonTextInput.value;
+            state.tooltipText = tooltipTextInput.value;
+            state.position = positionSelect.value;
+            state.buttonColor = buttonColorInput.value;
+            state.textColor = textColorInput.value;
+            state.buttonStyle = buttonStyleSelect.value;
+            
+            // Update color previews
+            buttonColorPreview.style.backgroundColor = state.buttonColor;
+            textColorPreview.style.backgroundColor = state.textColor;
+            
+            updatePreview();
+        }
+
+        // Update widget preview
+        function updatePreview() {
+            const positionClass = getPositionClass(state.position);
+            const widgetHTML = getWidgetHTML();
+            
+            widgetPreview.innerHTML = widgetHTML;
+            widgetPreview.className = `widget-preview ${positionClass}`;
+        }
+
+        // Get position class for preview
+        function getPositionClass(position) {
+            switch (position) {
+                case 'bottom-left':
+                    return 'bottom-5 left-5';
+                case 'bottom-center':
+                    return 'bottom-5 left-1/2 transform -translate-x-1/2';
+                default:
+                    return 'bottom-5 right-5';
+            }
+        }
+
+        // Get widget HTML for preview
+        function getWidgetHTML() {
+            const style = `background: ${state.buttonColor}; color: ${state.textColor}; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);`;
+            
+            switch (state.buttonStyle) {
+                case 'rounded':
+                    return `
+                        <div class="widget-rounded" style="${style}" title="${state.tooltipText}">
+                            <svg width="16" height="16" viewBox="0 0 175.216 175.552" fill="currentColor">
+                                <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/>
+                            </svg>
+                            ${state.buttonText}
+                        </div>
+                    `;
+                case 'square':
+                    return `
+                        <div class="widget-square" style="${style}" title="${state.tooltipText}">
+                            <svg width="20" height="20" viewBox="0 0 175.216 175.552" fill="currentColor">
+                                <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/>
+                            </svg>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="widget-circular" style="${style}" title="${state.tooltipText}">
+                            <svg width="20" height="20" viewBox="0 0 175.216 175.552" fill="currentColor">
+                                <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/>
+                            </svg>
+                        </div>
+                    `;
+            }
+        }
+
+        // Generate widget code
+        function generateCode() {
+            if (!state.phoneNumber.trim()) {
+                showAlert('Please enter a WhatsApp number first!');
+                return;
+            }
+
+            const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+            if (!phoneRegex.test(state.phoneNumber.replace(/\s+/g, ""))) {
+                showAlert('Please enter a valid WhatsApp number with country code (e.g., +1234567890)');
+                return;
+            }
+
+            const cleanPhone = state.phoneNumber.replace(/\s+/g, "");
+
+            const options = {
+                enabled: true,
+                chatButtonSetting: {
+                    backgroundColor: state.buttonColor,
+                    ctaText: state.buttonText,
+                    buttonStyle: state.buttonStyle,
+                    position: state.position === "bottom-right" ? "right" : state.position === "bottom-left" ? "left" : "center",
+                    textColor: state.textColor,
+                    phoneNumber: cleanPhone,
+                    messageText: state.welcomeMessage,
+                    tooltipText: state.tooltipText,
+                    trackClick: true
+                }
+            };
+
+            const codeHTML = `<!-- SynxZap WhatsApp Widget -->
+<script>
+var url = 'https://cdn.jsdelivr.net/npm/synxzap@1.0.2/index.min.js';
+var s = document.createElement('script');
+s.type = 'text/javascript';
+s.async = true;
+s.src = url;
+
+var options = ${JSON.stringify(options, null, 2)};
+
+s.onload = function() {
+  CreateWhatsappBtn(options);
+};
+
+var x = document.getElementsByTagName('script')[0];
+x.parentNode.insertBefore(s, x);
+</script>`;
+
+            state.generatedCode = codeHTML;
+            generatedCode.textContent = codeHTML;
+            codeOutput.classList.remove('hidden');
+            
+            // Scroll to code output
+            codeOutput.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Copy code to clipboard
+        function copyCode() {
+            navigator.clipboard.writeText(state.generatedCode).then(() => {
+                copyButton.textContent = 'Copied!';
+                copyButton.classList.add('bg-green-600');
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy Code';
+                    copyButton.classList.remove('bg-green-600');
+                }, 2000);
+            });
+        }
+
+        // Show alert
+        function showAlert(message) {
+            alertMessage.textContent = message;
+            alertModal.classList.remove('hidden');
+        }
+
+        // Close alert
+        function closeAlert() {
+            alertModal.classList.add('hidden');
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Check for saved theme preference
+        function checkTheme() {
+            const currentTheme = localStorage.getItem('theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (currentTheme === 'dark') {
+                html.classList.add('dark');
+                themeIcon.textContent = '☀️';
+            }
+        }
+
+        // Scroll to generator
+        function scrollToGenerator() {
+            document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            init();
+            checkTheme();
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
